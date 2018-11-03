@@ -50,7 +50,7 @@ au BufNewFile,BufRead *.js,*.html,*.css
     \ set softtabstop=2 |
     \ set shiftwidth=2 |
 
-Plugin 'vim-scripts/indentpython.vim'
+Plugin 'drozdowsky/indentpython.vim'
 
 
 set encoding=utf-8
