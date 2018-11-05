@@ -1,5 +1,5 @@
-alias mgd='google-drive-ocamlfuse /home/self/GoogleDrive'
-alias umgd='fusermount -u /home/self/GoogleDrive'
+alias mgd='google-drive-ocamlfuse ~/googledrive'
+alias umgd='fusermount -u ~/googledrive'
 
 alias a='sudo apt'
 alias g='git'
@@ -7,6 +7,12 @@ alias v='vim'
 alias sv='sudo vim'
 alias mkd='mkdir -pv'
 alias hcat='highlight --force --line-numbers'
+alias iten='trans -s it -t en'
+alias enit='trans -s en -t it' 
+
+fip() {
+	grep -r "$1" $pwd
+}
 
 mkcd ()
 {
@@ -35,3 +41,19 @@ extract () {
         echo "'$1' is not a valid file"
     fi
 }
+
+up(){
+  local d=""
+  limit=$1
+  for ((i=1 ; i <= limit ; i++))
+    do
+      d=$d/..
+    done
+  d=$(echo $d | sed 's/^\///')
+  if [ -z "$d" ]; then
+    d=..
+  fi
+  cd $d
+}
+
+

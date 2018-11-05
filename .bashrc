@@ -10,7 +10,9 @@
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoreboth
-
+HISTIGNORE='ls:bg:fg:history'
+shopt -s autocd # autocd
+HISTSIZE= HISTFILESIZE= # Infinite history
 # append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -87,13 +89,13 @@ fi
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -a --color=auto'
+    alias ls='ls -ahN --color=auto --group-directories-first'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 # some more ls aliases
@@ -125,7 +127,6 @@ fi
 # Add sbin directories to PATH.  This is useful on systems that have sudo
 
 [ -z "${PATH##*/sbin*}" ] || PATH=$PATH:/sbin:/usr/sbin
-shopt -s autocd # autocd
-HISTSIZE= HISTFILESIZE= # Infinite history
+
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-. /home/self/.local/bin/virtualenvwrapper.sh
+. ~/.local/bin/virtualenvwrapper.sh
