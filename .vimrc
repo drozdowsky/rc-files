@@ -11,9 +11,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
-
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -52,7 +49,6 @@ au BufNewFile,BufRead *.js,*.html,*.css
 
 Plugin 'drozdowsky/indentpython.vim'
 
-
 set encoding=utf-8
 Bundle 'Valloric/YouCompleteMe'
 
@@ -89,7 +85,17 @@ hi CursorLine   cterm=NONE cterm=bold ctermbg=8 term=bold ctermfg=NONE
 :highlight LineNr ctermfg=grey
 set path=$PWD/**
 
-
 colorscheme molokai
 highlight Comment cterm=bold
 set hidden
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap $w w !sudo tee > /dev/null %
+
+" \f - better file switching in vim
+nnoremap <Leader>f :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
+
+" better autocompletion
+set wildmenu
+set wildmode=longest:full,full
+
