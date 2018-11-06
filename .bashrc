@@ -10,7 +10,7 @@
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoreboth
-HISTIGNORE='ls:bg:fg:history'
+HISTIGNORE='ls:bg:fg:history:clear'
 shopt -s autocd # autocd
 HISTSIZE= HISTFILESIZE= # Infinite history
 # append to the history file, don't overwrite it
