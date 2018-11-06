@@ -30,9 +30,17 @@ nnoremap <space> za
 
 Plugin 'tmhedberg/SimpylFold'
 
+
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
+
 highlight BadWhitespace guibg=red ctermbg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.vy set expandtab
-au BufRead,BufNewFile *.py,*.pyw,*.vy set textwidth=139
+au BufRead,BufNewFile *.py,*.pyw,*.vy set textwidth=120
 au BufRead,BufNewFile *.py,*.pyw,*.vy set tabstop=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set softtabstop=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set shiftwidth=4
@@ -41,6 +49,8 @@ au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /^\t\+/
 au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /\s\+$/
 au         BufNewFile *.py,*.pyw,*.vy set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw,*.vy let b:comment_leader = '#'
+" Delete trailing whitespaces when saving python file
+au BufWrite *.py :call DeleteTrailingWS()
 
 au BufNewFile,BufRead *.js,*.html,*.css
     \ set tabstop=2 |
@@ -78,7 +88,6 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 set laststatus=2
-:highlight LineNr ctermfg=yellow
 set clipboard=unnamed
 set cursorline
 hi CursorLine   cterm=NONE cterm=bold ctermbg=8 term=bold ctermfg=NONE
@@ -89,7 +98,7 @@ colorscheme molokai
 highlight Comment cterm=bold
 set hidden
 
-" Allow saving of files as sudo when I forgot to start vim using sudo.
+" Allow saving of files as sudo when I forgot to start vim using sudo. Usage: $w
 cmap $w w !sudo tee > /dev/null %
 
 " \f - better file switching in vim
@@ -98,4 +107,3 @@ nnoremap <Leader>f :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
 " better autocompletion
 set wildmenu
 set wildmode=longest:full,full
-
