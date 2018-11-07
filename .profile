@@ -22,5 +22,5 @@ if [ -d "$HOME/bin" ] ; then
 fi
 # Ubuntu make installation of Ubuntu Make binary symlink
 PATH=$HOME/.local/share/umake/bin:$PATH
-# add faster key holding / pressing
-xset r rate 165 25
+# Make the holding key really long - to force myself to learn vim more
+xset r rate 5000 25
