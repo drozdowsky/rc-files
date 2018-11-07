@@ -30,13 +30,11 @@ nnoremap <space> za
 
 Plugin 'tmhedberg/SimpylFold'
 
-
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-
 
 highlight BadWhitespace guibg=red ctermbg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.vy set expandtab
@@ -45,8 +43,8 @@ au BufRead,BufNewFile *.py,*.pyw,*.vy set tabstop=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set softtabstop=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set shiftwidth=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set autoindent
-au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /^\t\+/
-au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /\s\+$/
+" au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /^\t\+/
+" au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /\s\+$/
 au         BufNewFile *.py,*.pyw,*.vy set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw,*.vy let b:comment_leader = '#'
 " Delete trailing whitespaces when saving python file
@@ -80,15 +78,19 @@ Plugin 'jistr/vim-nerdtree-tabs'
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 map <C-t> :NERDTreeToggle<CR>
 
-
 Plugin 'kien/ctrlp.vim'
-set nu
-
 Plugin 'tpope/vim-fugitive'
-
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" always show X line at the top/bottom when scrolling
+set scrolloff=2
+" show line number
+set nu
+" use fast terminal
+set ttyfast
 set laststatus=2
 set clipboard=unnamed
+" show line highlight
 set cursorline
 hi CursorLine   cterm=NONE cterm=bold ctermbg=8 term=bold ctermfg=NONE
 :highlight LineNr ctermfg=grey
