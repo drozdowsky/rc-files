@@ -124,3 +124,4 @@ nnoremap <Leader>f :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
 " better autocompletion
 set wildmenu
 set wildmode=longest:full,full
+set directory^=$HOME/.vim/tmp//
