@@ -108,7 +108,7 @@ set scrolloff=2
 " show line number
 set nu
 " use fast terminal
-" set ttyfast
+set ttyfast
 set laststatus=2
 set clipboard=unnamed
 set path=$PWD/**
