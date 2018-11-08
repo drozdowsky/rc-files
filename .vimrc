@@ -111,17 +111,26 @@ set nu
 set ttyfast
 set laststatus=2
 set clipboard=unnamed
-set path=$PWD/**
+set path+=$PWD/**
 
 set hidden
 
 " Allow saving of files as sudo when I forgot to start vim using sudo. Usage: $w
 cmap $w w !sudo tee > /dev/null %
 
-" \f - better file switching in vim
+" \b and \f - better buffer switching in vim
+nnoremap <Leader>b :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
 nnoremap <Leader>f :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
+" \t - tabs 
+nnoremap <Leader>t :set nomore<Bar>:tabs<Bar>:set more<CR>:tabn<Space>
 
 " better autocompletion
 set wildmenu
 set wildmode=longest:full,full
 set directory^=$HOME/.vim/tmp//
+" CtrlP different mapping fo tabs
+let g:ctrlp_prompt_mappings = {
+			\ 'AcceptSelection("h")': ['<c-x>', '<c-s>'],
+			\ 'AcceptSelection("t")': ['<c-t>'],
+			\ 'AcceptSelection("v")': ['<c-v>', '<c-i>'],
+			\ }
