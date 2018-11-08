@@ -59,7 +59,11 @@ au BufNewFile,BufRead *.js,*.html,*.css
     \ set expandtab |
     \ set autoindent
 
+
 Plugin 'drozdowsky/indentpython.vim'
+
+"vyper language syntax highlight
+Plugin 'jacqueswww/vim-vyper' 
 
 " autocompletion and syntax highlight
 Plugin 'davidhalter/jedi-vim'
