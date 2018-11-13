@@ -20,7 +20,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
 set splitright
 
 " Enable folding
@@ -53,9 +52,9 @@ au BufRead,BufNewFile *.py,*.pyw,*.vy let b:comment_leader = '#'
 au BufWrite *.py :call DeleteTrailingWS()
 
 au BufNewFile,BufRead *.js,*.html,*.css
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2 |
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
     \ set expandtab |
     \ set autoindent
 
@@ -138,3 +137,25 @@ let g:ctrlp_prompt_mappings = {
 			\ 'AcceptSelection("t")': ['<c-t>'],
 			\ 'AcceptSelection("v")': ['<c-v>', '<c-i>'],
 			\ }
+
+" Enable HJKL in insert mode - ALT+HJKL
+inoremap <Esc>j <C-o>j
+inoremap <Esc>k <C-o>k
+inoremap <Esc>h <C-o>h
+inoremap <Esc>l <C-o>l
+
+" disable arrows in vim
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+
+vnoremap <Up> <Nop>
+vnoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
