@@ -1,5 +1,5 @@
-alias mgd='google-drive-ocamlfuse ~/googledrive'
-alias umgd='fusermount -u ~/googledrive'
+alias mgd='google-drive-ocamlfuse ~/google/drive'
+alias umgd='fusermount -u ~/google/drive'
 
 alias a='sudo apt'
 alias g='git'
