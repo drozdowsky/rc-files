@@ -5,9 +5,6 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
@@ -58,13 +55,13 @@ au BufNewFile,BufRead *.js,*.html,*.css
     \ set expandtab |
     \ set autoindent
 
-
+" Indent for python - my fork
 Plugin 'drozdowsky/indentpython.vim'
 
 "vyper language syntax highlight
 Plugin 'jacqueswww/vim-vyper' 
 
-" autocompletion and syntax highlight
+" autocompletion for python 
 Plugin 'davidhalter/jedi-vim'
 " disable docstring window in jedi-vim when autocompleting
 autocmd FileType python setlocal completeopt-=preview
@@ -108,8 +105,9 @@ Plugin 'fisadev/vim-isort'
 
 " always show X line at the top/bottom when scrolling
 set scrolloff=2
-" show line number
+" show line number in current line - otherwise show relative number line
 set nu
+set relativenumber
 " use fast terminal
 set ttyfast
 set laststatus=2
@@ -117,7 +115,6 @@ set clipboard=unnamed
 set path+=$PWD/**
 
 set hidden
-
 " Allow saving of files as sudo when I forgot to start vim using sudo. Usage: $w
 cmap $w w !sudo tee > /dev/null %
 
@@ -138,9 +135,14 @@ let g:ctrlp_prompt_mappings = {
 			\ 'AcceptSelection("v")': ['<c-v>', '<c-i>'],
 			\ }
 
-" Enable HJKL in insert mode - ALT+HJKL
-inoremap <Esc>j <C-o>j
-inoremap <Esc>k <C-o>k
+" Fast ESC in insert mode
+augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+augroup END
+
+" provide hl movements in Insert mode via the <Alt> modifier key
 inoremap <Esc>h <C-o>h
 inoremap <Esc>l <C-o>l
 
