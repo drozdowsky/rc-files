@@ -49,10 +49,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+$sup+h move left
+bindsym $mod+$sup+j move down
+bindsym $mod+$sup+k move up
+bindsym $mod+$sup+l move right
 
 # split in horizontal orientation
 bindsym $mod+i split h
@@ -69,7 +69,7 @@ bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+$sup+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -106,23 +106,23 @@ bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+$sup+1 move container to workspace $ws1
+bindsym $mod+$sup+2 move container to workspace $ws2
+bindsym $mod+$sup+3 move container to workspace $ws3
+bindsym $mod+$sup+4 move container to workspace $ws4
+bindsym $mod+$sup+5 move container to workspace $ws5
+bindsym $mod+$sup+6 move container to workspace $ws6
+bindsym $mod+$sup+7 move container to workspace $ws7
+bindsym $mod+$sup+8 move container to workspace $ws8
+bindsym $mod+$sup+9 move container to workspace $ws9
+bindsym $mod+$sup+0 move container to workspace $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+$sup+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+$sup+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-msg exit"
+bindsym $mod+$sup+e exec "i3-msg exit"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -174,3 +174,4 @@ workspace 3 output DP-2
 # https://github.com/jappeace/brightnessctl
 bindsym $sup+F7 exec brightness-
 bindsym $sup+F8 exec brightness+
+bindsym $mod+$sup+p exec i3lock-fancy -p 
