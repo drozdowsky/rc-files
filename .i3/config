@@ -172,3 +172,6 @@ bindsym XF86MonBrightnessUp exec brightness+
 bindsym XF86MonBrightnessDown exec brightness- 
 # Lock screen under LOCK+ALT+P
 bindsym $mod+$sup+p exec i3lock-fancy -p 
+
+# disable screen breaking - power saving mode in xorg
+exec xset s off
