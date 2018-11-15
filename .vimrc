@@ -135,7 +135,9 @@ let g:ctrlp_prompt_mappings = {
 			\ 'AcceptSelection("v")': ['<c-v>', '<c-i>'],
 			\ }
 
-" Fast ESC in insert mode
+" Fast ESC in visual/insert mode
+set timeoutlen=1000
+set ttimeoutlen=0
 augroup FastEscape
     autocmd!
     au InsertEnter * set timeoutlen=0
@@ -145,6 +147,8 @@ augroup END
 " provide hl movements in Insert mode via the <Alt> modifier key
 inoremap <Esc>h <C-o>h
 inoremap <Esc>l <C-o>l
+inoremap <Esc>k <C-o>k
+inoremap <Esc>j <C-o>j
 
 " disable arrows in vim
 noremap <Up> <Nop>
