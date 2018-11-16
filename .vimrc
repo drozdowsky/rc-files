@@ -165,3 +165,8 @@ vnoremap <Up> <Nop>
 vnoremap <Down> <Nop>
 vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
+
+" color highlight :ColorHighlight/Clear/Toggle
+Plugin 'lilydjwg/colorizer'
+let g:colorizer_startup = 0
+let g:colorizer_nomap = 1

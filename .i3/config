@@ -145,10 +145,32 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    font pango:DejaVu Sans Mono, FontAwesome 11
+    position bottom
+    status_command /usr/bin/i3status-rs ~/.i3/status.toml
+    colors {
+        separator #666666
+        background #000000
+	focused_background #303030
+        statusline #dddddd
+	# workspace buttons
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace #2f343a #900000 #ffffff
+    }
 }
 
 # Pulse Audio controls
@@ -166,12 +188,19 @@ workspace 3 output DP-2
 
 # brightness
 # https://github.com/jappeace/brightnessctl
-bindsym $mod+F7 exec brightness-
-bindsym $mod+F8 exec brightness+
-bindsym XF86MonBrightnessUp exec brightness+ 
-bindsym XF86MonBrightnessDown exec brightness- 
+bindsym $mod+F7 exec --no-startup-id brightness-
+bindsym $mod+F8 exec --no-startup-id brightness+
+bindsym XF86MonBrightnessUp exec --no-startup-id brightness+ 
+bindsym XF86MonBrightnessDown exec --no-startup-id brightness- 
 # Lock screen under LOCK+ALT+P
 bindsym $mod+$sup+p exec i3lock-fancy -p 
 
 # disable screen breaking - power saving mode in xorg
-exec xset s off
+exec --no-startup-id xset s off
+
+# red light after midnight
+exec --no-startup-id redshift -l 51:17
+
+# app assigning here
+# assign HVD citrix to workspace 3
+assign [class="Wfica"] 3
