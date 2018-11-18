@@ -3,8 +3,22 @@ icons = "awesome"
 [theme]
 name = "modern"
 [theme.overrides]
-good_bg = "#222D32"
-good_fg = "#CFD8DC"
+idle_bg = "$*color0"
+idle_fg = "$*color3"
+info_bg = "$*color0"
+info_fg = "$*color3"
+
+good_bg = "$*color0"
+good_fg = "$*color2"
+
+warning_bg = "$*color0"
+warning_fg = "$*color1"
+
+critical_bg = "$*color0"
+critical_fg = "$*color6"
+
+separator = " "
+
 
 [[block]]
 block = "disk_space"

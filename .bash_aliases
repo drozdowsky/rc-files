@@ -9,6 +9,8 @@ alias mkd='mkdir -pv'
 alias hcat='highlight --force --line-numbers'
 alias iten='trans -s it -t en'
 alias enit='trans -s en -t it' 
+alias t='tmux'
+alias gs='git status --untracked-files=no'
 
 fip() {
 	grep -r "$1" $pwd

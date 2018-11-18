@@ -23,9 +23,10 @@ fi
 # Ubuntu make installation of Ubuntu Make binary symlink
 PATH=$HOME/.local/share/umake/bin:$PATH
 # add faster key holding / pressing
-xset r rate 165 30
+xset r rate 175 30
 # Set proper ordering for displays - NSN
 xrandr --listmonitors | grep 'DP-1-2' && xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1-2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --off --output DP-1-3 --off --output DP-2 --mode 1680x1050 --pos 3840x0 --rotate left --output DP-1-1 --off
 
-# Set background to solid
-xsetroot -solid "#333333"
+# Set background on start 
+#feh --bg-fill ~/wallpapers/starry_night.jpg
+wal -R

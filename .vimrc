@@ -86,6 +86,8 @@ hi CursorLine   cterm=NONE cterm=bold ctermbg=87 term=bold ctermfg=NONE
 highlight Comment cterm=bold
 
 colorscheme molokai
+Plugin 'dylanaraps/wal.vim'
+"colorscheme wal
 set background=dark
 
 Plugin 'scrooloose/nerdtree'
@@ -145,10 +147,10 @@ augroup FastEscape
 augroup END
 
 " provide hl movements in Insert mode via the <Alt> modifier key
-inoremap <Esc>h <C-o>h
-inoremap <Esc>l <C-o>l
-inoremap <Esc>k <C-o>k
-inoremap <Esc>j <C-o>j
+"inoremap <Esc>h <C-o>h
+"inoremap <Esc>l <C-o>l
+"inoremap <Esc>k <C-o>k
+"inoremap <Esc>j <C-o>j
 
 " disable arrows in vim
 noremap <Up> <Nop>
@@ -170,3 +172,10 @@ vnoremap <Right> <Nop>
 Plugin 'lilydjwg/colorizer'
 let g:colorizer_startup = 0
 let g:colorizer_nomap = 1
+let g:colorizer_fgcontrast = 0
+
+" disable vim comments on new line
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+
+" when resizing vim - make windows equal size
+autocmd VimResized * wincmd =

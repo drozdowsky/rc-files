@@ -30,7 +30,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec st 
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+q kill
@@ -121,8 +121,24 @@ bindsym $mod+$sup+0 move container to workspace $ws10
 bindsym $mod+$sup+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+$sup+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+$sup+e exec "i3-msg exit"
+
+# I3 Exit mode
+set $systemmode "[EX]it [R]eboot [L]ock Log[O]ut [C]ancel"
+bindsym $mod+$sup+e mode $systemmode 
+
+mode $systemmode {
+    bindsym x exec shutdown now; mode "default"
+    bindsym e exec shutdown; mode "default"
+    bindsym r exec reboot; mode "default"
+    bindsym l exec i3lock-fancy -p; mode "default"
+    bindsym o exec i3-msg exit
+    # repair drop down terminal if you fuck up
+    bindsym F12 exec --no-startup-id st -n dropdown -e tmux new-session -A -s d
+    # cancel binds
+    bindsym Escape mode "default"
+    bindsym q mode "default"
+    bindsym c exec shutdown -c; mode "default"
+}
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -145,30 +161,42 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# bind colors with .Xresources
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $barbg i3wm.color0 #f0f0f0
+# workspaces colors
+set_from_resource $wsbg i3wm.color1 #f0f0f0
+set_from_resource $wsfg i3wm.color5 #f0f0f0
+set_from_resource $iwsbg i3wm.color3 #f0f0f0
+set_from_resource $iwsfg i3wm.color8 #f0f0f0
+
+# hide title bar i3 + set border thickness
+default_border pixel 4
+# I3 colors
+#                       $bg     $bg     $fg     $bg       $fg
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.focused          $bg     $bg     $fg     $bg       $fg
+client.focused_inactive #000000 #000000 #888888 #4c3d03   #000000
+client.unfocused        #000000 #000000 #888888 #292d2e   #000000
+client.urgent           #900000 #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+exec python3 ~/.i3/scripts/i3status-rust-colors.py ~/.i3/status_raw.toml ~/.i3/status.toml > ~/.i3/log.out 2>&1
+# Start i3bar to display a workspace bar
 bar {
     font pango:DejaVu Sans Mono, FontAwesome 11
     position bottom
+    # use i3status-rust
     status_command /usr/bin/i3status-rs ~/.i3/status.toml
     colors {
-        separator #666666
-        background #000000
-	focused_background #303030
-        statusline #dddddd
+        background $barbg
+	focused_background $barbg
 	# workspace buttons
-        focused_workspace #0088CC #0088CC #ffffff
-        active_workspace #333333 #333333 #ffffff
-        inactive_workspace #333333 #333333 #888888
+        focused_workspace $wsbg $wsbg $wsfg
+        active_workspace $iwsbg $iwsbg $iwsfg
+        inactive_workspace $iwsbg $iwsbg $iwsfg
         urgent_workspace #2f343a #900000 #ffffff
     }
 }
@@ -204,3 +232,12 @@ exec --no-startup-id redshift -l 51:17
 # app assigning here
 # assign HVD citrix to workspace 3
 assign [class="Wfica"] 3
+
+# add dropdown/scratchpad terminal at MOD+F12
+for_window[instance="dropdown"] floating enable
+for_window[instance="dropdown"] resize set 800 409
+for_window[instance="dropdown"] move scratchpad
+for_window[instance="dropdown"] border pixel 5
+exec --no-startup-id st -n dropdown -e tmux new-session -A -s d
+
+bindsym $mod+F12 [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
