@@ -68,6 +68,8 @@ autocmd FileType python setlocal completeopt-=preview
 " how to show signature of function 0 - dont show, 1 - show in place (brokes
 " vim history (undo))  2 - show in command line (noshowmode must be set)
 let g:jedi#show_call_signatures = "2"
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 1
 set noshowmode
 
 set encoding=utf-8
@@ -179,3 +181,32 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 
 " when resizing vim - make windows equal size
 autocmd VimResized * wincmd =
+
+" smart tab in vim
+function! Smart_TabComplete()
+  let line = getline('.')                         " current line
+
+  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+                                                  " line to one character right
+                                                  " of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<tab>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+    return "\<C-X>\<C-O>"                         " plugin matching
+  endif
+endfunction
+
+" Note that this can break python autocompletion - for this we have ctrl + space mapping
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+
+" I thought about using ` as Esc 
+" To type ` - type C-V then ` 
+inoremap ` <Esc>

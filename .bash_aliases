@@ -11,6 +11,7 @@ alias iten='trans -s it -t en'
 alias enit='trans -s en -t it' 
 alias t='tmux'
 alias gs='git status --untracked-files=no'
+alias cdrep='cd ~/rp/reporting-portal/'
 
 fip() {
 	grep -r "$1" $pwd

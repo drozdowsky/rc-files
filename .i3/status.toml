@@ -3,19 +3,19 @@ icons = "awesome"
 [theme]
 name = "modern"
 [theme.overrides]
-idle_bg = "$*color0"
-idle_fg = "$*color3"
-info_bg = "$*color0"
-info_fg = "$*color3"
+idle_bg = "#252517"
+idle_fg = "#30a6e8"
+info_bg = "#252517"
+info_fg = "#30a6e8"
 
-good_bg = "$*color0"
-good_fg = "$*color2"
+good_bg = "#252517"
+good_fg = "#5becb0"
 
-warning_bg = "$*color0"
-warning_fg = "$*color1"
+warning_bg = "#252517"
+warning_fg = "#eae448"
 
-critical_bg = "$*color0"
-critical_fg = "$*color6"
+critical_bg = "#252517"
+critical_fg = "#e62692"
 
 separator = " "
 

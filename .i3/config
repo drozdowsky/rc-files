@@ -82,28 +82,28 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 1 luv
+set $ws2 2 main
+set $ws3 3 shit
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9 bg
+set $ws10 10 win
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
 bindsym $mod+$sup+1 move container to workspace $ws1
@@ -132,8 +132,6 @@ mode $systemmode {
     bindsym r exec reboot; mode "default"
     bindsym l exec i3lock-fancy -p; mode "default"
     bindsym o exec i3-msg exit
-    # repair drop down terminal if you fuck up
-    bindsym F12 exec --no-startup-id st -n dropdown -e tmux new-session -A -s d
     # cancel binds
     bindsym Escape mode "default"
     bindsym q mode "default"
@@ -163,7 +161,7 @@ bindsym $mod+r mode "resize"
 
 # bind colors with .Xresources
 set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $bg i3wm.color5 #f0f0f0
 set_from_resource $barbg i3wm.color0 #f0f0f0
 # workspaces colors
 set_from_resource $wsbg i3wm.color1 #f0f0f0
@@ -210,9 +208,10 @@ bindsym $mod+F11 exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase s
 bindsym $mod+F9 exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # set up workspaces NSN - work
-workspace 1 output eDP-1
-workspace 2 output DP-1-2
-workspace 3 output DP-2
+workspace "$ws1" output eDP-1
+workspace "$ws2" output DP-1-2
+workspace "$ws3" output DP-2
+workspace "$ws10" output DP-2
 
 # brightness
 # https://github.com/jappeace/brightnessctl
@@ -220,8 +219,6 @@ bindsym $mod+F7 exec --no-startup-id brightness-
 bindsym $mod+F8 exec --no-startup-id brightness+
 bindsym XF86MonBrightnessUp exec --no-startup-id brightness+ 
 bindsym XF86MonBrightnessDown exec --no-startup-id brightness- 
-# Lock screen under LOCK+ALT+P
-bindsym $mod+$sup+p exec i3lock-fancy -p 
 
 # disable screen breaking - power saving mode in xorg
 exec --no-startup-id xset s off
@@ -231,13 +228,13 @@ exec --no-startup-id redshift -l 51:17
 
 # app assigning here
 # assign HVD citrix to workspace 3
-assign [class="Wfica"] 3
+assign [class="Wfica"] $ws10
+for_window [class="Wfica_YesNoConfirm"] floating enable
 
 # add dropdown/scratchpad terminal at MOD+F12
 for_window[instance="dropdown"] floating enable
 for_window[instance="dropdown"] resize set 800 409
 for_window[instance="dropdown"] move scratchpad
 for_window[instance="dropdown"] border pixel 5
-exec --no-startup-id st -n dropdown -e tmux new-session -A -s d
 
-bindsym $mod+F12 [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+bindsym $mod+F12 exec --no-startup-id ~/.i3/scripts/dropdown_spawn.sh
