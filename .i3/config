@@ -140,16 +140,10 @@ mode $systemmode {
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 5 px 
+        bindsym j resize grow height 5 px 
+        bindsym k resize shrink height 5 px
+        bindsym l resize grow width 5 px
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -209,6 +203,11 @@ bindsym $mod+F9 exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # set up workspaces NSN - work
 workspace "$ws1" output eDP-1
+workspace "$ws2" output eDP-1
+workspace "$ws3" output eDP-1
+workspace "$ws10" output eDP-1
+
+workspace "$ws1" output eDP-1
 workspace "$ws2" output DP-1-2
 workspace "$ws3" output DP-2
 workspace "$ws10" output DP-2
@@ -230,6 +229,9 @@ exec --no-startup-id redshift -l 51:17
 # assign HVD citrix to workspace 3
 assign [class="Wfica"] $ws10
 for_window [class="Wfica_YesNoConfirm"] floating enable
+
+# Visual Paradigm - float mode
+for_window [class="com-install4j-runtime-launcher-UnixLauncher"] floating enable
 
 # add dropdown/scratchpad terminal at MOD+F12
 for_window[instance="dropdown"] floating enable

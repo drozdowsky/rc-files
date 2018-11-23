@@ -22,7 +22,7 @@ separator = " "
 
 [[block]]
 block = "focused_window"
-max_width = 21
+max_width = 30 
 
 [[block]]
 block = "disk_space"

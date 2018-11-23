@@ -74,9 +74,20 @@ set noshowmode
 
 set encoding=utf-8
 
-Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
-let python_highlight_all=1
+Plugin 'w0rp/ale'
+let g:ale_linters = {'python': ['flake8', 'pylint']}
+let g:ale_completion_enabled = 0
+let g:ale_echo_msg_format = '%severity%  %s (%code%)' 
+let g:ale_lint_on_save = 0
+let g:ale_python_pylint_options = "--rcfile ~/.config/.pylintrc"
+let g:ale_python_flake8_options = "--config ~/.config/flake8"
+"let g:ale_python_prospector_options = "--profile /home/self/.prospector.yaml --pylint-config-file /home/self/.pylintrc"
+
+"Plugin 'vim-syntastic/syntastic'
+"let g:syntastic_python_checkers = ['prospector']
+"let g:syntastic_python_pylint_args = ['--rcfile=~/.pylint.conf']
+"let g:syntastic_python_prospector_args = ['--pylint-config-file=~/.pylint.conf', '--member-warnings']
+"let g:syntastic_check_on_wq = 0
 
 syntax on
 syntax enable
@@ -93,7 +104,6 @@ Plugin 'dylanaraps/wal.vim'
 set background=dark
 
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 map <C-t> :NERDTreeToggle<CR>
 
@@ -134,9 +144,9 @@ set wildmode=longest:full,full
 set directory^=$HOME/.vim/tmp//
 " CtrlP different mapping fo tabs
 let g:ctrlp_prompt_mappings = {
-			\ 'AcceptSelection("h")': ['<c-x>', '<c-s>'],
+			\ 'AcceptSelection("h")': ['<c-h>', '<c-i>'],
 			\ 'AcceptSelection("t")': ['<c-t>'],
-			\ 'AcceptSelection("v")': ['<c-v>', '<c-i>'],
+			\ 'AcceptSelection("v")': ['<c-v>', '<c-s>'],
 			\ }
 
 " Fast ESC in visual/insert mode
@@ -205,8 +215,4 @@ function! Smart_TabComplete()
 endfunction
 
 " Note that this can break python autocompletion - for this we have ctrl + space mapping
-inoremap <tab> <c-r>=Smart_TabComplete()<CR>
-
-" I thought about using ` as Esc 
-" To type ` - type C-V then ` 
-inoremap ` <Esc>
+inoremap <Tab> <c-r>=Smart_TabComplete()<CR>
