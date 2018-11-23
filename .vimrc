@@ -81,13 +81,6 @@ let g:ale_echo_msg_format = '%severity%  %s (%code%)'
 let g:ale_lint_on_save = 0
 let g:ale_python_pylint_options = "--rcfile ~/.config/.pylintrc"
 let g:ale_python_flake8_options = "--config ~/.config/flake8"
-"let g:ale_python_prospector_options = "--profile /home/self/.prospector.yaml --pylint-config-file /home/self/.pylintrc"
-
-"Plugin 'vim-syntastic/syntastic'
-"let g:syntastic_python_checkers = ['prospector']
-"let g:syntastic_python_pylint_args = ['--rcfile=~/.pylint.conf']
-"let g:syntastic_python_prospector_args = ['--pylint-config-file=~/.pylint.conf', '--member-warnings']
-"let g:syntastic_check_on_wq = 0
 
 syntax on
 syntax enable
