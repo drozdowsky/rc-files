@@ -10,11 +10,11 @@ alias hcat='highlight --force --line-numbers'
 alias iten='trans -s it -t en'
 alias enit='trans -s en -t it' 
 alias t='tmux'
-alias gs='git status --untracked-files=no'
 alias cdrep='cd ~/rp/reporting-portal/'
+alias cdreps='cd ~/rp/reporting-portal/src'
 
 fip() {
-	grep -r "$1" $pwd
+	grep -r "$1" $pwd --line-number
 }
 
 mkcd ()

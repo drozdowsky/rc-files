@@ -137,21 +137,16 @@ mode $systemmode {
     bindsym q mode "default"
     bindsym c exec shutdown -c; mode "default"
 }
+bindsym $mod+$sup+p exec i3lock-fancy -p
+
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
-        bindsym h resize shrink width 5 px 
-        bindsym j resize grow height 5 px 
-        bindsym k resize shrink height 5 px
-        bindsym l resize grow width 5 px
+bindsym $mod+plus resize grow width 5 px or 5 ppt
+bindsym $mod+minus resize shrink width 5 px or 5 ppt
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
+bindsym $mod+shift+plus resize grow height 5 px or 5 ppt
+bindsym $mod+shift+minus resize shrink height 5 px or 5 ppt
 
-bindsym $mod+r mode "resize"
 
 # bind colors with .Xresources
 set_from_resource $fg i3wm.color7 #f0f0f0
