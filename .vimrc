@@ -121,11 +121,16 @@ map <C-t> :NERDTreeToggle<CR>
 
 
 " fuzzy search in vim
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlp/ctrlp.vim'
+" add ag (faster grep) in ctrlp
+"Plugin 'lokikl/vim-ctrlp-ag'
+"let g:ctrlp_extensions = ['ag']
+set wildignore+=*.pyc,*.swp,
+let g:ctrlp_lazy_update = 200
 let g:ctrlp_prompt_mappings = {
-			\ 'AcceptSelection("h")': ['<c-h>', '<c-i>'],
+			\ 'AcceptSelection("h")': ['<c-i>'],
 			\ 'AcceptSelection("t")': ['<c-t>'],
-			\ 'AcceptSelection("v")': ['<c-v>', '<c-s>'],
+			\ 'AcceptSelection("v")': ['<c-v>'],
 			\ }
 
 
@@ -133,8 +138,8 @@ let g:ctrlp_prompt_mappings = {
 Plugin 'tpope/vim-fugitive'
 
 
-" powerline in vim
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" airline in vim
+Plugin 'vim-airline/vim-airline'
 
 
 " sort imports in vim, requirement: pip install isort
@@ -151,8 +156,8 @@ set relativenumber
 set ttyfast
 " always show statusline
 set laststatus=2
-" add PWD in to path
-set path+=$PWD/**
+" set PWD in to path
+set path=$PWD/**
 " dont exit buffers but hide them
 set hidden
 
@@ -171,6 +176,8 @@ nnoremap <leader>' :tabprev<CR>
 " better vim's builtin autocompletion
 set wildmenu
 set wildmode=longest:full,full
+set ignorecase
+set smartcase
 
 
 " store swaps in ~/.vim/tmp
