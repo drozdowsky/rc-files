@@ -127,3 +127,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
 # VI mode as default for bash
 set -o vi
+
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden'

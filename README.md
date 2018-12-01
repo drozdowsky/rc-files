@@ -4,5 +4,6 @@ dotfiles
 # todo
  - [ ] ctags
  - [ ] cscope
- - [ ] extractd
- - [ ] ag search in ctrlp
+ - [x] extract & compress in .bash_aliases
+ - [x] use fzf instead of ctrlp
+ - [ ] dmenu-desktop/recent

@@ -116,22 +116,26 @@ hi CursorLine   cterm=NONE cterm=bold ctermbg=237 term=bold ctermfg=NONE
 
 " nerdtree under Ctrl+t
 Plugin 'scrooloose/nerdtree'
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+let NERDTreeIgnore=['\~$'] "ignore files in NERDTree
+let NERDTreeRespectWildIgnore = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeNatualSort = 1
+" let NERDTreeShowBookmarks = 1
+let NERDTreeShowHidden = 1
+let NERDTreeSortOrder = ['\/$', '\.py$', '\.js$', '\.html$', '\.css$', '*']
 map <C-t> :NERDTreeToggle<CR>
 
 
 " fuzzy search in vim
-Plugin 'ctrlp/ctrlp.vim'
-" add ag (faster grep) in ctrlp
-"Plugin 'lokikl/vim-ctrlp-ag'
-"let g:ctrlp_extensions = ['ag']
+set rtp+=~/builds/fzf
+Plugin 'junegunn/fzf.vim'
+nnoremap <C-p> :Files<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-i': 'split',
+  \ 'ctrl-v': 'vsplit' }
+" fzf doesnot use wildignore but .rgignore
 set wildignore+=*.pyc,*.swp,
-let g:ctrlp_lazy_update = 200
-let g:ctrlp_prompt_mappings = {
-			\ 'AcceptSelection("h")': ['<c-i>'],
-			\ 'AcceptSelection("t")': ['<c-t>'],
-			\ 'AcceptSelection("v")': ['<c-v>'],
-			\ }
 
 
 " Git in vim
@@ -171,6 +175,7 @@ nnoremap <Leader>b :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
 " add tab switching under \\ and \'
 nnoremap <Leader>\ :tabnext<CR>
 nnoremap <leader>' :tabprev<CR>
+nnoremap <leader>] :tabprev<CR>
 
 
 " better vim's builtin autocompletion
