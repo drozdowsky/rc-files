@@ -2,7 +2,18 @@
 "\e[A":history-search-backward
 ## arrow down
 "\e[B":history-search-forward
-# show vi mode in promp 
+
+
+# vi mode
+set editing-mode vi
 set show-mode-in-prompt on
 set vi-ins-mode-string "++ "
 set vi-cmd-mode-string ": "
+
+set keymap vi-command
+Control-l: clear-screen
+Control-a: beginning-of-line
+
+set keymap vi-insert
+Control-l: clear-screen
+Control-a: beginning-of-line

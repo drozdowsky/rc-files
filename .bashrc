@@ -116,9 +116,12 @@ fi
 
 # virtualenv
 export WORKON_HOME=~/virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 
 # Vim as default editor (ranger settings)
 VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR

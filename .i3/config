@@ -172,8 +172,7 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
 
-exec wal -R
-exec python3 ~/.i3/scripts/i3status-rust-colors.py ~/.i3/status_raw.toml ~/.i3/status.toml > ~/.i3/log.out 2>&1
+# exec python3 ~/.i3/scripts/i3status-rust-colors.py ~/.i3/status_raw.toml ~/.i3/status.toml > ~/.i3/log.out 2>&1
 # Start i3bar to display a workspace bar
 bar {
     font pango:DejaVu Sans Mono, FontAwesome 11
