@@ -122,7 +122,6 @@ let NERDTreeMinimalUI = 1
 let NERDTreeNatualSort = 1
 " let NERDTreeShowBookmarks = 1
 let NERDTreeShowHidden = 1
-let NERDTreeSortOrder = ['\/$', '\.py$', '\.js$', '\.html$', '\.css$', '*']
 map <C-t> :NERDTreeToggle<CR>
 
 

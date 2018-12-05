@@ -6,6 +6,7 @@
 	rebase = true
 [alias]
 	s = status --untracked-files=no
+	l = log
 [include]
 	path = ~/.gitproxy
 	path = ~/.gitname
