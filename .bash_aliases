@@ -1,26 +1,43 @@
-alias mgd='google-drive-ocamlfuse ~/google/drive'
-alias umgd='fusermount -u ~/google/drive'
-
+# main aliases
 alias a='sudo apt'
 alias g='git'
 alias v='vim'
 alias sv='sudo vim'
 alias mkd='mkdir -pv'
-alias iten='trans -s it -t en'
-alias enit='trans -s en -t it' 
 alias t='tmux'
+
+
+# clipboard pipe alias
+alias clip='xclip -selection clipboard'
+alias clips='xclip -i'  # selection clipboard
+
+
+# googledrive
+alias mgd='google-drive-ocamlfuse ~/google/drive'
+alias umgd='fusermount -u ~/google/drive'
+
+
+# work
 alias cdrep='cd ~/rp/reporting-portal/'
 alias cdreps='cd ~/rp/reporting-portal/src'
 
 
+# sudo apt install trans-shell
+# translating english - italian
+alias iten='trans -s it -t en'
+alias enit='trans -s en -t it' 
+
+
+# Find in path 
 fip() {
 	rg "$1" $pwd --line-number
 }
 
 
+# make dir and cd into it
 mkcd ()
 {
-    mkdir -p -- "$1" &&
+    mkdir -pv -- "$1" &&
     cd -P -- "$1"
 }
 

@@ -42,6 +42,11 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+# start clipmenu (clipboard manager)
+# clipmenud.service must be running
+exec --no-startup-id clipmenud
+bindsym $mod+c exec clipmenu
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -198,16 +203,21 @@ bindsym $mod+F10 exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease s
 bindsym $mod+F11 exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
 bindsym $mod+F9 exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
-# set up workspaces NSN - work
+# set up workspaces - work
+# output 1
 workspace "$ws1" output eDP-1
-workspace "$ws2" output eDP-1
-workspace "$ws3" output eDP-1
-workspace "$ws10" output eDP-1
-
-workspace "$ws1" output eDP-1
+workspace "$ws4" output eDP-1
+workspace "$ws7" output eDP-1
+# output 2
 workspace "$ws2" output DP-1-2
+workspace "$ws5" output DP-1-2
+workspace "$ws8" output DP-1-2
+# output 3
 workspace "$ws3" output DP-2
+workspace "$ws6" output DP-2
+workspace "$ws9" output DP-1-2
 workspace "$ws10" output DP-2
+
 
 # brightness
 # https://github.com/jappeace/brightnessctl

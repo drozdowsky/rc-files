@@ -2,8 +2,6 @@
 	helper = cache --timeout=99999999999
 [core]
 	excludesfile = ~/.gitignore
-[branch "master"]
-	rebase = true
 [alias]
 	s = status --untracked-files=no
 	l = log
