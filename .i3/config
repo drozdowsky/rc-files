@@ -247,3 +247,6 @@ for_window[instance="dropdown"] move scratchpad
 for_window[instance="dropdown"] border pixel 5
 
 bindsym $mod+F12 exec --no-startup-id ~/.i3/scripts/dropdown_spawn.sh
+
+bindsym --release $mod+Print exec flameshot screen --path ~/Pictures/screenshots/
+bindsym --release $mod+shift+Print exec flameshot gui --path ~/Pictures/screenshots/

@@ -22,6 +22,10 @@ alias cdrep='cd ~/rp/reporting-portal/'
 alias cdreps='cd ~/rp/reporting-portal/src'
 
 
+# CTRL+SHIFT+I to save the st's buffer to ss
+alias ss='vim /tmp/sttmp'
+
+
 # sudo apt install trans-shell
 # translating english - italian
 alias iten='trans -s it -t en'

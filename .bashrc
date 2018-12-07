@@ -18,7 +18,7 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 shopt -s autocd # autocd
 HISTSIZE= HISTFILESIZE= # Infinite history
-HISTIGNORE='ls:bg:fg:history:clear'
+HISTIGNORE='ls:bg:fg:history:clear:ss'
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize

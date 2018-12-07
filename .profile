@@ -12,6 +12,7 @@ PATH=$HOME/.local/share/umake/bin:$PATH
 
 
 # default programs
+export BROWSER="firefox"
 export EDITOR="vim"
 export TERMINAL="st"
 export READER="zathura"
