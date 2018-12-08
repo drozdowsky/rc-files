@@ -103,6 +103,7 @@ set t_Co=256
 
 
 " colorscheme - with option to use wal
+Plugin 'tomasr/molokai'
 colorscheme molokai
 Plugin 'dylanaraps/wal.vim'
 "colorscheme wal

@@ -24,10 +24,12 @@ command -v xset && xset r rate 175 30
 
 # map capslock to super
 command -v setxkbmap && setxkbmap -option caps:super
+command -v xmodmap && xmodmap ~/.Xmodmap
 
 
-# Set proper ordering for displays in work
-command -v xrandr && xrandr --listmonitors | grep 'DP-1-2' && source ~/.screenlayout/work.sh
+if [ -f ~/.display.sh ]; then
+	source ~/.display.sh
+fi
 
 
 # auto linux theme and wallpaper

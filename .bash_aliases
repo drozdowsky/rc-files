@@ -23,7 +23,7 @@ alias cdreps='cd ~/rp/reporting-portal/src'
 
 
 # CTRL+SHIFT+I to save the st's buffer to ss
-alias ss='vim /tmp/sttmp'
+alias ss='vim /tmp/stbuf'
 
 
 # sudo apt install trans-shell
