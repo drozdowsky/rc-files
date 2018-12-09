@@ -7,8 +7,11 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
 # Ubuntu make installation of Ubuntu Make binary symlink
-PATH=$HOME/.local/share/umake/bin:$PATH
+if [ -d "$HOME/.local/share/umake/bin" ]; then
+    PATH="$HOME/.local/share/umake/bin:$PATH"
+fi
 
 
 # default programs
@@ -33,4 +36,5 @@ fi
 
 
 # auto linux theme and wallpaper
-command -v wal && wal -R
+command -v wal && wal -nR
+feh --bg-fill --randomize ~/wallpaper/*
