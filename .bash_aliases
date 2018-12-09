@@ -8,8 +8,8 @@ alias t='tmux'
 
 
 # clipboard pipe alias
-alias clip='xclip -selection clipboard'
-alias clips='xclip -i'  # selection clipboard
+alias clip='xsel -ib'
+alias clips='xsel -i'  # selection clipboard
 
 
 # googledrive
