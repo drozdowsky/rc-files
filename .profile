@@ -29,12 +29,9 @@ command -v xset && xset r rate 175 30
 command -v setxkbmap && setxkbmap -option caps:super
 command -v xmodmap && xmodmap ~/.Xmodmap
 
+# auto linux theme and wallpaper
+command -v wal && wal -nR
 
 if [ -f ~/.display.sh ]; then
 	source ~/.display.sh
 fi
-
-
-# auto linux theme and wallpaper
-command -v wal && wal -nR
-feh --bg-fill ~/wallpaper/cropped-1920-1080-849740.jpg --bg-fill ~/wallpaper/cropped-1920-1080-506704.jpg --bg-fill ~/wallpaper/third.png

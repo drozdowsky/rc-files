@@ -50,6 +50,7 @@ au         BufNewFile *.py,*.pyw,*.vy set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw,*.vy let b:comment_leader = '#'
 " Delete trailing whitespaces when saving python file
 au BufWrite *.py :call DeleteTrailingWS()
+
 " frontend
 au BufNewFile,BufRead *.js,*.html,*.css
     \ set tabstop=4 |
@@ -57,6 +58,7 @@ au BufNewFile,BufRead *.js,*.html,*.css
     \ set shiftwidth=4 |
     \ set expandtab |
     \ set autoindent
+
 " markdown
 au BufNewFile,BufRead *.md
     \ set tabstop=2 |
