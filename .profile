@@ -37,4 +37,4 @@ fi
 
 # auto linux theme and wallpaper
 command -v wal && wal -nR
-feh --bg-fill --randomize ~/wallpaper/*
+feh --bg-fill ~/wallpaper/cropped-1920-1080-849740.jpg --bg-fill ~/wallpaper/cropped-1920-1080-506704.jpg --bg-fill ~/wallpaper/third.png

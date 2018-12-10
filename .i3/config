@@ -42,10 +42,6 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# start clipmenu (clipboard manager)
-# clipmenud.service must be running
-exec --no-startup-id clipmenud
-bindsym $mod+c exec clipmenu
 
 # change focus
 bindsym $mod+h focus left
