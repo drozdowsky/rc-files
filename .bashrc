@@ -129,4 +129,5 @@ VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
 set -o vi
 
 
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
+# make FZF use ripgrep as default file searcher
+export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore-vcs'

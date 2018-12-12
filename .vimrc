@@ -76,16 +76,9 @@ Plugin 'drozdowsky/indentpython.vim'
 Plugin 'jacqueswww/vim-vyper' 
 
 
-" autocompletion for python 
-Plugin 'davidhalter/jedi-vim'
-" disable docstring window in jedi-vim when autocompleting
-autocmd FileType python setlocal completeopt-=preview
-" how to show signature of function 0 - dont show, 1 - show in place (brokes
-" vim history (undo))  2 - show in command line (noshowmode must be set)
-let g:jedi#show_call_signatures = "2"
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 1
-set noshowmode
+" jedi is shit, long live the ctags & cscope!
+Plugin 'drozdowsky/cscope_maps.vim'
+set complete-=i  " stackoverflow.com/questions/2169645
 
 
 " syntax highlighting

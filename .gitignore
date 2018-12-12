@@ -1,3 +1,5 @@
 dbg.txt
 *.pyc
 *.swp
+src/tags
+src/cscope.out
