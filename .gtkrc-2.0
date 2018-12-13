@@ -1,0 +1,6 @@
+include ".local/share/mx-tweak-data/whisker-tweak.rc"
+
+style "xfdesktop-icon-view" {
+	XfdesktopIconView::ellipsize-icon-labels = 0
+}
+widget_class "*XfdesktopIconView*" style "xfdesktop-icon-view"

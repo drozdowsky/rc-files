@@ -120,6 +120,10 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+# Add sbin directories to PATH.  This is useful on systems that have sudo
+[ -z "${PATH##*/sbin*}" ] || PATH=$PATH:/sbin:/usr/sbin
+
+
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 
