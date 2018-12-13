@@ -123,7 +123,7 @@ map <C-t> :NERDTreeToggle<CR>
 
 " fuzzy search in vim
 set rtp+=~/builds/fzf
-Plugin 'junegunn/fzf.vim'
+Plugin 'drozdowsky/minimal-fzf.vim'
 nnoremap <C-p> :Files<CR>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -165,8 +165,11 @@ set hidden
 cmap $w w !sudo tee > /dev/null %
 
 
-" \b buffer switching in vim
-nnoremap <Leader>b :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
+" \b buffer,mark,text switching in vim (needs fzf.vim to work)
+"nnoremap <Leader>b :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>m :Marks<CR>
+nnoremap <Leader>t :Rg<CR>
 " add tab switching under \\ and \'
 nnoremap <Leader>\ :tabnext<CR>
 nnoremap <leader>' :tabprev<CR>
