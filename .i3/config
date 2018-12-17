@@ -124,7 +124,7 @@ bindsym $mod+$sup+c reload
 bindsym $mod+$sup+r restart
 
 # I3 Exit mode
-set $systemmode "[EX]it [R]eboot [L]ock Log[O]ut [C]ancel"
+set $systemmode "[EX]it [R]eboot [L]ock Log[O]ut [C]ancel [T]erminal"
 bindsym $mod+$sup+e mode $systemmode 
 
 mode $systemmode {
@@ -133,6 +133,10 @@ mode $systemmode {
     bindsym r exec reboot; mode "default"
     bindsym l exec i3lock-fancy -p; mode "default"
     bindsym o exec i3-msg exit
+
+    # terminal
+    bindsym t exec st; mode "default"
+
     # cancel binds
     bindsym Escape mode "default"
     bindsym q mode "default"
