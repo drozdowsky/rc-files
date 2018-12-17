@@ -8,77 +8,46 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+
+" colorschemes
+Plugin 'tomasr/molokai'
+Plugin 'dylanaraps/wal.vim'
 
 
-" Window switching
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-set splitright
+" Git in vim
+Plugin 'tpope/vim-fugitive'
 
 
-" Folding options
-nnoremap <space> za
+" airline in vim
+Plugin 'vim-airline/vim-airline'
+
+
+" sort imports in vim, requirement: pip install isort
+Plugin 'fisadev/vim-isort'
+
+
+" Folding
 Plugin 'tmhedberg/SimpylFold'
-set foldmethod=indent
-set foldlevel=99
-
-
-" Function to delete trailing whitespaces
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-
-
-" Configs per buffer type
-highlight BadWhitespace guibg=red ctermbg=darkred
-au BufRead,BufNewFile *.py,*.pyw,*.vy set expandtab
-au BufRead,BufNewFile *.py,*.pyw,*.vy set textwidth=120
-au BufRead,BufNewFile *.py,*.pyw,*.vy set tabstop=4
-au BufRead,BufNewFile *.py,*.pyw,*.vy set softtabstop=4
-au BufRead,BufNewFile *.py,*.pyw,*.vy set shiftwidth=4
-au BufRead,BufNewFile *.py,*.pyw,*.vy set autoindent
-" au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /^\t\+/
-" au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /\s\+$/
-au         BufNewFile *.py,*.pyw,*.vy set fileformat=unix
-au BufRead,BufNewFile *.py,*.pyw,*.vy let b:comment_leader = '#'
-" Delete trailing whitespaces when saving python file
-au BufWrite *.py :call DeleteTrailingWS()
-
-" frontend
-au BufNewFile,BufRead *.js,*.html,*.css
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set expandtab |
-    \ set autoindent
-
-" markdown
-au BufNewFile,BufRead *.md
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2 |
-    \ set expandtab |
-    \ set autoindent
 
 
 " Indent for python - my fork
 Plugin 'drozdowsky/indentpython.vim'
 
 
-"vyper language syntax highlight
+" vyper language syntax highlight
 Plugin 'jacqueswww/vim-vyper' 
 
 
 " jedi is shit, long live the ctags & cscope!
 Plugin 'drozdowsky/cscope_maps.vim'
 set complete-=i  " stackoverflow.com/questions/2169645
+
+
+" color highlight :ColorHighlight/Clear/Toggle
+Plugin 'lilydjwg/colorizer'
+let g:colorizer_startup = 0
+let g:colorizer_nomap = 1
+let g:colorizer_fgcontrast = 0
 
 
 " syntax highlighting
@@ -91,23 +60,6 @@ let g:ale_echo_msg_format = '%severity%  %s (%code%)'
 let g:ale_lint_on_save = 1
 let g:ale_python_pylint_options = "--rcfile ~/.config/.pylintrc"
 let g:ale_python_flake8_options = "--config ~/.config/flake8"
-
-
-" 256 colors in terminal
-set t_Co=256
-
-
-" colorscheme - with option to use wal
-Plugin 'tomasr/molokai'
-colorscheme molokai
-Plugin 'dylanaraps/wal.vim'
-"colorscheme wal
-set background=dark
-
-
-" show line highlight
-set cursorline
-hi CursorLine   cterm=NONE cterm=bold ctermbg=237 term=bold ctermfg=NONE
 
 
 " nerdtree under Ctrl+t
@@ -129,22 +81,94 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-i': 'split',
   \ 'ctrl-v': 'vsplit' }
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+" color scheme & show line highlight
+"colorscheme wal
+set t_Co=256
+colorscheme molokai
+set background=dark
+set cursorline
+hi CursorLine   cterm=NONE cterm=bold ctermbg=237 term=bold ctermfg=NONE
+
+
+" Window switching
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+set splitright splitbelow
+
+
+" Folding options
+nnoremap <space> za
+set foldmethod=indent
+set foldlevel=99
+
+
+" Configs per buffer type
+autocmd ColorScheme * highlight BadWhitespace guibg=red ctermbg=darkred
+autocmd ColorScheme * highlight SuspiciousComma guibg=red ctermbg=103
+au BufRead,BufNewFile *.py,*.pyw,*.vy set expandtab
+au BufRead,BufNewFile *.py,*.pyw,*.vy set textwidth=120
+au BufRead,BufNewFile *.py,*.pyw,*.vy set tabstop=4
+au BufRead,BufNewFile *.py,*.pyw,*.vy set softtabstop=4
+au BufRead,BufNewFile *.py,*.pyw,*.vy set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw,*.vy set autoindent
+"au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /^\t\+/
+"au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /\s\+$/
+" match ,$ as the bad whitespace
+"au BufRead,InsertLeave *.py,*.pyw,*.vy match SuspiciousComma /,$/
+au         BufNewFile *.py,*.pyw,*.vy set fileformat=unix
+au BufRead,BufNewFile *.py,*.pyw,*.vy let b:comment_leader = '#'
+
+" Delete trailing whitespaces when saving python file
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+au BufWrite           *.py,*.pyw,*.vy :call DeleteTrailingWS()
+
+" disable vim comments on new line
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+
+" when resizing vim - make windows equal size
+autocmd VimResized * wincmd =
+
+" Fast ESC in visual/insert mode
+set timeoutlen=1000
+set ttimeoutlen=0
+augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+augroup END
+
+" frontend
+au BufNewFile,BufRead *.js,*.html,*.css
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set expandtab |
+    \ set autoindent
+
+" markdown
+au BufNewFile,BufRead *.md
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set expandtab |
+    \ set autoindent
+
+
 " fzf doesnot use wildignore but .rgignore
 set wildignore+=*.pyc,*.swp,
-
-
-" Git in vim
-Plugin 'tpope/vim-fugitive'
-
-
-" airline in vim
-Plugin 'vim-airline/vim-airline'
-
-
-" sort imports in vim, requirement: pip install isort
-Plugin 'fisadev/vim-isort'
-
-
 " always show X line at the top/bottom when scrolling
 set scrolloff=2
 " show line number in current line
@@ -159,6 +183,17 @@ set laststatus=2
 set path=$PWD/**
 " dont exit buffers but hide them
 set hidden
+
+
+" better vim's builtin autocompletion
+set wildmenu
+set wildmode=longest:full,full
+set ignorecase
+set smartcase
+
+
+" store swaps in ~/.vim/tmp
+set directory^=$HOME/.vim/tmp//
 
 
 " Allow saving of files as sudo when I forgot to start vim using sudo. Usage: $w
@@ -176,27 +211,6 @@ nnoremap <leader>' :tabprev<CR>
 nnoremap <leader>] :tabprev<CR>
 
 
-" better vim's builtin autocompletion
-set wildmenu
-set wildmode=longest:full,full
-set ignorecase
-set smartcase
-
-
-" store swaps in ~/.vim/tmp
-set directory^=$HOME/.vim/tmp//
-
-
-" Fast ESC in visual/insert mode
-set timeoutlen=1000
-set ttimeoutlen=0
-augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-augroup END
-
-
 " disable arrows in vim
 noremap <Up> <Nop>
 noremap <Down> <Nop>
@@ -212,21 +226,6 @@ vnoremap <Up> <Nop>
 vnoremap <Down> <Nop>
 vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
-
-
-" color highlight :ColorHighlight/Clear/Toggle
-Plugin 'lilydjwg/colorizer'
-let g:colorizer_startup = 0
-let g:colorizer_nomap = 1
-let g:colorizer_fgcontrast = 0
-
-
-" disable vim comments on new line
-autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
-
-
-" when resizing vim - make windows equal size
-autocmd VimResized * wincmd =
 
 
 " Super Tab completion under Shift+Tab
@@ -250,5 +249,4 @@ function! Smart_TabComplete()
     return "\<C-X>\<C-O>"                         " plugin matching
   endif
 endfunction
-
 inoremap <S-Tab> <c-r>=Smart_TabComplete()<CR>

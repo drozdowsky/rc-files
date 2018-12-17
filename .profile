@@ -26,8 +26,9 @@ command -v xset && xset r rate 175 30
 
 
 # map capslock to super
-command -v setxkbmap && setxkbmap -option caps:super
 command -v xmodmap && xmodmap ~/.Xmodmap
+command -v setxkbmap && setxkbmap -option caps:super
+
 
 # auto linux theme and wallpaper
 command -v wal && wal -nR

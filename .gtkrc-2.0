@@ -1,5 +1,19 @@
-include ".local/share/mx-tweak-data/whisker-tweak.rc"
+# -- THEME AUTO-WRITTEN DO NOT EDIT
+include "/home/self/.themes/Numix-Dark/gtk-2.0/gtkrc"
 
+style "user-font" {
+	font_name = "Sans 10"
+}
+
+widget_class "*" style "user-font"
+
+gtk-font-name="Sans 10"
+
+include "/home/self/.gtkrc.mine"
+
+# -- THEME AUTO-WRITTEN DO NOT EDIT
+
+include ".local/share/mx-tweak-data/whisker-tweak.rc"
 style "xfdesktop-icon-view" {
 	XfdesktopIconView::ellipsize-icon-labels = 0
 }
