@@ -1,2 +1,4 @@
 *.pyc
 *.swp
+ctags
+cscope.out
