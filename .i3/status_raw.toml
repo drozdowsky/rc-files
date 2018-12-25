@@ -21,10 +21,6 @@ separator = " "
 
 
 [[block]]
-block = "focused_window"
-max_width = 30 
-
-[[block]]
 block = "disk_space"
 path = "/"
 alias = "/"
@@ -39,17 +35,12 @@ block = "memory"
 display_type = "memory"
 format_mem = "{Mum} MB"
 format_swap = "{SUp}%"
-warning_mem = 60.0
+warning_mem = 50.0
 critical_mem = 90.0
 
 [[block]]
 block = "cpu"
 interval = 3
-
-[[block]]
-block = "load"
-interval = 5
-format = "{1m}"
 
 [[block]]
 block = "battery"

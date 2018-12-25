@@ -124,7 +124,7 @@ bindsym $mod+$sup+c reload
 bindsym $mod+$sup+r restart
 
 # I3 Exit mode
-set $systemmode "[EX]it [R]eboot [L]ock Log[O]ut [C]ancel [T]erminal"
+set $systemmode "[EX]it [R]eboot [L]ock Log[O]ut [C]ancel [T]erminal [F]irefox"
 bindsym $mod+$sup+e mode $systemmode 
 
 mode $systemmode {
@@ -136,6 +136,8 @@ mode $systemmode {
 
     # terminal
     bindsym t exec st; mode "default"
+    # firefox
+    bindsym f exec firefox; mode "default"
 
     # cancel binds
     bindsym Escape mode "default"
@@ -164,7 +166,9 @@ set_from_resource $iwsbg i3wm.color3 #f0f0f0
 set_from_resource $iwsfg i3wm.color8 #f0f0f0
 
 # hide title bar i3 + set border thickness
-default_border pixel 4
+default_border pixel 3
+# hide edge border when only one container on screen
+hide_edge_borders smart
 # I3 colors
 #                       $bg     $bg     $fg     $bg       $fg
 # class                 border  backgr. text    indicator child_border

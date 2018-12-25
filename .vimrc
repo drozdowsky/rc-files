@@ -51,7 +51,6 @@ let g:colorizer_fgcontrast = 0
 
 
 " syntax highlighting
-set encoding=utf-8
 syntax on
 Plugin 'w0rp/ale'
 let g:ale_linters = {'python': ['flake8', 'pylint']}
@@ -183,6 +182,8 @@ set laststatus=2
 set path=$PWD/**
 " dont exit buffers but hide them
 set hidden
+" utf-8
+set encoding=utf-8
 
 
 " better vim's builtin autocompletion
