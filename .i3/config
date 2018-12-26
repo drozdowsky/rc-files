@@ -83,28 +83,28 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 1: luv
-set $ws2 2: main
-set $ws3 3: shit
-set $ws4 4
-set $ws5 5: web
-set $ws6 6
-set $ws7 7
-set $ws8 8
-set $ws9 9: bg
-set $ws10 10: win
+set $ws1 I
+set $ws2 II
+set $ws3 III
+set $ws4 IV
+set $ws5 V
+set $ws6 VI
+set $ws7 VII
+set $ws8 VIII
+set $ws9 IX
+set $ws10 X
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
 bindsym $mod+$sup+1 move container to workspace $ws1
@@ -124,7 +124,7 @@ bindsym $mod+$sup+c reload
 bindsym $mod+$sup+r restart
 
 # I3 Exit mode
-set $systemmode "[EX]it [R]eboot [L]ock Log[O]ut [C]ancel [T]erminal [F]irefox"
+set $systemmode "[EX]it [R]eboot [L]ock Log[O]ut [C]ancel [T]erminal"
 bindsym $mod+$sup+e mode $systemmode 
 
 mode $systemmode {
@@ -136,8 +136,6 @@ mode $systemmode {
 
     # terminal
     bindsym t exec st; mode "default"
-    # firefox
-    bindsym f exec firefox; mode "default"
 
     # cancel binds
     bindsym Escape mode "default"
@@ -234,7 +232,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brightness+
 bindsym XF86MonBrightnessDown exec --no-startup-id brightness- 
 
 # disable screen breaking - power saving mode in xorg
-exec --no-startup-id xset s off
+exec_always xset s off
 
 # red light after midnight
 exec redshift -l 51:17
@@ -253,7 +251,6 @@ for_window[instance="dropdown"] resize set 800 409
 for_window[instance="dropdown"] move scratchpad
 for_window[instance="dropdown"] border pixel 5
 
-
 # dropdown terminal
 bindsym $mod+F12 exec --no-startup-id ~/.i3/scripts/dropdown_spawn.sh
 
@@ -265,3 +262,11 @@ bindsym --release $mod+shift+Print exec scrot --select 's%m-%d-%H_%M_%S.png' -e 
 
 # disable focus window on mouse move
 focus_follows_mouse no
+
+
+# Disable CTRL+q, blame firefox
+bindsym Control+q exec echo 1
+
+
+# rerun .profile
+exec_always source ~/.profile

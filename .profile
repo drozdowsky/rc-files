@@ -33,6 +33,8 @@ command -v setxkbmap && setxkbmap -option caps:super
 # auto linux theme and wallpaper
 command -v wal && wal -nR
 
+
+# run custom script, run xrandr etc. there 
 if [ -f ~/.display.sh ]; then
 	source ~/.display.sh
 fi
