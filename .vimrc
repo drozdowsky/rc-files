@@ -90,6 +90,7 @@ filetype plugin indent on    " required
 " color scheme & show line highlight
 "colorscheme wal
 set t_Co=256
+set lazyredraw
 colorscheme molokai
 set background=dark
 set cursorline
@@ -110,21 +111,29 @@ set foldmethod=indent
 set foldlevel=99
 
 
-" Configs per buffer type
+" Preserve these settings on colorscheme change
 autocmd ColorScheme * highlight BadWhitespace guibg=red ctermbg=darkred
 autocmd ColorScheme * highlight SuspiciousComma guibg=red ctermbg=103
+
+
+" Configs per buffer/all buffers type
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set autoindent
+set fileformats=unix,dos,mac
 au BufRead,BufNewFile *.py,*.pyw,*.vy set expandtab
 au BufRead,BufNewFile *.py,*.pyw,*.vy set textwidth=120
 au BufRead,BufNewFile *.py,*.pyw,*.vy set tabstop=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set softtabstop=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set shiftwidth=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set autoindent
-"au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /^\t\+/
-"au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /\s\+$/
-" match ,$ as the bad whitespace
-"au BufRead,InsertLeave *.py,*.pyw,*.vy match SuspiciousComma /,$/
 au         BufNewFile *.py,*.pyw,*.vy set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw,*.vy let b:comment_leader = '#'
+"au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /^\t\+/
+"au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /\s\+$/
+"au BufRead,InsertLeave *.py,*.pyw,*.vy match SuspiciousComma /,$/
 
 " Delete trailing whitespaces when saving python file
 func! DeleteTrailingWS()
@@ -132,22 +141,13 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-au BufWrite           *.py,*.pyw,*.vy :call DeleteTrailingWS()
+au BufWrite           *.py,*.pyw,*.vy,*.js :call DeleteTrailingWS()
 
 " disable vim comments on new line
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 
 " when resizing vim - make windows equal size
 autocmd VimResized * wincmd =
-
-" Fast ESC in visual/insert mode
-set timeoutlen=1000
-set ttimeoutlen=0
-augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-augroup END
 
 " frontend
 au BufNewFile,BufRead *.js,*.html,*.css
@@ -164,6 +164,15 @@ au BufNewFile,BufRead *.md
     \ set shiftwidth=2 |
     \ set expandtab |
     \ set autoindent
+
+" Fast ESC in visual/insert mode
+set timeoutlen=1000
+set ttimeoutlen=0
+augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+augroup END
 
 
 " fzf doesnot use wildignore but .rgignore
@@ -184,6 +193,8 @@ set path=$PWD/**
 set hidden
 " utf-8
 set encoding=utf-8
+" bigger history
+set history=500
 
 
 " better vim's builtin autocompletion
@@ -197,9 +208,21 @@ set smartcase
 set directory^=$HOME/.vim/tmp//
 
 
-" Allow saving of files as sudo when I forgot to start vim using sudo. Usage: $w
-cmap $w w !sudo tee > /dev/null %
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" persistent undo
+try
+    set undodir=~/.vim/tmp/undodir
+    set undofile
+catch
+endtry
 
+
+" Allow saving of files as sudo when I forgot to start vim using sudo. Usage :W
+cmap W w !sudo tee > /dev/null %
+" Bash like keys for the command line
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
 
 " \b buffer,mark,text switching in vim (needs fzf.vim to work)
 "nnoremap <Leader>b :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
@@ -211,23 +234,19 @@ nnoremap <Leader>\ :tabnext<CR>
 nnoremap <leader>' :tabprev<CR>
 nnoremap <leader>] :tabprev<CR>
 
-
 " disable arrows in vim
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
-
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
-
 vnoremap <Up> <Nop>
 vnoremap <Down> <Nop>
 vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
-
 
 " Super Tab completion under Shift+Tab
 function! Smart_TabComplete()
