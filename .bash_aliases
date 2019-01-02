@@ -5,6 +5,7 @@ alias v='vim'
 alias sv='sudo vim'
 alias mkd='mkdir -pv'
 alias t='tmux'
+alias p='python'
 
 
 # clipboard pipe alias

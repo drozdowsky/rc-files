@@ -166,7 +166,7 @@ set_from_resource $iwsfg i3wm.color8 #f0f0f0
 # hide title bar i3 + set border thickness
 default_border pixel 3
 # hide edge border when only one container on screen
-hide_edge_borders smart
+# hide_edge_borders smart
 # I3 colors
 #                       $bg     $bg     $fg     $bg       $fg
 # class                 border  backgr. text    indicator child_border
