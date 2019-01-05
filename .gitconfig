@@ -5,6 +5,7 @@
 [alias]
 	s = status --untracked-files=no
 	l = log
+    a = add
 [include]
 	path = ~/.gitproxy
 	path = ~/.gitname

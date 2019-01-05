@@ -1,4 +1,3 @@
-set nocompatible              " required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -8,47 +7,37 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-
 " colorschemes
 Plugin 'tomasr/molokai'
 Plugin 'dylanaraps/wal.vim'
 
-
 " Git in vim
 Plugin 'tpope/vim-fugitive'
-
 
 " airline in vim
 Plugin 'vim-airline/vim-airline'
 
-
-" sort imports in vim, requirement: pip install isort
+" sort python imports in vim, requirement: pip install isort
 Plugin 'fisadev/vim-isort'
-
 
 " Folding
 Plugin 'tmhedberg/SimpylFold'
 
-
 " Indent for python - my fork
 Plugin 'drozdowsky/indentpython.vim'
-
 
 " vyper language syntax highlight
 Plugin 'jacqueswww/vim-vyper' 
 
-
 " jedi is shit, long live the ctags & cscope!
 Plugin 'drozdowsky/cscope_maps.vim'
 set complete-=i  " stackoverflow.com/questions/2169645
-
 
 " color highlight :ColorHighlight/Clear/Toggle
 Plugin 'lilydjwg/colorizer'
 let g:colorizer_startup = 0
 let g:colorizer_nomap = 1
 let g:colorizer_fgcontrast = 0
-
 
 " syntax highlighting
 syntax on
@@ -60,8 +49,7 @@ let g:ale_lint_on_save = 1
 let g:ale_python_pylint_options = "--rcfile ~/.config/.pylintrc"
 let g:ale_python_flake8_options = "--config ~/.config/flake8"
 
-
-" nerdtree under Ctrl+t
+" nerdtree under Ctrl+t (netrw - sucks)
 Plugin 'scrooloose/nerdtree'
 let NERDTreeIgnore=['\~$'] "ignore files in NERDTree
 let NERDTreeRespectWildIgnore = 1
@@ -71,7 +59,6 @@ let NERDTreeNatualSort = 1
 let NERDTreeShowHidden = 1
 map <C-t> :NERDTreeToggle<CR>
 
-
 " fuzzy search in vim
 set rtp+=~/builds/fzf
 Plugin 'drozdowsky/minimal-fzf.vim'
@@ -80,7 +67,6 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-i': 'split',
   \ 'ctrl-v': 'vsplit' }
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -114,7 +100,6 @@ set foldlevel=99
 " Preserve these settings on colorscheme change
 autocmd ColorScheme * highlight BadWhitespace guibg=red ctermbg=darkred
 autocmd ColorScheme * highlight SuspiciousComma guibg=red ctermbg=103
-
 
 " Configs per buffer/all buffers type
 set expandtab
@@ -196,17 +181,14 @@ set encoding=utf-8
 " bigger history
 set history=500
 
-
 " better vim's builtin autocompletion
 set wildmenu
 set wildmode=longest:full,full
 set ignorecase
 set smartcase
 
-
 " store swaps in ~/.vim/tmp
 set directory^=$HOME/.vim/tmp//
-
 
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -217,9 +199,8 @@ try
 catch
 endtry
 
-
 " Allow saving of files as sudo when I forgot to start vim using sudo. Usage :W
-cmap W w !sudo tee > /dev/null %
+cmap $w w !sudo tee > /dev/null %
 " Bash like keys for the command line
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
@@ -229,10 +210,6 @@ cnoremap <C-E> <End>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>m :Marks<CR>
 nnoremap <Leader>t :Rg<CR>
-" add tab switching under \\ and \'
-nnoremap <Leader>\ :tabnext<CR>
-nnoremap <leader>' :tabprev<CR>
-nnoremap <leader>] :tabprev<CR>
 
 " disable arrows in vim
 noremap <Up> <Nop>
@@ -270,3 +247,42 @@ function! Smart_TabComplete()
   endif
 endfunction
 inoremap <S-Tab> <c-r>=Smart_TabComplete()<CR>
+
+
+" switch to previously used buffer with \\ or \' etc.
+function! GoToPreviousBuffer()
+  let startName = bufname('%')
+  let timeout = 100
+  while timeout > 0
+    exe "normal! \<c-o>"
+    let nowName = bufname('%')
+    let timeout -= 1
+    if nowName != startName
+      break
+    endif
+  endwhile
+  if nowName == startName
+    echo "No previous file"
+  endif
+endfunction
+
+function! GoToNextBuffer()
+  let startName = bufname('%')
+  let timeout = 100
+  while timeout > 0
+    exe "normal! 1\<c-i>"
+    let nowName = bufname('%')
+    let timeout -= 1
+    if nowName != startName
+      break
+    endif
+  endwhile
+  if nowName == startName
+    echo "No next file"
+  endif
+endfunction
+
+" to switch tabs use gt and gT (vim built-in shortcuts)
+nnoremap <Leader>\ :GoToNextBuffer()<CR>
+nnoremap <leader>' :GoToPreviousBuffer()<CR>
+nnoremap <leader>] :GoToPreviousBuffer()<CR>
