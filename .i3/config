@@ -254,19 +254,15 @@ for_window[instance="dropdown"] border pixel 5
 # dropdown terminal
 bindsym $mod+F12 exec --no-startup-id ~/.i3/scripts/dropdown_spawn.sh
 
-
 # screenshoting
 bindsym --release $mod+Print exec scrot --multidisp '%m-%d-%H_%M_%S.png' -e 'mv $f ~/Pictures/screenshots/'
 bindsym --release $mod+shift+Print exec scrot --select 's%m-%d-%H_%M_%S.png' -e 'mv $f ~/Pictures/screenshots/'
 
-
 # disable focus window on mouse move
 focus_follows_mouse no
 
-
 # Disable CTRL+q, blame firefox
 bindsym Control+q exec echo 1
-
 
 # rerun .profile
 exec_always source ~/.profile
