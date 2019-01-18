@@ -208,6 +208,7 @@ cnoremap <C-E> <End>
 " \b buffer,mark,text switching in vim (needs fzf.vim to work)
 "nnoremap <Leader>b :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
 nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>h :History<CR>
 nnoremap <Leader>m :Marks<CR>
 nnoremap <Leader>t :Rg<CR>
 
@@ -283,6 +284,6 @@ function! GoToNextBuffer()
 endfunction
 
 " to switch tabs use gt and gT (vim built-in shortcuts)
-nnoremap <Leader>\ :GoToNextBuffer()<CR>
-nnoremap <leader>' :GoToPreviousBuffer()<CR>
-nnoremap <leader>] :GoToPreviousBuffer()<CR>
+nnoremap <Leader>\ :call GoToNextBuffer()<CR>
+nnoremap <leader>' :call GoToPreviousBuffer()<CR>
+nnoremap <leader>] :call GoToPreviousBuffer()<CR>

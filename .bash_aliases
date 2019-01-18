@@ -9,8 +9,8 @@ alias p='python'
 
 
 # clipboard pipe alias
-alias clip='xsel -ib'
-alias clips='xsel -i'  # selection clipboard
+alias clip='xclip -i -selection clipboard'
+alias clips='xclip -i'  # selection clipboard
 
 
 # googledrive

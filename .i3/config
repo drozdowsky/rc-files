@@ -231,11 +231,6 @@ bindsym $mod+F8 exec --no-startup-id brightness+
 bindsym XF86MonBrightnessUp exec --no-startup-id brightness+ 
 bindsym XF86MonBrightnessDown exec --no-startup-id brightness- 
 
-# disable screen breaking - power saving mode in xorg
-exec_always xset s off
-
-# red light after midnight
-exec redshift -l 51:17
 
 # app assigning here
 # assign HVD citrix to workspace 3
@@ -263,6 +258,3 @@ focus_follows_mouse no
 
 # Disable CTRL+q, blame firefox
 bindsym Control+q exec echo 1
-
-# rerun .profile
-exec_always source ~/.profile
