@@ -33,6 +33,11 @@ alias iten='trans -s it -t en'
 alias enit='trans -s en -t it' 
 
 
+re() {
+    nohup "$@"&
+    exit
+}
+
 # Find in path 
 fip() {
 	rg "$1" $pwd --line-number

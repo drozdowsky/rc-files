@@ -1,11 +1,18 @@
-filetype off                  " required
+" ============================================================================
+" Vundle initialization
+" Avoid modify this section, unless you are very sure of what you are doing
 
-" set the runtime path to include Vundle and initialize
+filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+
+
+" ============================================================================
+" Plugins here
+" Plugins & configurations
 
 " colorschemes
 Plugin 'tomasr/molokai'
@@ -73,7 +80,10 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 
-" color scheme & show line highlight
+" ============================================================================
+" VIM related
+" Color scheme, colors, draw, cursor, windows, folds
+
 "colorscheme wal
 set t_Co=256
 set lazyredraw
@@ -82,7 +92,6 @@ set background=dark
 set cursorline
 hi CursorLine   cterm=NONE cterm=bold ctermbg=237 term=bold ctermfg=NONE
 
-
 " Window switching
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -90,35 +99,42 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 set splitright splitbelow
 
-
 " Folding options
 nnoremap <space> za
 set foldmethod=indent
 set foldlevel=99
 
+" when resizing vim - make windows equal size
+autocmd VimResized * wincmd =
 
 " Preserve these settings on colorscheme change
 autocmd ColorScheme * highlight BadWhitespace guibg=red ctermbg=darkred
 autocmd ColorScheme * highlight SuspiciousComma guibg=red ctermbg=103
 
-" Configs per buffer/all buffers type
+
+" ============================================================================
+" Buffers config
+" Per filetypes configs
+
+" defaults
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set textwidth=0
 set autoindent
 set fileformats=unix,dos,mac
+" disable vim comments on new line
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+
+" per buffer
 au BufRead,BufNewFile *.py,*.pyw,*.vy set expandtab
-au BufRead,BufNewFile *.py,*.pyw,*.vy set textwidth=120
 au BufRead,BufNewFile *.py,*.pyw,*.vy set tabstop=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set softtabstop=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set shiftwidth=4
 au BufRead,BufNewFile *.py,*.pyw,*.vy set autoindent
 au         BufNewFile *.py,*.pyw,*.vy set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw,*.vy let b:comment_leader = '#'
-"au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /^\t\+/
-"au BufRead,BufNewFile *.py,*.pyw,*.vy match BadWhitespace /\s\+$/
-"au BufRead,InsertLeave *.py,*.pyw,*.vy match SuspiciousComma /,$/
 
 " Delete trailing whitespaces when saving python file
 func! DeleteTrailingWS()
@@ -127,12 +143,6 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 au BufWrite           *.py,*.pyw,*.vy,*.js :call DeleteTrailingWS()
-
-" disable vim comments on new line
-autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
-
-" when resizing vim - make windows equal size
-autocmd VimResized * wincmd =
 
 " frontend
 au BufNewFile,BufRead *.js,*.html,*.css
@@ -150,7 +160,11 @@ au BufNewFile,BufRead *.md
     \ set expandtab |
     \ set autoindent
 
-" Fast ESC in visual/insert mode
+
+" ============================================================================
+" VIM related 2
+" Fast ESC, search, swaps, show number lines
+
 set timeoutlen=1000
 set ttimeoutlen=0
 augroup FastEscape
@@ -159,9 +173,8 @@ augroup FastEscape
     au InsertLeave * set timeoutlen=1000
 augroup END
 
-
 " fzf doesnot use wildignore but .rgignore
-set wildignore+=*.pyc,*.swp,
+set wildignore+=*.pyc,*.swp,*.swo
 " always show X line at the top/bottom when scrolling
 set scrolloff=2
 " show line number in current line
@@ -198,6 +211,11 @@ try
     set undofile
 catch
 endtry
+
+
+" ============================================================================
+" VIM binds
+" Custom maps, functions, shortcuts
 
 " Allow saving of files as sudo when I forgot to start vim using sudo. Usage :W
 cmap $w w !sudo tee > /dev/null %
@@ -248,7 +266,6 @@ function! Smart_TabComplete()
   endif
 endfunction
 inoremap <S-Tab> <c-r>=Smart_TabComplete()<CR>
-
 
 " switch to previously used buffer with \\ or \' etc.
 function! GoToPreviousBuffer()

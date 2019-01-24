@@ -3,3 +3,4 @@ dbg.txt
 *.swp
 tags
 cscope.out
+nohup.out
