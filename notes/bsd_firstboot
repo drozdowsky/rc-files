@@ -1,0 +1,35 @@
+pkg_add firefox
+
+pkg_add vim
+ln -sf /usr/local/bin/python2.7 /usr/local/bin/python
+ln -sf /usr/local/bin/python2.7-2to3 /usr/local/bin/2to3
+ln -sf /usr/local/bin/python2.7-config /usr/local/bin/python-config
+ln -sf /usr/local/bin/pydoc2.7  /usr/local/bin/pydoc
+ln -sf /usr/local/bin/ruby24 /usr/local/bin/ruby
+ln -sf /usr/local/bin/erb24 /usr/local/bin/erb
+ln -sf /usr/local/bin/irb24 /usr/local/bin/irb
+ln -sf /usr/local/bin/rdoc24 /usr/local/bin/rdoc
+ln -sf /usr/local/bin/ri24 /usr/local/bin/ri
+ln -sf /usr/local/bin/rake24 /usr/local/bin/rake
+ln -sf /usr/local/bin/gem24 /usr/local/bin/gem
+
+mkdir builds
+pkg_add git
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+git clone https://github.com/drozdowsky/st builds/st
+git clone https://github.com/drozdowsky/dwm builds/dwm
+git clone https://github.com/drozdowsky/rc-files
+
+pkg_add htop
+pkg_add dmenu
+
+pkg_add ffmpeg
+pkg_add zathura
+pkg_add xclip
+pkg_add sxiv
+
+echo "TODO:\n 1. /etc/sysctl.conf: hw.smt=1"
+echo "2. mv rc-files"
+echo "3. doas.conf: permit persist keepenv one as root"
+echo "4. firefox: layers.acceleration.force-enabled"

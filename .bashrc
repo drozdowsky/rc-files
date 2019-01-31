@@ -116,6 +116,7 @@ fi
 
 # virtualenv
 export WORKON_HOME=~/virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
   source /usr/local/bin/virtualenvwrapper.sh
 fi

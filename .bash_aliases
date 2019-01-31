@@ -1,42 +1,21 @@
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
+fi
+
 # main aliases
 alias a='sudo apt'
-alias g='git'
-alias v='vim'
 alias sv='sudo vim'
 alias mkd='mkdir -pv'
-alias t='tmux'
-alias p='python'
-
-
-# clipboard pipe alias
-alias clip='xclip -i -selection clipboard'
-alias clips='xclip -i'  # selection clipboard
-
+alias doas='sudo'
 
 # googledrive
 alias mgd='google-drive-ocamlfuse ~/google/drive'
 alias umgd='fusermount -u ~/google/drive'
 
-
 # work
 alias cdrep='cd ~/rp/reporting-portal/'
 alias cdreps='cd ~/rp/reporting-portal/src'
 
-
-# CTRL+SHIFT+I to save the st's buffer to ss
-alias ss='vim /tmp/stbuf'
-
-
-# sudo apt install trans-shell
-# translating english - italian
-alias iten='trans -s it -t en'
-alias enit='trans -s en -t it' 
-
-
-re() {
-    nohup "$@"&
-    exit
-}
 
 # Find in path 
 fip() {
@@ -152,19 +131,4 @@ compress() {
   else
     echo "usage: compress <foo.tar.gz> ./foo ./bar"
   fi
-}
-
-
-up(){
-  local d=""
-  limit=$1
-  for ((i=1 ; i <= limit ; i++))
-    do
-      d=$d/..
-    done
-  d=$(echo $d | sed 's/^\///')
-  if [ -z "$d" ]; then
-    d=..
-  fi
-  cd $d
 }

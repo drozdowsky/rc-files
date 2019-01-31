@@ -1,10 +1,9 @@
 if [ -x "$(command -v bash)" ]; then
-    source "$HOME/.bashrc"
+    . "$HOME/.bashrc"
 else
     PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games
-    export PATH HOME TERM
     export ENV=$HOME/.kshrc
-    source "$HOME/.kshrc"
+    . "$HOME/.kshrc"
 fi
 
 # set PATH so it includes user's private bin if it exists
@@ -17,28 +16,41 @@ if [ -d "$HOME/.local/share/umake/bin" ]; then
     PATH="$HOME/.local/share/umake/bin:$PATH"
 fi
 
+export PATH
 
 # default programs
 export BROWSER="firefox"
 export EDITOR="vim"
-export TERMINAL="st"
+export TERM="st"
 export READER="zathura"
 
-
 # add faster key holding / pressing
-command -v xset && xset r rate 175 30 && xset s off &
-
+if [ -x "$(command -v xset)" ]; then
+    xset r rate 175 30
+    xset s off
+    xset b off
+fi
 
 # map capslock to super
-command -v xmodmap && xmodmap ~/.Xmodmap
-command -v setxkbmap && setxkbmap -option caps:super
-
+if [ -x "$(command -v xmodmap)" ]; then
+    xmodmap ~/.Xmodmap
+else
+    if [ -x "$(command -v setxkbmap)" ]; then
+        setxkbmap -option caps:super
+    fi
+fi
 
 # auto linux theme and wallpaper
-command -v wal && wal -nR &
+if [ -x "$(command -v wal)" ]; then
+    wal -nR
+fi
 
+# wallpaper
+if [ -x "$(command -v feh)" ]; then
+    feh --bg-fill --randomize ~/wallpaper/*
+fi
 
 # run custom script, run xrandr etc. there 
 if [ -f ~/.display.sh ]; then
-	source ~/.display.sh
+	. ~/.display.sh
 fi
