@@ -1,3 +1,3 @@
 . $HOME/.profile
 slstatus &
-dwm
+dwm > /home/one/dwm.log 2>&1

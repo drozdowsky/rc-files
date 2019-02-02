@@ -1,54 +1,50 @@
-" ============================================================================
-" Vundle initialization
-" Avoid modify this section, unless you are very sure of what you are doing
+" Install plug if now available
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-
+call plug#begin('~/.vim/plugged')
 " ============================================================================
 " Plugins here
 " Plugins & configurations
 
 " colorschemes
-Plugin 'tomasr/molokai'
-Plugin 'dylanaraps/wal.vim'
+Plug 'tomasr/molokai'
+Plug 'dylanaraps/wal.vim'
 
 " Git in vim
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " airline in vim
-Plugin 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 
 " sort python imports in vim, requirement: pip install isort
-Plugin 'fisadev/vim-isort'
+Plug 'fisadev/vim-isort'
 
 " Folding
-Plugin 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold'
 
 " Indent for python - my fork
-Plugin 'drozdowsky/indentpython.vim'
+Plug 'drozdowsky/indentpython.vim'
 
 " vyper language syntax highlight
-Plugin 'jacqueswww/vim-vyper' 
+Plug 'jacqueswww/vim-vyper' 
 
 " jedi is shit, long live the ctags & cscope!
-Plugin 'drozdowsky/cscope_maps.vim'
+Plug 'drozdowsky/cscope_maps.vim'
 set complete-=i  " stackoverflow.com/questions/2169645
 
 " color highlight :ColorHighlight/Clear/Toggle
-Plugin 'lilydjwg/colorizer'
+Plug 'lilydjwg/colorizer'
 let g:colorizer_startup = 0
 let g:colorizer_nomap = 1
 let g:colorizer_fgcontrast = 0
 
 " syntax highlighting
 syntax on
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 let g:ale_linters = {'python': ['flake8', 'pylint']}
 let g:ale_completion_enabled = 0
 let g:ale_echo_msg_format = '%severity%  %s (%code%)' 
@@ -57,7 +53,7 @@ let g:ale_python_pylint_options = "--rcfile ~/.config/.pylintrc"
 let g:ale_python_flake8_options = "--config ~/.config/flake8"
 
 " nerdtree under Ctrl+t (netrw - sucks)
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 let NERDTreeIgnore=['\~$'] "ignore files in NERDTree
 let NERDTreeRespectWildIgnore = 1
 let NERDTreeMinimalUI = 1
@@ -67,8 +63,8 @@ let NERDTreeShowHidden = 1
 map <C-t> :NERDTreeToggle<CR>
 
 " fuzzy search in vim
-set rtp+=~/builds/fzf
-Plugin 'drozdowsky/minimal-fzf.vim'
+set rtp+=~/.fzf
+Plug 'drozdowsky/minimal-fzf.vim'
 nnoremap <C-p> :Files<CR>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -76,8 +72,7 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()            " required
 
 
 " ============================================================================

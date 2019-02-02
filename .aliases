@@ -22,18 +22,15 @@ alias ss='vim /tmp/stbuf'
 alias iten='trans -s it -t en'
 alias enit='trans -s en -t it' 
 
-
 re() {
     nohup "$@"&
     exit
 }
 
-
 # Find in path 
 fip() {
 	grep "$1" $pwd --line-number
 }
-
 
 up(){
     local d=""

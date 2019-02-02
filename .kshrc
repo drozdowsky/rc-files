@@ -6,8 +6,10 @@ fi
 
 # main aliases
 alias d='doas'
+alias sudo='doas'
 alias ls='ls -aF'
 
+HISTCONTROL=ignoredups
 HISTFILE=$HOME/.ksh_history
 HISTSIZE=5000
 
@@ -19,4 +21,11 @@ HISTSIZE=5000
 #ccyan=$(tput setaf 6)
 #creset=$(tput sgr0)
 
-PS1="\H:\w \$ "
+# man ksh | grep PS1
+if [[ $(id -u) -ne 0 ]]
+then
+    # nonroot
+    PS1="\H:\w \\$ "
+else
+    PS1="\w \\$ "
+fi

@@ -20,7 +20,15 @@ export PATH
 
 # default programs
 export BROWSER="firefox"
-export EDITOR="vim"
+if [ -x "$(command -v nano)" ]; then
+    export EDITOR="nano"
+fi
+if [ -x "$(command -v nvim)" ]; then
+    export EDITOR="nvim"
+fi
+if [ -x "$(command -v vim)" ]; then
+    export EDITOR="vim"
+fi
 export TERM="st"
 export READER="zathura"
 
