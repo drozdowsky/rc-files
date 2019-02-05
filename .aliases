@@ -21,6 +21,7 @@ alias ss='vim /tmp/stbuf'
 # translating english - italian
 alias iten='trans -s it -t en'
 alias enit='trans -s en -t it' 
+alias proxy="export http_proxy=http://10.158.100.120:8080; export https_proxy=http://10.158.100.120:8080"
 
 re() {
     nohup "$@"&

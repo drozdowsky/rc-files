@@ -33,6 +33,14 @@ Plug 'drozdowsky/indentpython.vim'
 Plug 'jacqueswww/vim-vyper' 
 
 " jedi is shit, long live the ctags & cscope!
+Plug 'ixil/vim-gutentags', {'branch': 'pycscope'}
+let g:gutentags_project_root = ['manage.py'] 
+let g:gutentags_pyscopefile = 'cscope.out'
+let g:gutentags_exclude_project_root = [$HOME]
+let g:gutentags_generate_on_new = 0
+let g:gutentags_generate_on_write = 0
+let g:gutentags_modules = ['ctags', 'pycscope']
+let g:gutentags_exclude_filetypes = ['static/libs']
 Plug 'drozdowsky/cscope_maps.vim'
 set complete-=i  " stackoverflow.com/questions/2169645
 
