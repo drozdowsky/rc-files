@@ -6,6 +6,14 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+
+if has('nvim')
+    " override intrusive neovim settings
+    set guicursor=n-v-c-sm-i-ci-ve:block,r-cr-o:hor20
+    set noincsearch
+    set nohlsearch
+endif
+
 " ============================================================================
 " Plugins here
 " Plugins & configurations
