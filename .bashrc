@@ -136,3 +136,7 @@ set -o vi
 
 # make FZF use ripgrep as default file searcher
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore-vcs'
+
+if [ -f ~/builds/aurelius/aurelius.tsv ]; then
+    cat ~/builds/aurelius/aurelius.tsv | shuf -n 1 | awk 'BEGIN {FS="\t"}; {print $6}' | fold -w 80 -s
+fi

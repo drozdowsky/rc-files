@@ -9,6 +9,7 @@ alias p='python'
 # clipboard pipe alias
 alias clip='xclip -i -selection clipboard'
 alias clips='xclip -i'  # selection clipboard
+alias sclip='xclip -i'  # selection clipboard
 
 # googledrive
 alias mgd='google-drive-ocamlfuse ~/google/drive'
