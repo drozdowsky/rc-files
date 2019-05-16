@@ -7,6 +7,7 @@ case $- in
     *i*) ;;
       *) return;;
 esac
+. ~/.profile
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -67,21 +68,13 @@ unset color_prompt force_color_prompt
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls -ahN --color=auto --group-directories-first'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -98,7 +91,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -116,27 +108,19 @@ fi
 
 # virtualenv
 export WORKON_HOME=~/virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-  source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=$(which python3)
+if [ -f /usr/bin/virtualenvwrapper_lazy.sh ]; then
+  source /usr/bin/virtualenvwrapper_lazy.sh
 fi
 
-# Add sbin directories to PATH.  This is useful on systems that have sudo
-[ -z "${PATH##*/sbin*}" ] || PATH=$PATH:/sbin:/usr/sbin
-
-
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 
 # Vim as default editor (ranger settings)
 VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
 # VI mode as default for bash
 set -o vi
 
-
 # make FZF use ripgrep as default file searcher
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore-vcs'
-
-if [ -f ~/builds/aurelius/aurelius.tsv ]; then
-    cat ~/builds/aurelius/aurelius.tsv | shuf -n 1 | awk 'BEGIN {FS="\t"}; {print $6}' | fold -w 80 -s
-fi
+# Marcus Aurelius quote
+marcus

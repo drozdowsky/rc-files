@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# http://github.com/mitchweaver/bin
+#
+# plan9 rio style terminal drawing in X
+#
+
+set -- $(slop -q -o -f '%x %y %w %h')
+
+[ $# -eq 0 ] && exit 1
+
+tabbed -n x9term -d -c -g ${3}x${4}+${1}+${2} -r 2 \
+st -w '' -T x9term &

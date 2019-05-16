@@ -5,6 +5,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+if has('nvim')
+    set guicursor=n-v-c-sm-i-ci-ve:block,r-cr-o:hor20
+endif
+
 call plug#begin('~/.vim/plugged')
 
 if has('nvim')
@@ -12,6 +16,7 @@ if has('nvim')
     set guicursor=n-v-c-sm-i-ci-ve:block,r-cr-o:hor20
     set noincsearch
     set nohlsearch
+    let g:python3_host_prog = '/bin/python3'
 endif
 
 " ============================================================================
@@ -41,7 +46,7 @@ Plug 'drozdowsky/indentpython.vim'
 Plug 'jacqueswww/vim-vyper' 
 
 " jedi is shit, long live the ctags & cscope!
-Plug 'ixil/vim-gutentags', {'branch': 'pycscope'}
+" Plug 'ixil/vim-gutentags', {'branch': 'pycscope'}
 let g:gutentags_project_root = ['manage.py'] 
 let g:gutentags_pyscopefile = 'cscope.out'
 let g:gutentags_exclude_project_root = [$HOME]

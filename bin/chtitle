@@ -1,0 +1,3 @@
+#!/bin/sh
+# change title of current window
+exec echo -ne "\033]0;$1\007"

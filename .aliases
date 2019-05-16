@@ -1,4 +1,5 @@
-# I keep aliases that are BOTH BASH & KSH compatible here.
+#!/bin/sh
+# Aliases that are POSIX compatibile 
 
 # main aliases
 alias g='git'
@@ -22,16 +23,24 @@ alias ss='vim /tmp/stbuf'
 # translating english - italian
 alias iten='trans -s it -t en'
 alias enit='trans -s en -t it' 
-alias proxy="export http_proxy=http://10.158.100.120:8080; export https_proxy=http://10.158.100.120:8080"
+alias proxy='export http_proxy=http://10.158.100.120:8080; export https_proxy=http://10.158.100.120:8080'
 
+# 3rd
+alias feh='feh -X -s -Z --scale-down --title feh'
+
+# run & exit
 re() {
-    nohup "$@"&
+    nohup "$@" &>/tmp/nohup.out &
     exit
 }
 
 # Find in path 
 fip() {
-	grep "$1" $pwd --line-number
+    if [[ -x "$(command -v rg)" ]]; then
+        rg "$1" $pwd --line-number
+    else
+        grep "$1" $pwd --line-number
+    fi
 }
 
 up(){

@@ -1,5 +1,50 @@
 #!/bin/sh
+# add faster key holding / pressing
+if [ -x "$(command -v xset)" ]; then
+    xset r rate 175 30
+    xset s off
+    xset dpms 0 0 0
+    xset b off
+fi
+
+# set display brightness
+if [ -x "$(command -v xbacklight)" ] && [ -x "$(command -v bright)" ]; then
+    bright 100
+    bright -50
+fi
+
+# run custom script, run xrandr etc. there 
+if [ -f ~/.display.sh ]; then
+   . ~/.config/.display.sh
+fi
+
+# auto linux theme and wallpaper
+if [ -x "$(command -v wal)" ]; then
+    wal -nR
+fi
+
+# wallpaper
+if [ -x "$(command -v feh)" ]; then
+    feh --bg-fill --randomize ~/Pictures/wallpaper/*
+fi
+
+# map capslock to super
+if [ -x "$(command -v xmodmap)" ]; then
+    xmodmap ~/.config/.Xmodmap
+else
+    if [ -x "$(command -v setxkbmap)" ]; then
+        setxkbmap -option caps:super
+    fi
+fi
+
 # red light after midnight
-command -v redshift && (pgrep redshift || redshift -l 51:17) &
-command -v slstatus && slstatus &
-command -v dwm && exec dwm
+if [ -x "$(command -v redshift)" ]; then
+    redshift -l 51:17 &
+fi
+
+# slstatus
+if [ -x "$(command -v slstatus)" ]; then
+    slstatus &
+fi
+
+exec $(which dwm)

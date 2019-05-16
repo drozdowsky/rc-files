@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# needs work, chop up the outputted text
+
+sudo iw list `interface` scanning | \
+grep ESSID | grep -Eo '[^ESSID:"]+'

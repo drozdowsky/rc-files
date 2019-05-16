@@ -1,6 +1,4 @@
-if [ -x "$(command -v bash)" ]; then
-    . "$HOME/.bashrc"
-else
+if [ -x "$(command -v ksh)" ]; then
     PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games
     export ENV=$HOME/.kshrc
     . "$HOME/.kshrc"
@@ -31,34 +29,3 @@ if [ -x "$(command -v vim)" ]; then
 fi
 export TERM="st"
 export READER="zathura"
-
-# add faster key holding / pressing
-if [ -x "$(command -v xset)" ]; then
-    xset r rate 175 30
-    xset s off
-    xset b off
-fi
-
-# map capslock to super
-if [ -x "$(command -v xmodmap)" ]; then
-    xmodmap ~/.Xmodmap
-else
-    if [ -x "$(command -v setxkbmap)" ]; then
-        setxkbmap -option caps:super
-    fi
-fi
-
-# auto linux theme and wallpaper
-if [ -x "$(command -v wal)" ]; then
-    wal -nR
-fi
-
-# wallpaper
-if [ -x "$(command -v feh)" ]; then
-    feh --bg-fill --randomize ~/wallpaper/*
-fi
-
-# run custom script, run xrandr etc. there 
-if [ -f ~/.display.sh ]; then
-	. ~/.display.sh
-fi

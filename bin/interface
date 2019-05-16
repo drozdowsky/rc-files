@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# http://github.com/mitchweaver/bin
+#
+# get correct wifi interface
+#
+
+ifconfig -a | grep 'wl' | sed 's/Link//' | awk '{print $1}' | head -n 1

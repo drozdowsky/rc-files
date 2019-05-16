@@ -4,7 +4,6 @@ fi
 
 # main aliases
 alias a='sudo apt'
-alias sv='sudo vim'
 alias mkd='mkdir -pv'
 alias doas='sudo'
 
@@ -15,12 +14,6 @@ alias umgd='fusermount -u ~/google/drive'
 # work
 alias cdrep='cd ~/rp/reporting-portal/'
 alias cdreps='cd ~/rp/reporting-portal/src'
-
-
-# Find in path 
-fip() {
-	rg "$1" $pwd --line-number
-}
 
 
 # make dir and cd into it
