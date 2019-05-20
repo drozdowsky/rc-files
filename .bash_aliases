@@ -3,18 +3,11 @@ if [ -f ~/.aliases ]; then
 fi
 
 # main aliases
+alias s='sudo'
 alias a='sudo apt'
 alias mkd='mkdir -pv'
 alias doas='sudo'
-
-# googledrive
-alias mgd='google-drive-ocamlfuse ~/google/drive'
-alias umgd='fusermount -u ~/google/drive'
-
-# work
-alias cdrep='cd ~/rp/reporting-portal/'
-alias cdreps='cd ~/rp/reporting-portal/src'
-
+alias d='sudo'
 
 # make dir and cd into it
 mkcd ()

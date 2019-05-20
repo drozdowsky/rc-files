@@ -13,19 +13,19 @@ if [ -x "$(command -v xbacklight)" ] && [ -x "$(command -v bright)" ]; then
     bright -50
 fi
 
-# run custom script, run xrandr etc. there 
-if [ -f ~/.display.sh ]; then
-   . ~/.config/.display.sh
-fi
-
 # auto linux theme and wallpaper
 if [ -x "$(command -v wal)" ]; then
     wal -nR
+else
+    # wallpaper
+    if [ -x "$(command -v feh)" ]; then
+        feh --bg-fill --randomize ~/Pictures/wallpaper/*
+    fi
 fi
 
-# wallpaper
-if [ -x "$(command -v feh)" ]; then
-    feh --bg-fill --randomize ~/Pictures/wallpaper/*
+# run custom script, run xrandr etc. there 
+if [ -f ~/.config/.display.sh ]; then
+   . ~/.config/.display.sh
 fi
 
 # map capslock to super

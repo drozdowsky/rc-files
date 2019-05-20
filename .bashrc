@@ -7,7 +7,6 @@ case $- in
     *i*) ;;
       *) return;;
 esac
-. ~/.profile
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -31,11 +30,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -56,13 +50,11 @@ if [ -n "$force_color_prompt" ]; then
 	color_prompt=
     fi
 fi
-
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u\h\[\033[00m\] \[\033[01;34m\]\w\[\033[0;37m\]\$\[\033[00m\] '
+    PS1='\[\033[01;31m\]\u\h\[\033[00m\] \[\033[01;34m\]\w\[\033[0;37m\]\$\[\033[00m\] '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='\u@\h:\w\$ '
 fi
-unset color_prompt force_color_prompt
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -110,17 +102,20 @@ fi
 export WORKON_HOME=~/virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 if [ -f /usr/bin/virtualenvwrapper_lazy.sh ]; then
-  source /usr/bin/virtualenvwrapper_lazy.sh
+  . /usr/bin/virtualenvwrapper_lazy.sh
+else
+    if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
+      . /usr/local/bin/virtualenvwrapper_lazy.sh 
+    fi
 fi
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Vim as default editor (ranger settings)
-VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
 # VI mode as default for bash
 set -o vi
 
 # make FZF use ripgrep as default file searcher
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore-vcs'
+
 # Marcus Aurelius quote
 marcus
