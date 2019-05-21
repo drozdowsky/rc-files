@@ -8,9 +8,9 @@ if [ -x "$(command -v xset)" ]; then
 fi
 
 # set display brightness
-if [ -x "$(command -v xbacklight)" ] && [ -x "$(command -v bright)" ]; then
-    bright 100
-    bright -50
+if [ -x "$(command -v xbacklight)" ]; then
+    # note that there is ~/bin/bright
+    xbacklight -set 50
 fi
 
 # auto linux theme and wallpaper
