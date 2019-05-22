@@ -1,0 +1,10 @@
+#!/bin/sh
+# add wifi entry
+if [ $# -lt 2 ]; then
+    echo 'Usage: addwifi "wifi ssid" "password"' 
+    exit
+fi
+
+SSID="$1"
+PASS="$2"
+wpa_passphrase "$1" "$2" | sudo tee -a "/etc/wpa_supplicant/wpa_supplicant.conf"

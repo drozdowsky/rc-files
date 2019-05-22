@@ -19,7 +19,7 @@ if [ -x "$(command -v wal)" ]; then
 else
     # wallpaper
     if [ -x "$(command -v feh)" ]; then
-        feh --bg-fill --randomize ~/Pictures/wallpaper/*
+        feh --bg-fill --no-fehbg --randomize ~/Pictures/wallpaper/*
     fi
 fi
 

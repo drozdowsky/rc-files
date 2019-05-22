@@ -4,5 +4,5 @@
 # used by
 # https://github.com/drozdowsky/dwm
 #
-notify-send -u low "A dopo, ragazzo!"
+notify-send -u low "A dopo ragazzo!"
 slock
