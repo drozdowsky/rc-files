@@ -21,8 +21,7 @@ fi
 # --vo=xv  # less costly but laggy
 mpv="mpv --wid WID --no-config --keepaspect=no --loop \
     --no-border --vd-lavc-fast --x11-bypass-compositor=no \
-    --gapless-audio=yes --vo=vaapi --hwdec=auto --really-quiet \
+    --gapless-audio=yes --hwdec=auto --really-quiet \
     --name=mpvbg"
 
 $xwin $mpv "$1" > /dev/null 2>&1 &
-echo -n $! > ${HOME}/.cache/mpvbg.pid

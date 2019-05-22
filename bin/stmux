@@ -5,55 +5,24 @@
 # * creates tmux sessions: from 0 to 9 when needed
 # * if there is unused 0-9 session start terminal with that session (reuse)
 #
-# by default first argument is ID of window to embeed the st (used by tabbed)
-# this script works well with dmw and tabbed
-# requirements: st, tmux, lsw
-# this in .tmux.conf:
-# set-option -g set-titles on
-# set-option -g set-titles-string "#S:#I:HEREYOUCANHAVEYOUROWNSETTINGS"
-# of course you can adjust script so your window name looks different
-# sorry for the mess
-#
+MAX_SESSIONS=9
 TMP_FILE=/tmp/termcount
 
-increase_counter() {
-    COUNTER=`cat $TMP_FILE`
-    if [ -z "$COUNTER" ]; then
-        COUNTER=0
+AUTO_SESSIONS=$(tmux list-sessions -F "#S C#{session_attached}") 
+for z in `seq 0 $MAX_SESSIONS`; do
+    if [ -z "$(echo $AUTO_SESSIONS | grep -Po "$z(?= C[1-9])")" ]; then
+        SESSION_NAME="$z"
+        break 2
     fi
-    if [ $COUNTER -gt 9 ]; then
+done
+
+if [ -z "$SESSION_NAME" ]; then
+    COUNTER=`cat $TMP_FILE`
+    if [ -z "$COUNTER" ] || [ $COUNTER -gt $MAX_SESSIONS ]; then
         COUNTER=0
     fi
     echo $(($COUNTER+1)) > $TMP_FILE
     SESSION_NAME=$COUNTER
-}
-
-get_unused_session() {
-    AUTO_SESSIONS=$(tmux list-sessions -F "#S SA#{session_attached}SA" | grep -P "\d SA0SA" | awk '{print $1}' | sort)
-    RUNNING_TERMS=$(lsw | grep -Po '(\d)(?=:\d:)' | sort)
-
-    # if these are not null
-    if [ -n "$AUTO_SESSIONS" ] && [ -n "$RUNNING_TERMS" ]; then
-        # if anyone can write this better in sh let me know
-        for session in $AUTO_SESSIONS; do
-            for term in $RUNNING_TERMS; do
-                if [ "$session" -ne "$term" ]; then
-                    SESSION_NAME=$session
-                    break 2
-                fi
-            done
-        done
-    else
-        # return first in AUTO_SESSION
-        SESSION_NAME=$(echo $AUTO_SESSIONS | awk '{print $1}')
-    fi
-}
-
-# get session that is already created and unused
-get_unused_session
-if [ -z "$SESSION_NAME" ]; then
-    # if every session is used, create (or recycle) new one
-    increase_counter
 fi
-# finally start st with tmux
-exec st -w $1 -T term -e tmux new-session -A -s $SESSION_NAME
+
+exec st -w $1 -T term -e tmux new-session -A -s "$SESSION_NAME"
