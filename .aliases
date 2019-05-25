@@ -38,7 +38,7 @@ fip() {
     if [[ -x "$(command -v rg)" ]]; then
         rg "$1" $pwd --line-number
     else
-        grep "$1" $pwd --line-number
+        grep -r "$1" $pwd --line-number
     fi
 }
 
