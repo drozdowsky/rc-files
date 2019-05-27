@@ -5,4 +5,4 @@
 # https://github.com/drozdowsky/dwm
 #
 notify-send -u low "A dopo ragazzo!"
-slock
+slock && notify-send -u low "Ciao caro!" || notify-send -u normal "Aspetti!"
