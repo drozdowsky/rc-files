@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s "it.wttr.in/$1" | head -38

@@ -6,12 +6,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 if has('nvim')
-    set guicursor=n-v-c-sm-i-ci-ve:block,r-cr-o:hor20
-endif
-
-call plug#begin('~/.vim/plugged')
-
-if has('nvim')
     " override intrusive neovim settings
     set guicursor=n-v-c-sm-i-ci-ve:block,r-cr-o:hor20
     set noincsearch
@@ -19,6 +13,7 @@ if has('nvim')
     let g:python3_host_prog = '/bin/python3'
 endif
 
+call plug#begin('~/.vim/plugged')
 " ============================================================================
 " Plugins here
 " Plugins & configurations
@@ -45,18 +40,6 @@ Plug 'drozdowsky/indentpython.vim'
 " vyper language syntax highlight
 Plug 'jacqueswww/vim-vyper' 
 
-" jedi is shit, long live the ctags & cscope!
-" Plug 'ixil/vim-gutentags', {'branch': 'pycscope'}
-let g:gutentags_project_root = ['manage.py'] 
-let g:gutentags_pyscopefile = 'cscope.out'
-let g:gutentags_exclude_project_root = [$HOME]
-let g:gutentags_generate_on_new = 0
-let g:gutentags_generate_on_write = 0
-let g:gutentags_modules = ['ctags', 'pycscope']
-let g:gutentags_exclude_filetypes = ['static/libs']
-Plug 'drozdowsky/cscope_maps.vim'
-set complete-=i  " stackoverflow.com/questions/2169645
-
 " color highlight :ColorHighlight/Clear/Toggle
 Plug 'lilydjwg/colorizer'
 let g:colorizer_startup = 0
@@ -65,13 +48,14 @@ let g:colorizer_fgcontrast = 0
 
 " syntax highlighting
 syntax on
-Plug 'w0rp/ale'
-let g:ale_linters = {'python': ['flake8', 'pylint']}
-let g:ale_completion_enabled = 0
-let g:ale_echo_msg_format = '%severity%  %s (%code%)' 
-let g:ale_lint_on_save = 1
-let g:ale_python_pylint_options = "--rcfile ~/.config/.pylintrc"
-let g:ale_python_flake8_options = "--config ~/.config/flake8"
+if has("nvim")
+    " avoid suppressing error messages from this plugin.
+    set shortmess-=F
+endif
+Plug 'natebosch/vim-lsc'
+"let g:lsc_enable_autocomplete = v:false
+let g:lsc_server_commands = {'rust': 'rls'}
+autocmd CompleteDone * silent! pclose
 
 " nerdtree under Ctrl+t (netrw - sucks)
 Plug 'scrooloose/nerdtree'

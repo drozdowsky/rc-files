@@ -8,6 +8,10 @@ if [ -d "$HOME/.local/share/umake/bin" ]; then
     PATH="$HOME/.local/share/umake/bin:$PATH"
 fi
 
+if [ -d "$HOME/.cargo/bin" ]; then
+    PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 export PATH
 
 # default programs
