@@ -45,15 +45,28 @@ let g:colorizer_fgcontrast = 0
 
 " syntax highlighting
 syntax on
-if has("nvim")
-    " avoid suppressing error messages from this plugin.
-    set shortmess-=F
-endif
+set shortmess-=F
+set completeopt-=preview
 Plug 'natebosch/vim-lsc'
-"let g:lsc_enable_autocomplete = v:false
 let g:lsc_server_commands = {'rust': 'rls', 'python': 'pyls'}
-
-autocmd CompleteDone * silent! pclose
+let g:lsc_auto_map = {
+    \ 'defaults': v:true,
+    \ 'GoToDefinition': '\d',
+    \ 'GoToDefinitionSplit': '',
+    \ 'FindReferences': '\x',
+    \ 'NextReference': '<C-n>',
+    \ 'PreviousReference': '<C-p>',
+    \ 'FindImplementations': '\i',
+    \ 'FindCodeActions': '\a',
+    \ 'Rename': 'gR',
+    \ 'ShowHover': v:false,
+    \ 'DocumentSymbol': 'go',
+    \ 'WorkspaceSymbol': 'gS',
+    \ 'SignatureHelp': 'gm',
+    \ 'Completion': 'completefunc',
+    \}
+"let g:lsc_enable_autocomplete = v:false
+"autocmd CompleteDone * silent! pclose
 
 " nerdtree under Ctrl+t (netrw - sucks)
 Plug 'scrooloose/nerdtree'

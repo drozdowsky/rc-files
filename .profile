@@ -8,8 +8,10 @@ if [ -d "$HOME/.local/share/umake/bin" ]; then
     PATH="$HOME/.local/share/umake/bin:$PATH"
 fi
 
-if [ -d "$HOME/.cargo/bin" ]; then
-    PATH="$HOME/.cargo/bin:$PATH"
+if [ -d "$HOME/.local/cargo/bin" ]; then
+    export CARGO_HOME="$HOME/.local/cargo"
+    export RUSTUP_HOME="$HOME/.local/rustup"
+    PATH="$HOME/.local/cargo/bin:$PATH"
 fi
 
 export PATH
