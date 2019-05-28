@@ -31,9 +31,6 @@ Plug 'vim-airline/vim-airline'
 " sort python imports in vim, requirement: pip install isort
 Plug 'fisadev/vim-isort'
 
-" Folding
-Plug 'tmhedberg/SimpylFold'
-
 " Indent for python - my fork
 Plug 'drozdowsky/indentpython.vim'
 
@@ -54,7 +51,8 @@ if has("nvim")
 endif
 Plug 'natebosch/vim-lsc'
 "let g:lsc_enable_autocomplete = v:false
-let g:lsc_server_commands = {'rust': 'rls'}
+let g:lsc_server_commands = {'rust': 'rls', 'python': 'pyls'}
+
 autocmd CompleteDone * silent! pclose
 
 " nerdtree under Ctrl+t (netrw - sucks)
