@@ -4,10 +4,6 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
-# main aliases
-alias d='doas'
-alias sudo='doas'
-alias sudo='doas'
 alias ls='ls -aF'
 
 HISTCONTROL=ignoredups

@@ -1,5 +1,18 @@
 #!/bin/sh
+#
 # Aliases that are POSIX compatibile 
+#
+
+case $(uname) in
+    Linux)
+        alias s='sudo'
+        alias doas='sudo'
+        ;;
+    OpenBSD)
+        alias sudo='doas'
+        alias d='doas'
+        ;;
+esac
 
 # main aliases
 alias g='git'
