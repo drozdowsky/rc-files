@@ -9,8 +9,8 @@ fi
 
 # set display brightness
 if [ -x "$(command -v xbacklight)" ]; then
-    # note that there is ~/bin/bright
-    xbacklight -set 50
+    bright 100
+    bright -50
 fi
 
 # # auto linux theme and wallpaper

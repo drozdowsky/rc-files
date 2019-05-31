@@ -5,8 +5,10 @@
 # increments/decrements brightness, clamping to not
 # allow screen to go blank
 #
-# with no arguments, prints the current setting
-# add this script to sudoers
+# with no arguments, prints the current setting.
+#
+# add this script to sudoers if you want legacy
+# to work without sudo
 #
 LEGACY_DIR=/sys/class/backlight/intel_backlight
 CURRENT_BRIGHT=$(cat $LEGACY_DIR/actual_brightness)
