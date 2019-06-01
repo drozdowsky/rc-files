@@ -9,8 +9,10 @@ fi
 
 # set display brightness
 if [ -x "$(command -v xbacklight)" ]; then
-    bright 100
-    bright -50
+    # bright should be in sudoers file
+    # also it should be owned by root
+    sudo bright 100
+    sudo bright -50
 fi
 
 # # auto linux theme and wallpaper
@@ -41,6 +43,13 @@ fi
 if [ -x "$(command -v redshift)" ]; then
     pkill -9 redshift
     redshift -l 51:17 &
+else 
+    if [ -x "$(command -v sct)" ]; then
+        currenttime=$(date +%H:%M)
+        if [ "$currenttime" \> "22:00" -o "$currenttime" \< "06:30" ]; then
+            sct 2000
+        fi
+    fi
 fi
 
 # slstatus

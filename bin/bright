@@ -10,7 +10,7 @@
 # add this script to sudoers if you want legacy
 # to work without sudo
 #
-LEGACY_DIR=/sys/class/backlight/intel_backlight
+LEGACY_DIR=/sys/class/backlight/*
 CURRENT_BRIGHT=$(cat $LEGACY_DIR/actual_brightness)
 MAX_BRIGHT=$(cat $LEGACY_DIR/max_brightness)
 
