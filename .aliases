@@ -20,11 +20,6 @@ alias v='vim'
 alias t='tmux'
 alias p='python'
 
-# clipboard pipe alias
-alias clip='xclip -i -selection clipboard'
-alias clips='xclip -i'  # selection clipboard
-alias sclip='xclip -i'  # selection clipboard
-
 # googledrive
 alias mgd='google-drive-ocamlfuse ~/google/drive'
 alias umgd='fusermount -u ~/google/drive'
@@ -40,14 +35,14 @@ alias cdreps="cd ~/rp/reporting-portal/src/"
 # 3rd
 alias feh='feh -X -s -Z --scale-down --title "%n [%wx%h][%u/%l]"'
 
-# run & exit
-re() {
+# run & close term
+swallow() {
     nohup "$@" &>/tmp/nohup.out &
     exit
 }
 
 # Find in path 
-fip() {
+frep() {
     if [[ -x "$(command -v rg)" ]]; then
         rg "$1" $pwd --line-number
     else
