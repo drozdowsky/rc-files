@@ -4,7 +4,7 @@
 # Usage: destination.ext [files...]
 #
 
-if [[ -n "$1" ]]; then
+if [ -n "$1" ]; then
     FILE=$1
     case $FILE in
         *.tar ) shift && tar cf $FILE $* ;;
