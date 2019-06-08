@@ -4,4 +4,4 @@
 # clears it after 30s
 #
 exec 3<"${1:-/dev/stdin}"
-cat <&3 | timeout 30 xclip -i -selection clipboard -verbose -r >/dev/null 2>&1 &
+cat <&3 | timeout 30 xclip -i -sel c -verbose >/dev/null 2>&1 &
