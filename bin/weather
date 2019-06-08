@@ -1,2 +1,11 @@
 #!/bin/sh
-curl -s "it.wttr.in/$1" | head -38
+CUT=38
+request="it.wttr.in/$1?"
+if [ `tput cols` -lt 125 ]; then
+    request=$request+"n"
+fi
+if [ `tput lines` -lt 30 ]; then
+    CUT=28
+    request=$request+"2"
+fi
+curl -s "$request" | head -$CUT
