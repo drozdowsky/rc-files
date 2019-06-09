@@ -2,6 +2,8 @@
 #
 # reads stdin/file and copies it to clipboard
 # clears it after 30s
+# works with tmux
+# make sure that your xclip has -r flag
 #
-exec 3<"${1:-/dev/stdin}"
-cat <&3 | timeout 30 xclip -i -sel c -verbose >/dev/null 2>&1 &
+[ -n "$1" ] && exec 3<"$1" || exec 3<&0
+cat <&3 | timeout 30 xclip -r -i -sel c -verbose >/dev/null 2>&1 &

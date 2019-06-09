@@ -134,6 +134,7 @@ set softtabstop=4
 set shiftwidth=4
 set textwidth=0
 set autoindent
+set notitle
 set fileformats=unix,dos,mac
 " disable vim comments on new line
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
