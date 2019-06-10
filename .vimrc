@@ -9,6 +9,7 @@ if has('nvim')
     " override intrusive neovim settings
     set guicursor=n-v-c-sm-i-ci-ve:block,r-cr-o:hor20
     set noincsearch
+    set nohlsearch
     let g:python3_host_prog = '/bin/python3'
 endif
 
@@ -134,7 +135,6 @@ set shiftwidth=4
 set textwidth=0
 set autoindent
 set notitle
-set hlsearch
 set showcmd
 set fileformats=unix,dos,mac
 " disable vim comments on new line
