@@ -2,5 +2,5 @@
 
 # needs work, chop up the outputted text
 
-sudo iw list `interface` scanning | \
-grep ESSID | grep -Eo '[^ESSID:"]+'
+sudo iw `interface` scan | \
+grep SSID | grep -Eo '[^:]+$' | sed 's/ //'

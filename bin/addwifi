@@ -1,7 +1,7 @@
 #!/bin/sh
 # add wifi entry
 if [ $# -lt 2 ]; then
-    echo 'Usage: addwifi "wifi ssid" "password"' 
+    echo 'Usage: addwifi "SSID" "PASSWORD"' 
     exit
 fi
 
