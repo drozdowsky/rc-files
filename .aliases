@@ -2,13 +2,16 @@
 #
 # Aliases that are POSIX compatibile 
 #
-
 case $(uname) in
     Linux)
         alias s='sudo'
         alias doas='sudo'
         ;;
     OpenBSD)
+        alias sudo='doas'
+        alias d='doas'
+        ;;
+    FreeBSD)
         alias sudo='doas'
         alias d='doas'
         ;;
@@ -29,8 +32,6 @@ alias umgd='fusermount -u ~/google/drive'
 alias iten='trans -s it -t en'
 alias enit='trans -s en -t it' 
 alias proxy='export http_proxy=http://10.158.100.120:8080; export https_proxy=http://10.158.100.120:8080'
-alias cdrep="cd ~/rp/reporting-portal/"
-alias cdreps="cd ~/rp/reporting-portal/src/"
 
 # 3rd
 alias feh='feh -X -s -Z --scale-down --title "%n [%wx%h][%u/%l]"'
@@ -44,9 +45,9 @@ swallow() {
 # Find in path 
 frep() {
     if [[ -x "$(command -v rg)" ]]; then
-        rg "$1" $pwd --line-number
+        rg "$1" $PWD --line-number
     else
-        grep -r "$1" $pwd --line-number
+        grep -nr "$1" $PWD
     fi
 }
 
@@ -67,4 +68,16 @@ up(){
     fi
 
     cd $d
+}
+
+workon(){
+    VIRTUALENVS_PATH=~/.virtualenvs
+    if [ $# -eq 0 ]; then
+        /bin/ls $VIRTUALENVS_PATH
+    else
+        . "$VIRTUALENVS_PATH/$1/bin/activate"
+        if [ -f "$VIRTUALENVS_PATH/$1/bin/post_activate" ]; then
+            . "$VIRTUALENVS_PATH/$1/bin/post_activate"
+        fi
+    fi
 }

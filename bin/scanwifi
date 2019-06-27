@@ -1,6 +1,12 @@
 #!/bin/sh
 
 # needs work, chop up the outputted text
-
-sudo iw `interface` scan | \
-grep SSID | grep -Eo '[^:]+$' | sed 's/ //'
+case $(uname) in
+    Linux)
+        sudo iw `interface` scan | \
+        grep SSID | grep -Eo '[^:]+$' | sed 's/ //'
+        ;;
+    OpenBSD|FreeBSD)
+        doas ifconfig `interface` up scan | tail -n +2 | awk -F "   " '{print $1}'
+        ;;
+esac

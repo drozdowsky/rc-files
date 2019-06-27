@@ -10,7 +10,9 @@ if has('nvim')
     set guicursor=n-v-c-sm-i-ci-ve:block,r-cr-o:hor20
     set noincsearch
     set nohlsearch
-    let g:python3_host_prog = '/bin/python3'
+    let g:python3_host_prog = '/usr/local/bin/python3'
+    let g:python_host_skip_check = 1
+    let g:python3_host_skip_check = 1
 endif
 
 call plug#begin('~/.vim/plugged')

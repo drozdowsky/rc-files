@@ -7,4 +7,14 @@ fi
 
 SSID="$1"
 PASS="$2"
-wpa_passphrase "$1" "$2" | sudo tee -a "/etc/wpa_supplicant/wpa_supplicant.conf"
+
+case $(uname) in
+    Linux)
+        WPA_FILE="/etc/wpa_supplicant/wpa_supplicant.conf"
+        ;;
+    OpenBSD|FreeBSD)
+        WPA_FILE="/etc/wpa_supplicant.conf"
+        ;;
+esac
+
+wpa_passphrase "$1" "$2" | sudo tee -a "$WPA_FILE"

@@ -13,7 +13,6 @@ include "/home/self/.gtkrc.mine"
 
 # -- THEME AUTO-WRITTEN DO NOT EDIT
 
-include ".local/share/mx-tweak-data/whisker-tweak.rc"
 style "xfdesktop-icon-view" {
 	XfdesktopIconView::ellipsize-icon-labels = 0
 }

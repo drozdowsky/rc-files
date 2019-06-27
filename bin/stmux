@@ -10,7 +10,7 @@ TMP_FILE=/tmp/termcount
 
 AUTO_SESSIONS=$(tmux list-sessions -F "#S C#{session_attached}") 
 for z in `seq 0 $MAX_SESSIONS`; do
-    if [ -z "$(echo $AUTO_SESSIONS | grep -Po "$z(?= C[1-9])")" ]; then
+    if [ -z "$(echo $AUTO_SESSIONS | grep "$z C[1-9]")" ]; then
         SESSION_NAME="$z"
         break 2
     fi

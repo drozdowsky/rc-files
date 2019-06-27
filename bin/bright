@@ -1,42 +1,25 @@
 #!/bin/sh
 #
-# http://github.com/mitchweaver/bin
+# increments/decrements brightness
 #
-# increments/decrements brightness, clamping to not
-# allow screen to go blank
-#
-# with no arguments, prints the current setting.
-#
-# add this script to sudoers if you want legacy
-# to work without sudo
-#
-LEGACY_DIR=/sys/class/backlight/intel_backlight
-CURRENT_BRIGHT=$(cat $LEGACY_DIR/actual_brightness)
-MAX_BRIGHT=$(cat $LEGACY_DIR/max_brightness)
-
-legacy() {
-    CHANGE=$(($(($1 * $MAX_BRIGHT))/100))
-    TO_SET=$CURRENT_BRIGHT+$CHANGE
-    TO_SET=$(( $TO_SET < 1 ? 1 : $TO_SET ))
-    TO_SET=$(( $TO_SET > $MAX_BRIGHT ? $MAX_BRIGHT : $TO_SET))
-    sudo sh -c "echo $TO_SET > $LEGACY_DIR/brightness"
-}
-
-if [ $# -gt 0 ] ; then
-    if [ -x "$(command -v xbacklight)" ]; then
-        xbacklight -inc "$1"
-
-        if [ $(printf %0.f $(xbacklight -get)) -lt 0 ] ; then
-            xbacklight -set 1
-        fi
-    else
-        legacy $1
+if [ -x "$(command -v xbacklight)" ]; then
+    incr="xbacklight -inc "
+    decr="xbacklight -dec "
+    get=`printf %0.f%%\\n $(xbacklight -get)`
+else
+    if [ -x "$(command -v intel_backlight)" ]; then
+        incr="intel_backlight incr "
+        decr="intel_backlight decr "
+        get=`intel_backlight | grep -Eo '[0-9]+%'`
     fi
 fi
 
-if [ -x "$(command -v xbacklight)" ]; then
-    printf %0.f%%\\n $(xbacklight -get)
-else
-    CURRENT_BRIGHT=$(cat $LEGACY_DIR/actual_brightness)
-    echo $(($CURRENT_BRIGHT*100/$MAX_BRIGHT))
+if [ $# -gt 0 ]; then
+    if [ $1 -gt 0 ]; then
+        $incr "$1"
+    else
+        $decr "$1"
+    fi
 fi
+
+echo "$get"

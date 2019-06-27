@@ -8,6 +8,11 @@ case $(uname) in
         export ENV=$HOME/.kshrc
         PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games"
         ;;
+    FreeBSD)
+        DEFAULT_SHELL="kshrc"
+        export ENV=$HOME/.kshrc
+        PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/games"
+        ;;
 esac
 
 if [ -d "$HOME/bin" ] ; then
@@ -28,7 +33,6 @@ export RUSTUP_HOME="$HOME/.local/rustup"
 # default programs
 export BROWSER="firefox"
 export EDITOR="vim"
-export TERM="st"
 export READER="zathura"
 
 . "$HOME/.$DEFAULT_SHELL"
