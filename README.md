@@ -1,4 +1,4 @@
 # rc-files
-dotfiles
+dotfiles that are RealShit
 
-Linux & OpenBSD compatible
+Linux, FreeBSD and OpenBSD compatible

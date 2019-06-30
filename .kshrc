@@ -10,7 +10,7 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
-alias ls='ls -aF'
+alias ls='ls -aGF'
 
 HISTCONTROL=ignoredups
 HISTFILE=$HOME/.ksh_history
