@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# increments/decrements brightness
+#
+if [ -x "$(command -v xbacklight)" ]; then
+    incr="xbacklight -inc "
+    decr="xbacklight -dec "
+elif [ -x "$(command -v intel_backlight)" ]; then
+    incr="intel_backlight incr "
+    decr="intel_backlight decr "
+fi
+
+if [ $# -gt 0 ]; then
+    if [ $1 -gt 0 ]; then
+        $incr "$1"
+    else
+        $decr "$1"
+    fi
+fi
+
+if [ -x "$(command -v xbacklight)" ]; then
+    get=`printf %0.f%%\\n $(xbacklight -get)`
+elif [ -x "$(command -v intel_backlight)" ]; then
+    get=`intel_backlight | grep -Eo '[0-9]+%'`
+fi
+
+echo "$get"

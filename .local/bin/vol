@@ -10,14 +10,15 @@ usage() { >&2 echo "Usage: -inc, -dec" ; exit 1 ; }
 unmute() {
     case $(uname) in
         Linux) amixer sset Master unmute ;;
-        OpenBSD) mixerctl -q outputs.master.mute=off
+        OpenBSD) mixerctl -q outputs.master.mute=off;;
     esac
 }
 
 mute() {
     case $(uname) in
         Linux) amixer sset Master toggle ;;
-        OpenBSD) mixerctl -q outputs.master.mute=toggle
+        OpenBSD) mixerctl -q outputs.master.mute=toggle;;
+        FreeBSD) mixerl vol=0
     esac
 }
 
@@ -31,7 +32,9 @@ inc() {
                 amixer sset Master "$1"+
             fi
             ;;
-        OpenBSD) mixerctl -q outputs.master="+$1"
+        OpenBSD) mixerctl -q outputs.master="+$1";;
+        FreeBSD) mixer vol "+$1"
+
     esac
 }
 
@@ -45,7 +48,8 @@ dec() {
                 amixer sset Master "$1"-
             fi
             ;;
-        OpenBSD) mixerctl -q outputs.master="-$1"
+        OpenBSD) mixerctl -q outputs.master="-$1";;
+        FreeBSD) mixer vol "-$1"
     esac
 }
 
@@ -66,7 +70,10 @@ ismute() {
             else
                 echo "unmuted"
                 return 1
-            fi
+            fi ;;
+        FreeBSD)
+            # not implemented
+            return 1
     esac
 }
 
@@ -94,6 +101,11 @@ get_vol() {
             vol=$(echo ${vol} \* 0.4 | bc)
             # convert back to int
             vol=${vol%.*}
+        ;;
+        FreeBSD)
+            vol="$(mixer vol)"
+            vol="$(echo ${vol} | grep -Eo '[0-9]+$')"
+        ;;
     esac
 
     # clamp

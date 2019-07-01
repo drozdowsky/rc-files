@@ -15,12 +15,12 @@ case $(uname) in
         ;;
 esac
 
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
-if [ -d "$HOME/.local/share/umake/bin" ]; then
-    PATH="$HOME/.local/share/umake/bin:$PATH"
+if [ -d "$HOME/work/bin" ] ; then
+    PATH="$HOME/work/bin:$PATH"
 fi
 
 # rust
