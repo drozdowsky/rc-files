@@ -30,9 +30,6 @@ Plug 'tpope/vim-fugitive'
 " airline in vim
 Plug 'vim-airline/vim-airline'
 
-" sort python imports in vim, requirement: pip install isort
-Plug 'fisadev/vim-isort'
-
 " Indent for python - my fork
 Plug 'drozdowsky/indentpython.vim'
 
