@@ -34,5 +34,6 @@ export RUSTUP_HOME="$HOME/.local/rustup"
 export BROWSER="firefox"
 export EDITOR="vim"
 export READER="zathura"
+export RIPGREP_CONFIG_PATH="$HOME/.config/.ripgreprc"
 
 . "$HOME/.$DEFAULT_SHELL"

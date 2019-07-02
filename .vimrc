@@ -81,13 +81,15 @@ let NERDTreeShowHidden = 1
 map <C-t> :NERDTreeToggle<CR>
 
 " fuzzy search in vim
-set rtp+=~/.fzf
-Plug 'drozdowsky/minimal-fzf.vim'
-nnoremap <C-p> :Files<CR>
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-i': 'split',
-  \ 'ctrl-v': 'vsplit' }
+Plug 'cloudhead/neovim-fuzzy'
+nnoremap <C-p> :FuzzyOpen<CR>
+nnoremap <Leader>t :FuzzyGrep<Space>
+nnoremap <Leader>b :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
+nnoremap <Leader>h :browse oldfiles<CR>
+"nnoremap <Leader>b :Buffers<CR>
+"nnoremap <Leader>h :History<CR>
+"nnoremap <Leader>m :Marks<CR>
+"nnoremap <Leader>t :Rg<CR>
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -237,13 +239,6 @@ cmap $w w !sudo tee > /dev/null %
 " Bash like keys for the command line
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
-
-" \b buffer,mark,text switching in vim (needs fzf.vim to work)
-"nnoremap <Leader>b :set nomore<Bar>:ls<Bar>:set more<CR>:b<Space>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>h :History<CR>
-nnoremap <Leader>m :Marks<CR>
-nnoremap <Leader>t :Rg<CR>
 
 " disable arrows in vim
 noremap <Up> <Nop>

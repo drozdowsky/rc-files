@@ -2,3 +2,5 @@
 *.swp
 ctags
 cscope.out
+tags
+.git/

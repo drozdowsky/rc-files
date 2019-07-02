@@ -114,8 +114,5 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # VI mode as default for bash
 set -o vi
 
-# make FZF use ripgrep as default file searcher
-export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore-vcs'
-
 # Marcus Aurelius quote
 marcus
