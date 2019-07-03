@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 # git clone https://github.com/drozdowsky/aurelius
 # Read the Word of Marcus Aurelius from Meditations in your terminal.
+#
 FILE=~/builds/aurelius/aurelius.tsv
 if [ -f $FILE ]; then
     cat $FILE | shuf -n 1 | awk 'BEGIN {FS="\t"}; {print $6}' | fold -w 80 -s
