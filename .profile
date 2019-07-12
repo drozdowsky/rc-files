@@ -35,5 +35,6 @@ export BROWSER="firefox"
 export EDITOR="vim"
 export READER="zathura"
 export RIPGREP_CONFIG_PATH="$HOME/.config/.ripgreprc"
+export FZF_DEFAULT_COMMAND='rg --files'
 
 . "$HOME/.$DEFAULT_SHELL"

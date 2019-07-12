@@ -8,11 +8,9 @@ case $(uname) in
         alias doas='sudo'
         ;;
     OpenBSD)
-        alias sudo='doas'
         alias d='doas'
         ;;
     FreeBSD)
-        alias sudo='doas'
         alias d='doas'
         ;;
 esac
@@ -80,4 +78,8 @@ workon(){
             . "$VIRTUALENVS_PATH/$1/bin/post_activate"
         fi
     fi
+}
+
+branch() {
+    git branch | fzf | grep -Eo "[^ *]+"
 }

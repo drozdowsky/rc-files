@@ -1,4 +1,5 @@
-if [ "$0" = "sh" ]; then
+if [ "$0" = "sh" ] || [ "$0" = "su" ]; then
+    PS1='\h:\w \$ '
     return
 fi
 
