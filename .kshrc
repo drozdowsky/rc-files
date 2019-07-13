@@ -11,7 +11,14 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
-alias ls='ls -aGF'
+case $(uname) in
+    FreeBSD)
+        alias ls='ls -aGF'
+        ;;
+    OpenBSD)
+        alias ls='ls -aF'
+        ;;
+esac
 
 HISTCONTROL=ignoredups
 HISTFILE=$HOME/.ksh_history

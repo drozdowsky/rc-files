@@ -8,11 +8,17 @@
 MAX_SESSIONS=9
 TMP_FILE=/tmp/termcount
 
+if [ "$(uname)" = "OpenBSD" ]; then
+    seq="jot $MAX_SESSIONS 0 $MAX_SESSIONS"
+else
+    seq="seq 0 $MAXSESSIONS"
+fi
+
 AUTO_SESSIONS=$(tmux list-sessions -F "#S C#{session_attached}") 
-for z in `seq 0 $MAX_SESSIONS`; do
+for z in `$seq`; do
     if [ -z "$(echo $AUTO_SESSIONS | grep "$z C[1-9]")" ]; then
         SESSION_NAME="$z"
-        break 2
+        break 
     fi
 done
 

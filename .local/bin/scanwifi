@@ -1,12 +1,17 @@
 #!/bin/sh
 
-# needs work, chop up the outputted text
 case $(uname) in
     Linux)
         sudo iw `interface` scan | \
         grep SSID | grep -Eo '[^:]+$' | sed 's/ //'
         ;;
-    OpenBSD|FreeBSD)
+    FreeBSD)
         doas ifconfig `interface` up scan | tail -n +2 | awk -F "   " '{print $1}'
+        ;;
+    OpenBSD)
+        # current wifi
+        ifconfig `interface` scan | grep join | pcregrep -o1 ".*join \"?([^\"]*)\"? chan.*" 
+        # other wifis
+        ifconfig `interface` scan | grep nwid | pcregrep -o1 ".*nwid \"?([^\"]*)\"? chan.*" 
         ;;
 esac

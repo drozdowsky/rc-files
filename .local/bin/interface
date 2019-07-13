@@ -5,4 +5,11 @@
 # get correct wifi interface
 #
 
-ifconfig -a | grep 'wl' | sed 's/Link//' | awk '{print $1}' | head -n 1 | sed 's/://'
+case $(uname) in
+    Linux|FreeBSD)
+        ifconfig -a | grep 'wl' | sed 's/Link//' | awk '{print $1}' | head -n 1 | sed 's/://'
+        ;;
+    OpenBSD)
+        ifconfig -a | grep -B 3 wl | head -1 | awk '{print $1}' | head -n 1 | sed 's/://'
+        ;;
+esac

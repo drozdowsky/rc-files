@@ -1,1 +1,2 @@
-.xinitrc
+[ -f ~/.profile ] && . ~/.profile
+[ -f ~/.xinitrc ] && . ~/.xinitrc

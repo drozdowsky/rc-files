@@ -11,10 +11,17 @@ PASS="$2"
 case $(uname) in
     Linux)
         WPA_FILE="/etc/wpa_supplicant/wpa_supplicant.conf"
+        wpa_passphrase "$1" "$2" | sudo tee -a "$WPA_FILE"
         ;;
-    OpenBSD|FreeBSD)
+    FreeBSD)
         WPA_FILE="/etc/wpa_supplicant.conf"
+        wpa_passphrase "$1" "$2" | doas tee -a "$WPA_FILE"
+        ;;
+    OpenBSD)
+        FILE="/etc/hostname.`interface`"
+        doas sed -i "\$i\\
+join \"$1\" wpakey \"$2\"
+" $FILE
         ;;
 esac
 
-wpa_passphrase "$1" "$2" | sudo tee -a "$WPA_FILE"

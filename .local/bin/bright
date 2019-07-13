@@ -3,11 +3,11 @@
 # increments/decrements brightness
 #
 if [ -x "$(command -v xbacklight)" ]; then
-    incr="xbacklight -inc "
-    decr="xbacklight -dec "
+    incr="xbacklight -inc"
+    decr="xbacklight -inc"
 elif [ -x "$(command -v intel_backlight)" ]; then
-    incr="intel_backlight incr "
-    decr="intel_backlight decr "
+    incr="intel_backlight incr"
+    decr="intel_backlight decr"
 fi
 
 if [ $# -gt 0 ]; then
@@ -19,7 +19,7 @@ if [ $# -gt 0 ]; then
 fi
 
 if [ -x "$(command -v xbacklight)" ]; then
-    get=`printf %0.f%%\\n $(xbacklight -get)`
+    get=`printf %0.f%% $(xbacklight -get)`
 elif [ -x "$(command -v intel_backlight)" ]; then
     get=`intel_backlight | grep -Eo '[0-9]+%'`
 fi
