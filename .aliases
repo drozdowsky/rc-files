@@ -33,6 +33,7 @@ alias proxy='export http_proxy=http://10.158.100.120:8080; export https_proxy=ht
 
 # 3rd
 alias feh='feh -X -s -Z --scale-down --title "%n [%wx%h][%u/%l]"'
+alias ..='cd ..'
 
 # run & close term
 swallow() {
