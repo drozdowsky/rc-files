@@ -11,7 +11,7 @@ TMP_FILE=/tmp/termcount
 if [ "$(uname)" = "OpenBSD" ]; then
     seq="jot $MAX_SESSIONS 0 $MAX_SESSIONS"
 else
-    seq="seq 0 $MAXSESSIONS"
+    seq="seq 0 $MAX_SESSIONS"
 fi
 
 AUTO_SESSIONS=$(tmux list-sessions -F "#S C#{session_attached}") 
