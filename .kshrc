@@ -34,8 +34,8 @@ alias __B=`echo "\016"`
 alias __C=`echo "\006"`
 alias __D=`echo "\002"`
 
-if [[ $(id -u) -ne 0 ]]; then
+if [ $(id -u) -ne 0 ]; then
     PS1="\[\033[031m\u\h\033[033m:\w\033[0m \$ \]"
 else
-    PS1='\h:\w \$ '
+    PS1="\h:\w \$ "
 fi

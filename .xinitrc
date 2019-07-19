@@ -26,12 +26,13 @@ fi
 # fi
 
 # run custom script, run xrandr etc. there 
-if [ -f ~/.config/.display.sh ]; then
-   . ~/.config/.display.sh
+if [ -f ~/.config/display.sh ]; then
+   . ~/.config/display.sh
 fi
 
 # map capslock to super
 if [ -x "$(command -v setxkbmap)" ]; then
+    setxkbmap pl
     setxkbmap -option caps:super
 else
     if [ -x "$(command -v xmodmap)" ]; then
