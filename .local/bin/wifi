@@ -1,0 +1,102 @@
+#!/bin/sh
+#
+# wi-fi manager
+#
+
+current() {
+    case $(uname) in
+        Linux)
+            echo "Not implemented yet"
+            ;;
+    FreeBSD)
+            ifconfig `interface` | pcregrep -o1 "ssid (.*) channel"
+            ;;
+    OpenBSD)
+            ifconfig `interface` scan | grep join | pcregrep -o1 ".*join \"?([^\"]*)\"? chan.*"
+            ;;
+    esac
+}
+
+
+scan() {
+    case $(uname) in
+        Linux)
+            sudo iw `interface` scan | \
+            grep SSID | grep -Eo '[^:]+$' | sed 's/ //'
+            ;;
+        FreeBSD)
+            ifconfig `interface` scan | tail -n +2 | awk -F "   " '{print $1}'
+            ;;
+        OpenBSD)
+            current
+            ifconfig `interface` scan | grep nwid | pcregrep -o1 ".*nwid \"?([^\"]*)\"? chan.*"
+            ;;
+    esac
+}
+
+
+add() {
+    if [ $# -lt 2 ]; then
+        echo 'Usage: wifi add <SSID> <PASSWD>' 
+        exit
+    fi
+
+    SSID="$1"
+    PASS="$2"
+
+    case $(uname) in
+        Linux)
+            WPA_FILE="/etc/wpa_supplicant/wpa_supplicant.conf"
+            wpa_passphrase "$1" "$2" | sudo tee -a "$WPA_FILE"
+            ;;
+        FreeBSD)
+            WPA_FILE="/etc/wpa_supplicant.conf"
+            wpa_passphrase "$1" "$2" | doas tee -a "$WPA_FILE"
+            ;;
+        OpenBSD)
+            FILE="/etc/hostname.`interface`"
+            doas sed -i "\$i\\
+            join \"$1\" wpakey \"$2\"
+            " $FILE
+            ;;
+    esac
+}
+
+
+connect() { 
+    case $(uname) in
+        Linux)
+            WPA_FILE="/etc/wpa_supplicant/wpa_supplicant.conf"
+            sudo pkill wpa_supplicant
+            sudo ifconfig `interface` up
+            sudo wpa_supplicant -d -B -i `interface` -f /var/log/wpa.log -c "$WPA_FILE"
+            ;;
+        FreeBSD)
+            doas service netif restart
+            WPA_FILE="/etc/wpa_supplicant.conf"
+            ;;
+        OpenBSD)
+            doas sh /etc/netstart
+            # /etc/hostname.if
+            ;;
+    esac
+}
+
+
+main() {
+    command="$1"
+    shift
+    
+    if [ -z "$command" ] || [ "$command" = "help" ]; then
+        echo "Usage:"
+        echo " current - current wifi"
+        echo " scan - scan wifi"
+        echo " add <SSID> <PASSWD> - add wifi"
+        echo " connect - restart wifi"
+        exit 0
+    fi
+
+    $command $@
+}
+
+main $@
