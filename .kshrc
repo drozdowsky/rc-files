@@ -1,14 +1,5 @@
-if [ "$0" = "sh" ] || [ "$0" = "su" ]; then
-    PS1='\h:\w \$ '
-    return
-fi
-
 if [ -f /etc/ksh.kshrc ]; then
     . /etc/ksh.kshrc
-fi
-
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
 fi
 
 case $(uname) in

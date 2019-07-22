@@ -116,3 +116,4 @@ set -o vi
 
 # Marcus Aurelius quote
 marcus
+ty k...
