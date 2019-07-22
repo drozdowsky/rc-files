@@ -16,7 +16,7 @@ case $(uname) in
 
         perc=$(cat $BAT/capacity)
         ;;
-    OpenBSD) perc=$(apm -l)
+    OpenBSD|FreeBSD) perc=$(apm -l)
 esac
 
 echo $perc

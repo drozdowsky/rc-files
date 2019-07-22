@@ -1,9 +1,9 @@
 #!/bin/sh
 #
 # reads stdin/file and copies it to clipboard
-# clears it after 90s
+# clears it after 120s
 # works with tmux
 # make sure that your xclip has -r flag
 #
 [ -n "$1" ] && exec 3<"$1" || exec 3<&0
-cat <&3 | timeout 90 xclip -r -i -sel c -verbose >/dev/null 2>&1 &
+cat <&3 | timeout 120 xclip -r -i -sel c -verbose >/dev/null 2>&1 &

@@ -43,9 +43,6 @@ case $0 in
     *ksh*)
         . ~/.kshrc 
         ;;
-    *bash*)
-        . ~/.bashrc
-        ;;
     *zsh*)
         . ~/.zshrc
         ;;

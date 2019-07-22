@@ -83,8 +83,8 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -98,17 +98,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# virtualenv
-export WORKON_HOME=~/virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=$(which python3)
-if [ -f /usr/bin/virtualenvwrapper_lazy.sh ]; then
-  . /usr/bin/virtualenvwrapper_lazy.sh
-else
-    if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
-      . /usr/local/bin/virtualenvwrapper_lazy.sh 
-    fi
-fi
-
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # VI mode as default for bash
@@ -116,4 +105,4 @@ set -o vi
 
 # Marcus Aurelius quote
 marcus
-ty k...
+# ty k...
