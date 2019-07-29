@@ -46,4 +46,7 @@ case $0 in
     *zsh*)
         . ~/.zshrc
         ;;
+    *bash*)
+        . ~/.bashrc
+        ;;
 esac

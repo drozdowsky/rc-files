@@ -85,7 +85,6 @@ connect() {
 
 main() {
     command="$1"
-    shift
     
     if [ -z "$command" ] || [ "$command" = "help" ]; then
         echo "Usage:"
@@ -95,8 +94,9 @@ main() {
         echo " connect - restart wifi"
         exit 0
     fi
+    shift
 
-    $command $@
+    $command "$@"
 }
 
-main $@
+main "$@"
