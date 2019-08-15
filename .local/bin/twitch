@@ -49,7 +49,7 @@ for i in $streams ; do
     [ -f /tmp/twitch/$i ] || continue
     echo $i
     rm /tmp/twitch/$i
-done | menu -p 'Stream:')
+done | dmenu -p 'Stream:')
 
 if [ -n "$name" ] ; then
     mpv "$@" https://twitch.tv/$name &
