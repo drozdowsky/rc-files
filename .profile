@@ -1,4 +1,5 @@
 export ENV=$HOME/.shrc
+export LANG=it_IT.UTF-8
 
 case $(uname) in
     OpenBSD)

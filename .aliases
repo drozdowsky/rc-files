@@ -70,7 +70,7 @@ up(){
 }
 
 workon(){
-    VIRTUALENVS_PATH=${WORKON_HOME:~/.virtualenvs}
+    VIRTUALENVS_PATH=${WORKON_HOME:-~/.virtualenvs}
     if [ $# -eq 0 ]; then
         /bin/ls $VIRTUALENVS_PATH
     else
@@ -82,5 +82,5 @@ workon(){
 }
 
 branch() {
-    git branch | fzf | grep -Eo "[^ *]+"
+    git branch --all | fzf | grep -Eo "[^ *]+"
 }

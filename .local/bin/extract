@@ -20,10 +20,10 @@ fi
 if [ -z "$2" ]; then
     DESTDIR="." #set destdir to current dir
 elif [ ! -d "$2" ]; then
-    echo -e -n "${clrstart}Destination folder doesn't exist or isnt a directory. Create? (y/n): ${clrend}"
+    echo -e "${clrstart}Destination folder doesn't exist or isnt a directory. Create? (y/n): ${clrend}"
     read response
     #echo -e "\n"
-    if [ $response == y || $response == Y ]; then
+    if [ "$response" == y ] || [ "$response" == Y ]; then
         mkdir -p "$2"
         if [ $? -eq 0 ]; then
             DESTDIR="$2"
@@ -37,6 +37,7 @@ else
     DESTDIR="$2"
 fi
 
+
 if [ ! -z "$3" ]; then
     if [ "$3" != "v" ]; then
         echo -e "${clrstart}Wrong argument $3 !${clrend}"
@@ -47,7 +48,6 @@ fi
 filename=`basename "$1"`
 
 #echo "${filename##*.}" debug
-
 case "${filename##*.}" in
     tar)
         echo -e "${clrstart}Extracting $1 to $DESTDIR: (uncompressed tar)${clrend}"
