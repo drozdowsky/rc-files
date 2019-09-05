@@ -17,12 +17,6 @@
 # e.g. ESC to go into visual mode.
 # set -o vi
 
-alias h='fc -l'
-alias j=jobs
-alias m="$PAGER"
-alias cp='cp -ip'
-alias mv='mv -i'
-alias rm='rm -i'
 [ -f ~/.aliases ] && . ~/.aliases
 
 # set prompt: ``username@hostname$ '' 

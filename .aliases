@@ -15,6 +15,12 @@ case $(uname) in
         ;;
 esac
 
+alias h='fc -l'
+alias j=jobs
+alias cp='cp -ip'
+alias mv='mv -i'
+alias rm='rm -I'
+
 # main aliases
 alias g='git'
 alias v='vim'
