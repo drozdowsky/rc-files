@@ -175,6 +175,14 @@ au BufNewFile,BufRead *.md
     \ set expandtab |
     \ set autoindent
 
+" yaml
+au BufNewFile,BufRead *.yml,*.yaml
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set expandtab |
+    \ set autoindent
+
 
 " ============================================================================
 " VIM related 2
