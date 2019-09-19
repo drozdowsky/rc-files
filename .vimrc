@@ -10,6 +10,11 @@ if has('nvim')
     set guicursor=n-v-c-sm-i-ci-ve:block,r-cr-o:hor20
     set noincsearch
     set nohlsearch
+    tnoremap <C-W> <C-\><C-n>
+    command! -nargs=* T split | resize 20 | terminal <args>
+    nnoremap <C-W>t :T<CR>
+else
+    nnoremap <C-W>t :terminal<CR>
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -19,7 +24,7 @@ call plug#begin('~/.vim/plugged')
 
 " colorschemes
 Plug 'tomasr/molokai'
-Plug 'dylanaraps/wal.vim'
+" Plug 'dylanaraps/wal.vim'
 
 " Git in vim
 Plug 'tpope/vim-fugitive'
@@ -123,6 +128,7 @@ autocmd VimResized * wincmd =
 " Preserve these settings on colorscheme change
 autocmd ColorScheme * highlight BadWhitespace guibg=red ctermbg=darkred
 autocmd ColorScheme * highlight SuspiciousComma guibg=red ctermbg=103
+
 
 
 " ============================================================================
