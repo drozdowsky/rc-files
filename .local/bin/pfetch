@@ -1,0 +1,9 @@
+#!/bin/sh
+BASEDIR=$(dirname "$0")
+
+[ ! -x "$BASEDIR/_pfetch" ] || [ "$1" == "-f" ] \
+    && curl https://raw.githubusercontent.com/dylanaraps/pfetch/master/pfetch 2>/tmp/err 1>"$BASEDIR/_pfetch" \
+    && chmod +x "$BASEDIR/_pfetch"
+
+[ -x "$BASEDIR/_pfetch" ] && exec "$BASEDIR/_pfetch"
+cat /tmp/err
