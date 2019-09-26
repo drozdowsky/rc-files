@@ -29,6 +29,9 @@ esac
 # search path for cd(1)
 CDPATH=.:$HOME
 
+# non easy ctrl-d
+set -o ignoreeof
+
 # ENV=~/.shrc so source other shells depending on $0
 case $0 in
     *csh*)
