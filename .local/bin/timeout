@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# port of GNU/timeout (1)
+# in pure sh 
+# drozdowsky
+#
+[ $# -lt 2 ] && exit 1
+TIME=$1
+shift
+exec 3<&0
+cat <&3 | $@ &
+PROCESS=$!
+
+i=0
+while [ "$i" -le "$TIME" ]; do
+    # if process already exited -> exit
+    PROCESS_NAME=$(ps -p "$PROCESS" -o comm=)
+    [ -z "$PROCESS_NAME"] && exit 0
+    sleep 1
+    i=$((i+1))
+done
+
+# if $! pid has the same name kill it
+case $(ps -p "$PROCESS" -o comm=) in
+    $PROCESS_NAME)
+        kill "$PROCESS"
+        ;;
+esac
