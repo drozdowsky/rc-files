@@ -53,12 +53,17 @@ else
     fi
 fi
 
-# slstatus
-if [ -x "$(command -v slstatus)" ]; then
-    pkill -9 slstatus
-    slstatus &
-fi
+# prefer awesome over dwm
+if [ -z "$(pgrep awesome)" ]; then
+    exec $(which awesome)
+else
+    # slstatus
+    if [ -x "$(command -v slstatus)" ]; then
+        pkill -9 slstatus
+        slstatus &
+    fi
 
-if [ -z "$(pgrep dwm)" ]; then
-    exec $(which dwm)
+    if [ -z "$(pgrep dwm)" ]; then
+        exec $(which dwm)
+    fi
 fi
