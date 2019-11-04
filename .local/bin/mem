@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# author: drozdowsky
+# show memory usage (without swap)
+# example output: 2024M
+#
+top -tn | grep "Mem: [0-9]" | awk '{ print $2 }'

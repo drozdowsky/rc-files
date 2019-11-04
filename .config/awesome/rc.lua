@@ -17,7 +17,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
-local vicious = require("vicious")
+-- local vicious = require("vicious")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -117,17 +117,17 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- memory widget
-memwidget = wibox.widget.textbox()
-vicious.cache(vicious.widgets.mem)
-vicious.register(memwidget, vicious.widgets.mem, "  $2MiB  ", 3)
-
--- cpu widget
-cpuwidget = wibox.widget.textbox()
-vicious.register(cpuwidget, vicious.widgets.cpu, "  $1%  ", 3)
-
--- bat widget
-batwidget = wibox.widget.textbox()
-vicious.register(batwidget, vicious.widgets.bat, "  🔋$2%  ", 1, "0")
+--memwidget = wibox.widget.textbox()
+--vicious.cache(vicious.widgets.mem)
+--vicious.register(memwidget, vicious.widgets.mem, "  $2MiB  ", 3)
+--
+---- cpu widget
+--cpuwidget = wibox.widget.textbox()
+--vicious.register(cpuwidget, vicious.widgets.cpu, "  $1%  ", 3)
+--
+---- bat widget
+--batwidget = wibox.widget.textbox()
+--vicious.register(batwidget, vicious.widgets.bat, "  🔋$2%  ", 1, "0")
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -162,6 +162,9 @@ local tasklist_buttons = gears.table.join(
                                                       {raise = true}
                                                   )
                                               end
+                                          end),
+                     awful.button({ }, 2, function(c)
+                                              c:kill()
                                           end),
                      awful.button({ }, 3, function()
                                               awful.menu.client_list({ theme = { width = 250 } })
@@ -237,9 +240,9 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             --mykeyboardlayout,
             wibox.widget.systray(),
-            cpuwidget,
-            memwidget,
-            batwidget,
+            --cpuwidget,
+            --memwidget,
+            --batwidget,
             mytextclock,
             s.mylayoutbox,
         },

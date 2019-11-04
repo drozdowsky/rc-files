@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# author: drozdowsky
+# show cpu % usage 
+# example output: 10.5%
+#
+top -tn | grep "CPU: [0-9]" | awk '{ print $2 }'
