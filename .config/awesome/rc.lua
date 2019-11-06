@@ -95,7 +95,7 @@ myawesomemenu = {
 }
 
 systemmenu = {
-   { "shutdown", "sudo halt -p" }
+   { "shutdown", "shutdown -p now" }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },

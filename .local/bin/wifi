@@ -1,12 +1,15 @@
 #!/bin/sh
 #
 # wi-fi manager
+# using only built-in tools
+# Linux, FreeBSD, OpenBSD compatibile
 #
 
 current() {
     case $(uname) in
         Linux)
-            echo "Not implemented yet"
+            SSID=$(iw `interface` info | grep ssid)
+            echo "${SSID##     ssid }"
             ;;
     FreeBSD)
             ifconfig `interface` | pcregrep -o1 "ssid (.*) channel"
@@ -16,16 +19,18 @@ current() {
             ;;
     esac
 }
+status() {
+    current
+}
 
 
 scan() {
     case $(uname) in
         Linux)
-            sudo iw `interface` scan | \
-            grep SSID | grep -Eo '[^:]+$' | sed 's/ //'
+            sudo iw `interface` scan | grep SSID | grep -Eo '[^:]+$' | sed 's/ //'
             ;;
         FreeBSD)
-            ifconfig `interface` scan | tail -n +2 | awk -F "   " '{print $1}'
+            ifconfig `interface` scan | tail -n +2 | awk -F "   " '{print $1}' | sort | uniq
             ;;
         OpenBSD)
             current
@@ -51,7 +56,7 @@ add() {
             ;;
         FreeBSD)
             WPA_FILE="/etc/wpa_supplicant.conf"
-            wpa_passphrase "$1" "$2" | doas tee -a "$WPA_FILE"
+            wpa_passphrase "$1" "$2" | sudo tee -a "$WPA_FILE"
             ;;
         OpenBSD)
             FILE="/etc/hostname.`interface`"
@@ -72,14 +77,17 @@ connect() {
             sudo wpa_supplicant -d -B -i `interface` -f /var/log/wpa.log -c "$WPA_FILE"
             ;;
         FreeBSD)
-            doas service netif restart
             WPA_FILE="/etc/wpa_supplicant.conf"
+            sudo service netif restart
             ;;
         OpenBSD)
-            doas sh /etc/netstart
             # /etc/hostname.if
+            doas sh /etc/netstart
             ;;
     esac
+}
+restart() {
+    connect
 }
 
 

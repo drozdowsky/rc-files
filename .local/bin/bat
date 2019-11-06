@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# https://github.com/mitchweaver
+# https://github.com/drozdowsky
+# get battery percent remaining
+#
+
+case $(uname) in
+    Linux) PERC=$(find /sys/class/power_supply -name BAT* -exec cat {}/capacity \;) ;;
+    OpenBSD|FreeBSD) PERC=$(apm -l)
+esac
+echo "$PERC%"
