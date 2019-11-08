@@ -1,27 +1,70 @@
 #!/bin/sh
 #
 # increments/decrements brightness
+# drozdowsky
 #
-if [ -x "$(command -v xbacklight)" ]; then
-    incr="xbacklight -inc"
-    decr="xbacklight -inc"
-elif [ -x "$(command -v intel_backlight)" ]; then
-    incr="intel_backlight incr"
-    decr="intel_backlight decr"
-fi
 
-if [ $# -gt 0 ]; then
-    if [ $1 -gt 0 ]; then
-        $incr "$1"
-    else
-        $decr "$1"
+get_bright() {
+    case $(which xbacklight intel_backlight) in
+        *xbacklight*)
+            CURRENT_BRIGHT=$(printf %0.f%% $(xbacklight -get))
+            ;;
+        *intel_backlight*)
+            CURRENT_BRIGHT=$(intel_backlight | grep -Eo [0-9]+%)
+            ;;
+        *)
+            echo "bright: no xbacklight or intel_backlight"
+            exit 1
+            ;;
+    esac
+    echo "$CURRENT_BRIGHT"
+}
+
+set_bright() {
+    CURRENT_BRIGHT=$(get_bright)
+    CURRENT_BRIGHT=${CURRENT_BRIGHT%%%}
+    case $1 in
+        =*)
+            ARG=${1##=}
+            if [ "$ARG" -ge "0" ] && [ "$ARG" -le "100" ]; then
+                SET_BRIGHT="$ARG"
+            fi
+            ;;
+        -*|+*|*)
+            ARG=${1##+}
+            VALUE=$(($CURRENT_BRIGHT+$ARG))
+            if [ "$VALUE" -ge "0" ] && [ "$VALUE" -le "100" ]; then
+                SET_BRIGHT="$VALUE"
+            fi
+            ;;
+    esac
+
+    if [ ! "$SET_BRIGHT" ]; then
+        echo "bright: no valid value passed"
+        exit 1
     fi
-fi
 
-if [ -x "$(command -v xbacklight)" ]; then
-    get=`printf %0.f%% $(xbacklight -get)`
-elif [ -x "$(command -v intel_backlight)" ]; then
-    get=`intel_backlight | grep -Eo '[0-9]+%'`
-fi
+    case $(which xbacklight intel_backlight) in
+        *xbacklight*)
+            xbacklight -set "$SET_BRIGHT"
+            ;;
+        *intel_backlight*)
+            intel_backlight "$SET_BRIGHT"
+            ;;
+    esac
+}
 
-echo "$get"
+case $1 in
+    "")
+        get_bright
+        exit 0
+        ;;
+    -h|--help)
+        echo "bright: change brightness"
+        echo "Usage: bright [-+=value]"
+        exit 0
+        ;;
+esac
+
+set_bright "$1" >/dev/null 2>&1
+get_bright

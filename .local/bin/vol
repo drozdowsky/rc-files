@@ -1,11 +1,19 @@
 #!/bin/sh
 #
-# http://github.com/mitchweaver/bin
+# https://github.com/mitchweaver/bin
+# https://github.com/drozdowsky
 #
 # Simple volume control
 #
 
-usage() { >&2 echo "Usage: -inc, -dec" ; exit 1 ; }
+usage() {
+    echo "vol: change volume"
+    echo "Usage: vol [-+=value]"
+    echo "       vol -mute"
+    echo "       vol -unmute"
+    echo "       vol -ismute"
+    exit 0
+}
 
 unmute() {
     case $(uname) in
@@ -18,15 +26,31 @@ mute() {
     case $(uname) in
         Linux) amixer sset Master toggle ;;
         OpenBSD) mixerctl -q outputs.master.mute=toggle;;
-        FreeBSD) mixerl vol=0
+        FreeBSD) mixer vol 0
     esac
 }
 
-inc() {
+setv() {
     unmute 
     case $(uname) in
         Linux)
-            if type pulseaudio > /dev/null 2>&1 ; then
+            if [ -x "$(which pulseaudio)" ]; then
+                pactl set-sink-volume 0 "$1"%
+            else
+                amixer sset Master "$1"
+            fi
+            ;;
+        OpenBSD) mixerctl -q outputs.master="$1";;
+        FreeBSD) mixer vol "$1"
+
+    esac
+}
+
+incv() {
+    unmute 
+    case $(uname) in
+        Linux)
+            if [ -x "$(which pulseaudio)" ]; then
                 pactl set-sink-volume 0 +"$1"%
             else
                 amixer sset Master "$1"+
@@ -38,7 +62,7 @@ inc() {
     esac
 }
 
-dec() {
+decv() {
     unmute 
     case $(uname) in
         Linux)
@@ -58,33 +82,28 @@ ismute() {
         Linux)
             if $(amixer -q sget Master | grep -o '\[off\]' > /dev/null) ; then
                 echo "muted"
-                return 0
             else
                 echo "unmuted"
-                return 1
             fi ;;
         OpenBSD)
             if [ $(mixerctl -n outputs.master.mute) = on ] ; then
                 echo "muted"
-                return 0
             else
                 echo "unmuted"
-                return 1
             fi ;;
         FreeBSD)
-            # not implemented
-            return 1
+            echo "unmuted"
     esac
 }
 
 get_vol() {
-    if ismute > /dev/null ; then
+    if [ "$(ismute)" == "muted" ]; then
         echo "muted"
-        exit
+        exit 0
     fi
     case $(uname) in
         Linux) 
-            if type pulseaudio > /dev/null 2>&1 ; then
+            if [ -x "$(which pulseaudio)" ]; then
 				vol=`pactl list sinks | grep '^[[:space:]]Volume:' | \
 					head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'`
 			else
@@ -116,11 +135,13 @@ get_vol() {
 }
 
 case "$1" in
-    -inc|-i) inc "$2" ;;
-    -dec|-d) dec "$2" ;;
-    -mute|-m) mute ;;
-    -ismute) ismute ; exit $? ;;
-    --help|-h) usage
+    -mute) mute ;;
+    -unmute) unmute ;;
+    -ismute) ismute ;;
+    --help|-h) usage ;;
+    -*) decv "${1##-}" > /dev/null ;;
+    +*) incv "${1##+}" > /dev/null ;;
+    =*) setv "${1##=}" > /dev/null ;;
 esac
 
 get_vol
