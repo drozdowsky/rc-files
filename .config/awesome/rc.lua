@@ -189,6 +189,22 @@ local function set_wallpaper(s)
     end
 end
 
+local function get_vol()
+    awful.spawn.easy_async("vol", function(stdout, stderr, reason, exit_code)
+        naughty.notify({ preset = naughty.config.presets.normal,
+        title = "Volume",
+        text = "🔊 " .. stdout })
+    end)
+end
+
+local function get_bright()
+    awful.spawn.easy_async("bright", function(stdout, stderr, reason, exit_code)
+        naughty.notify({ preset = naughty.config.presets.normal,
+        title = "Brightness",
+        text = "☀️ " .. stdout })
+    end)
+end
+
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 -- screen.connect_signal("property::geometry", set_wallpaper)
 
@@ -384,34 +400,45 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("bright +10") end,
-              {description = "bright +10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("bright -10") end,
-              {description = "bright -10%", group = "hotkeys"}),
+    awful.key({ }, "XF86MonBrightnessUp",
+    function ()
+        os.execute("bright +10")
+        get_bright()
+    end,
+    {description = "bright +10%", group = "hotkeys"}),
+    awful.key({ }, "XF86MonBrightnessDown", 
+    function ()
+        os.execute("bright -10")
+        get_bright()
+    end,
+    {description = "bright -10%", group = "hotkeys"}),
 
     -- volume control
     awful.key({ "Mod1" }, "Up",
         function ()
             os.execute("vol -inc 10")
-            beautiful.volume.update()
+            get_vol()
         end,
         {description = "volume up", group = "hotkeys"}),
     awful.key({ "Mod1" }, "Down",
         function ()
             os.execute("vol -dec 10")
-            beautiful.volume.update()
+            get_vol()
+            --beautiful.volume.update()
         end,
         {description = "volume down", group = "hotkeys"}),
     awful.key({ }, "XF86AudioRaiseVolume",
         function ()
             os.execute("vol -inc 10")
-            beautiful.volume.update()
+            get_vol()
+            --beautiful.volume.update()
         end,
         {description = "volume up", group = "hotkeys"}),
     awful.key({ }, "XF86AudioLowerVolume",
         function ()
             os.execute("vol -dec 10")
-            beautiful.volume.update()
+            get_vol()
+            --beautiful.volume.update()
         end,
         {description = "volume down", group = "hotkeys"}),
 

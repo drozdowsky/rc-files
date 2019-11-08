@@ -1,4 +1,8 @@
 #!/bin/sh
+#
+# check weather with wttr.in
+# drozdowsky
+#
 CUT=38
 request="it.wttr.in/$1?"
 if [ `tput cols` -lt 125 ]; then

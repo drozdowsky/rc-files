@@ -1,4 +1,10 @@
 #!/bin/sh
+#
+# downloads latest version of pfetch and runs it
+# pfetch = posix neofetch
+# author: drozdowsky
+# pfetch author: dylanaraps
+#
 BASEDIR=$(dirname "$0")
 
 [ ! -x "$BASEDIR/_pfetch" ] || [ "$1" == "-f" ] \

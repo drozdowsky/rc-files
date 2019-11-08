@@ -6,14 +6,14 @@
 
 get_memory() {
     case $(uname) in
-        # Used memory is calculated using the following "formula" (Linux):
+        # Used memory is calculated using the following "formula":
         # MemUsed = MemTotal + Shmem - MemFree - Buffers - Cached - SReclaimable
         # Source: https://github.com/KittyKatt/screenFetch/issues/386
         Linux*)
             # Parse the '/proc/meminfo' file splitting on ':' and 'k'.
             # The format of the file is 'key:   000kB' and an additional
             # split is used on 'k' to filter out 'kB'.
-            while IFS=:k read -r key val _; do
+            while IFS=':k '  read -r key val _; do
                 case $key in
                     MemTotal)
                         mem_used=$((mem_used + val))
@@ -34,7 +34,7 @@ get_memory() {
             mem_full=$((mem_full / 1024))
         ;;
 
-        # Used memory is calculated using the following "formula" (MacOS):
+        # Used memory is calculated using the following "formula":
         # (wired + active + occupied) * 4 / 1024
         Darwin*)
             mem_full=$(($(sysctl -n hw.memsize) / 1024 / 1024))
@@ -44,7 +44,7 @@ get_memory() {
             # split is used on '.' to filter it out.
             while IFS=:. read -r key val; do
                 case $key in
-                    *wired*|*active*|*occupied*)
+                    *' wired'*|*' active'*|*' occupied'*)
                         mem_used=$((mem_used + ${val:-0}))
                     ;;
                 esac
@@ -84,9 +84,9 @@ get_memory() {
 			EOF
         ;;
 
-        # Used memory is calculated using the following "formula" (FreeBSD):
-        # (inactive_count + free_count + cache_count) * page_size / 1024
-        FreeBSD*)
+        # Used memory is calculated using the following "formula":
+        # mem_full - ((inactive + free + cache) * page_size / 1024)
+        FreeBSD*|DragonFly*)
             mem_full=$(($(sysctl -n hw.physmem) / 1024 / 1024))
 
             # Use 'set --' to store the output of the command in the
@@ -108,7 +108,7 @@ get_memory() {
             # $2: vm.stats.vm.v_inactive_count
             # $3: vm.stats.vm.v_free_count
             # $4: vm.stats.vm.v_cache_count
-            mem_used=$((($2 + $3 + $4) * $1 / 1024 / 1024))
+            mem_used=$((mem_full - (($2 + $3 + $4) * $1 / 1024 / 1024)))
         ;;
 
         NetBSD*)
@@ -116,7 +116,7 @@ get_memory() {
 
             # NetBSD implements a lot of the Linux '/proc' filesystem,
             # this uses the same parser as the Linux memory detection.
-            while IFS=:k read -r key val _; do
+            while IFS=':k ' read -r key val _; do
                 case $key in
                     MemFree)
                         mem_free=$((val / 1024))
@@ -142,6 +142,44 @@ get_memory() {
 
             mem_used=$((mem_used / 1024 / 1024))
             mem_full=$((mem_full / 1024 / 1024))
+        ;;
+
+        Minix)
+            # Minix includes the '/proc' filesystem though the format
+            # differs from Linux. The '/proc/meminfo' file is only a
+            # single line with space separated elements and elements
+            # 2 and 3 contain the total and free memory numbers.
+            read -r _ mem_full mem_free _ < /proc/meminfo
+
+            mem_used=$(((mem_full - mem_free) / 1024))
+            mem_full=$(( mem_full / 1024))
+        ;;
+
+        SunOS)
+            hw_pagesize=$(pagesize)
+
+            # 'kstat' outputs memory in the following format:
+            # unix:0:system_pages:pagestotal	1046397
+            # unix:0:system_pages:pagesfree		885018
+            #
+            # This simply uses the first "element" (white-space
+            # separated) as the key and the second element as the
+            # value.
+            #
+            # A variable is then assigned based on the key.
+            while read -r key val; do
+                case $key in
+                    *total) pages_full=$val ;;
+                    *free)  pages_free=$val ;;
+                esac
+            done <<-EOF
+				$(kstat -p unix:0:system_pages:pagestotal \
+                           unix:0:system_pages:pagesfree)
+			EOF
+
+            mem_full=$((pages_full * hw_pagesize / 1024 / 1024))
+            mem_free=$((pages_free * hw_pagesize / 1024 / 1024))
+            mem_used=$((mem_full - mem_free))
         ;;
     esac
 
