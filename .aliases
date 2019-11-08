@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Aliases that are POSIX compatibile 
+# Aliases that are POSIX complaint
 #
 case $(uname) in
     Linux)
@@ -9,14 +9,19 @@ case $(uname) in
         ;;
     OpenBSD)
         alias d='doas'
+        alias sudo='doas'
         ;;
     FreeBSD)
-        alias d='doas'
+        # I will switch to doas, I promise
+        # but I need that 'persist' feature first.
+        alias d='sudo'
+        alias doas='sudo'
         ;;
 esac
 
 alias h='fc -l'
 alias j=jobs
+# ask when removing more files
 alias cp='cp -ip'
 alias mv='mv -i'
 alias rm='rm -I'
@@ -31,24 +36,21 @@ alias p='python'
 alias mgd='google-drive-ocamlfuse ~/google/drive'
 alias umgd='fusermount -u ~/google/drive'
 
-# sudo apt install trans-shell
-# translating english - italian
-alias iten='trans -s it -t en'
-alias enit='trans -s en -t it' 
+# work
 alias proxy='export http_proxy=http://10.158.100.120:8080; export https_proxy=http://10.158.100.120:8080'
 
 # 3rd
 alias feh='feh -X -s -Z --scale-down --title "%n [%wx%h][%u/%l]"'
 alias ..='cd ..'
 
-# run & close term
 swallow() {
+    # run cmd in bg & close term
     nohup "$@" &>/tmp/nohup.out &
     exit
 }
 
-# Find in path 
 frep() {
+    # fast find in path
     if [[ -x "$(command -v rg)" ]]; then
         rg "$1" $PWD --line-number
     else
@@ -57,6 +59,7 @@ frep() {
 }
 
 up(){
+    # cd ../.. == up 2
     local d=""
     limit=$1
 
@@ -76,6 +79,7 @@ up(){
 }
 
 workon(){
+    # no need for virtualenv-wrapper
     VIRTUALENVS_PATH=${WORKON_HOME:-~/.virtualenvs}
     if [ $# -eq 0 ]; then
         /bin/ls $VIRTUALENVS_PATH
