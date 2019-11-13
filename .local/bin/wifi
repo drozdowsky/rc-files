@@ -9,12 +9,14 @@ current() {
     case $(uname) in
         Linux)
             SSID=$(iw `interface` info | grep ssid)
-            echo "${SSID##     ssid }"
+            # Remove all leading white-space.
+            SSID=${SSID#${SSID%%[![:space:]]*}}
+            echo "${SSID##ssid }"
             ;;
-    FreeBSD)
+        FreeBSD)
             ifconfig `interface` | pcregrep -o1 "ssid (.*) channel"
             ;;
-    OpenBSD)
+        OpenBSD)
             ifconfig `interface` scan | grep join | pcregrep -o1 ".*join \"?([^\"]*)\"? chan.*"
             ;;
     esac

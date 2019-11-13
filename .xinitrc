@@ -54,7 +54,7 @@ else
 fi
 
 # prefer awesome over dwm
-if [ -z "$(pgrep awesome)" ]; then
+if [ -x "$(command -v awesome)" ]; then
     exec $(which awesome)
 else
     # slstatus
