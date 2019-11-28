@@ -29,7 +29,7 @@ status() {
 scan() {
     case $(uname) in
         Linux)
-            sudo iw `interface` scan | grep SSID | grep -Eo '[^:]+$' | sed 's/ //'
+            sudo iw `interface` scan | grep SSID | grep -Eo '[^:]+$' | sed 's/ //' | sort | uniq
             ;;
         FreeBSD)
             ifconfig `interface` scan | tail -n +2 | awk -F "   " '{print $1}' | sort | uniq
