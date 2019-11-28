@@ -79,10 +79,9 @@ up(){
 }
 
 workon(){
-    # no need for virtualenv-wrapper
-    VIRTUALENVS_PATH=${WORKON_HOME:-"~/.virtualenvs"}
+    VIRTUALENVS_PATH=${WORKON_HOME:-~/.virtualenvs}
     if [ $# -eq 0 ]; then
-        /bin/ls $VIRTUALENVS_PATH
+        ls "$VIRTUALENVS_PATH"
     else
         . "$VIRTUALENVS_PATH/$1/bin/activate"
         if [ -f "$VIRTUALENVS_PATH/$1/bin/post_activate" ]; then
