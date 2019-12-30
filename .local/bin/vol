@@ -141,7 +141,7 @@ case "$1" in
     --help|-h) usage ;;
     -*) decv "${1##-}" > /dev/null ;;
     +*) incv "${1##+}" > /dev/null ;;
-    =*) setv "${1##=}" > /dev/null ;;
+    =*|*) setv "${1##=}" > /dev/null ;;
 esac
 
 get_vol

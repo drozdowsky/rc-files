@@ -24,17 +24,17 @@ set_bright() {
     CURRENT_BRIGHT=$(get_bright)
     CURRENT_BRIGHT=${CURRENT_BRIGHT%%%}
     case $1 in
-        =*)
-            ARG=${1##=}
-            if [ "$ARG" -ge "0" ] && [ "$ARG" -le "100" ]; then
-                SET_BRIGHT="$ARG"
-            fi
-            ;;
-        -*|+*|*)
+        -*|+*)
             ARG=${1##+}
             VALUE=$(($CURRENT_BRIGHT+$ARG))
             if [ "$VALUE" -ge "0" ] && [ "$VALUE" -le "100" ]; then
                 SET_BRIGHT="$VALUE"
+            fi
+            ;;
+        =*|*)
+            ARG=${1##=}
+            if [ "$ARG" -ge "0" ] && [ "$ARG" -le "100" ]; then
+                SET_BRIGHT="$ARG"
             fi
             ;;
     esac
