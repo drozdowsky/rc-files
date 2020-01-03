@@ -3,17 +3,27 @@
 # increments/decrements brightness
 # drozdowsky
 #
+round()
+{
+    echo $(printf "%.$2f" $(echo "scale=$2;(((10^$2)*$1)+0.5)/(10^$2)" | bc))
+}
 
 get_bright() {
-    case $(which xbacklight intel_backlight) in
+    case $(which xbacklight intel_backlight brightness) in
+        *not*found*)
+            ;;
         *xbacklight*)
             CURRENT_BRIGHT=$(printf %0.f%% $(xbacklight -get))
             ;;
         *intel_backlight*)
             CURRENT_BRIGHT=$(intel_backlight | grep -Eo [0-9]+%)
             ;;
+        *brightness*)
+            CURRENT_BRIGHT=$(echo "$(brightness -l 2>/dev/null | grep 'display 0: brightness' | grep -Eo '\d\.\d+')*100" | bc)
+            CURRENT_BRIGHT=$(round "$CURRENT_BRIGHT" 0)
+            ;;
         *)
-            echo "bright: no xbacklight or intel_backlight"
+            echo "bright: no xbacklight, intel_backlight or brightness (macOS)"
             exit 1
             ;;
     esac
@@ -24,14 +34,14 @@ set_bright() {
     CURRENT_BRIGHT=$(get_bright)
     CURRENT_BRIGHT=${CURRENT_BRIGHT%%%}
     case $1 in
-        -*|+*)
+        -[0-9]*|+[0-9]*)
             ARG=${1##+}
             VALUE=$(($CURRENT_BRIGHT+$ARG))
             if [ "$VALUE" -ge "0" ] && [ "$VALUE" -le "100" ]; then
                 SET_BRIGHT="$VALUE"
             fi
             ;;
-        =*|*)
+        =*|[0-9]*)
             ARG=${1##=}
             if [ "$ARG" -ge "0" ] && [ "$ARG" -le "100" ]; then
                 SET_BRIGHT="$ARG"
@@ -44,12 +54,16 @@ set_bright() {
         exit 1
     fi
 
-    case $(which xbacklight intel_backlight) in
+    case $(which xbacklight intel_backlight brightness) in
         *xbacklight*)
             xbacklight -set "$SET_BRIGHT"
             ;;
         *intel_backlight*)
             intel_backlight "$SET_BRIGHT"
+            ;;
+        *brightness*)
+            SET_BRIGHT=$(echo "$SET_BRIGHT*0.01" | bc)
+            brightness "$SET_BRIGHT"
             ;;
     esac
 }

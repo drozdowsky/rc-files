@@ -8,6 +8,9 @@ case $(uname) in
     FreeBSD)
         PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/games"
         ;;
+    Darwin)
+        PATH="/usr/local/opt/python@3.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        ;;
 esac
 
 if [ -d "$HOME/.local/bin" ] ; then
@@ -21,6 +24,7 @@ fi
 if [ -d "$HOME/.local/cargo/bin" ]; then
     PATH="$HOME/.local/cargo/bin:$PATH"
 fi
+export PATH
 export CARGO_HOME="$HOME/.local/cargo"
 export RUSTUP_HOME="$HOME/.local/rustup"
 

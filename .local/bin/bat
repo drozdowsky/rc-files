@@ -7,6 +7,7 @@
 
 case $(uname) in
     Linux) PERC=$(find /sys/class/power_supply -name BAT* -exec cat {}/capacity \;) ;;
-    OpenBSD|FreeBSD) PERC=$(apm -l)
+    OpenBSD|FreeBSD) PERC=$(apm -l) ;;
+    Darwin) PERC=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
 esac
 echo "$PERC%"

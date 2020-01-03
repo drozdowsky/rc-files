@@ -36,9 +36,6 @@ alias p='python'
 alias mgd='google-drive-ocamlfuse ~/google/drive'
 alias umgd='fusermount -u ~/google/drive'
 
-# work
-alias proxy='export http_proxy=http://10.158.100.120:8080; export https_proxy=http://10.158.100.120:8080'
-
 # 3rd
 alias feh='feh -X -s -Z --scale-down --title "%n [%wx%h][%u/%l]"'
 alias ..='cd ..'

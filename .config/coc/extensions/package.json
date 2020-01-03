@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "coc-eslint": ">=1.2.3",
+    "coc-prettier": ">=1.1.11",
+    "coc-python": ">=1.2.6",
+    "coc-tslint-plugin": ">=1.1.1",
+    "coc-tsserver": ">=1.4.9"
+  }
+}

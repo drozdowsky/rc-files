@@ -12,3 +12,6 @@
 [include]
 	path = ~/.gitproxy
 	path = ~/.gitname
+[user]
+	name = drozdowsky
+	email = hubert.drozdowski@mirumee.com
