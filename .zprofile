@@ -1,2 +1,2 @@
 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
-. "$HOME/.bashrc"
+. ~/.config/.zshrc

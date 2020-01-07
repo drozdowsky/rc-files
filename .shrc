@@ -40,10 +40,10 @@ case $0 in
     *ksh*)
         . ~/.kshrc 
         ;;
-    ## zsh does not use ENV?
-    # *zsh*)
-    #     . ~/.zshrc
-    #     ;;
+    *zsh*)
+        # zsh does not use $ENV, workaround with ln -s
+        . ~/.config/.zshrc
+        ;;
     *bash*)
         . ~/.bashrc
         ;;

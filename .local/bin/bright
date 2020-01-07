@@ -20,7 +20,7 @@ get_bright() {
             ;;
         *brightness*)
             CURRENT_BRIGHT=$(echo "$(brightness -l 2>/dev/null | grep 'display 0: brightness' | grep -Eo '\d\.\d+')*100" | bc)
-            CURRENT_BRIGHT=$(round "$CURRENT_BRIGHT" 0)
+            CURRENT_BRIGHT="$(round "$CURRENT_BRIGHT" 0)%"
             ;;
         *)
             echo "bright: no xbacklight, intel_backlight or brightness (macOS)"
