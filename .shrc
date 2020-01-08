@@ -32,8 +32,8 @@ CDPATH=.:$HOME
 # non easy ctrl-d
 set -o ignoreeof
 
-# ENV=~/.shrc so source other shells depending on $0
-case $0 in
+# ENV=~/.shrc so source other shells depending on $0$SHELL
+case "$0$SHELL" in
     *csh*)
         . ~/.cshrc
         ;;
