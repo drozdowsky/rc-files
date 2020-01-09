@@ -2,15 +2,6 @@ if [ -f /etc/ksh.kshrc ]; then
     . /etc/ksh.kshrc
 fi
 
-case $(uname) in
-    FreeBSD)
-        alias ls='ls -aGF'
-        ;;
-    OpenBSD)
-        alias ls='ls -aF'
-        ;;
-esac
-
 HISTCONTROL=ignoredups
 HISTFILE=$HOME/.ksh_history
 HISTSIZE=50000

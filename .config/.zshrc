@@ -1,6 +1,10 @@
-[ -f /etc/zshrc ] && . /etc/zshrc
-[ -f ~/.config/.fzf.zsh ] && . ~/.config/.fzf.zsh
+# autocompletion
+autoload -Uz compinit; compinit
 
 PS1="luv %~ %# "
+
+bindkey "^A" "beginning-of-line"
+bindkey "^E" "end-of-line"
+bindkey '^R' "history-incremental-search-backward"
 
 export SECRET_KEY='<mysecretkey>'

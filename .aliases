@@ -2,23 +2,6 @@
 #
 # Aliases that are POSIX complaint
 #
-case $(uname) in
-    Linux)
-        alias s='sudo'
-        alias doas='sudo'
-        ;;
-    OpenBSD)
-        alias d='doas'
-        alias sudo='doas'
-        ;;
-    FreeBSD)
-        # I will switch to doas, I promise
-        # but I need that 'persist' feature first.
-        alias d='sudo'
-        alias doas='sudo'
-        ;;
-esac
-
 alias h='fc -l'
 alias j=jobs
 # ask when removing more files
@@ -39,6 +22,33 @@ alias umgd='fusermount -u ~/google/drive'
 # 3rd
 alias feh='feh -X -s -Z --scale-down --title "%n [%wx%h][%u/%l]"'
 alias ..='cd ..'
+
+case $(uname) in
+    Linux)
+        alias s='sudo'
+        alias doas='sudo'
+        alias ls='ls -ahN'
+        ;;
+    OpenBSD)
+        alias d='doas'
+        alias sudo='doas'
+        alias ls='ls -aF'
+        ;;
+    FreeBSD)
+        # I will switch to doas, I promise
+        # but I need that 'persist' feature first.
+        alias d='sudo'
+        alias doas='sudo'
+        alias ls='ls -aGF'
+        ;;
+    Darwin)
+        alias s='sudo'
+        alias doas='sudo'
+        alias d='sudo'
+        alias rm='rm'
+        alias ls='ls -AFG'
+        ;;
+esac
 
 swallow() {
     # run cmd in bg & close term
