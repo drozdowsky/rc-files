@@ -190,6 +190,7 @@ set autoindent
 set notitle
 set showcmd
 set fileformats=unix,dos,mac
+set backspace=indent,eol,start
 " disable vim comments on new line
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 
