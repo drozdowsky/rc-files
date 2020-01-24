@@ -58,10 +58,12 @@ swallow() {
 
 frep() {
     # fast find in path
+    SEARCH_PHASE=$1
+    shift
     if [[ -x "$(command -v rg)" ]]; then
-        rg "$1" $PWD --line-number
+        rg "$SEARCH_PHASE" "$PWD" --line-number $@
     else
-        grep -nr "$1" $PWD
+        grep -nr "$SEARCH_PHASE" "$PWD" $@
     fi
 }
 

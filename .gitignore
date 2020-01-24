@@ -6,3 +6,5 @@ cscope.out
 nohup.out
 src/manage.py
 work/*
+django_models.txt
+django_models.py

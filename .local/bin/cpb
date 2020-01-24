@@ -9,4 +9,11 @@
 # * easy to use
 #
 [ -n "$1" ] && exec 3<"$1" || exec 3<&0
-cat <&3 | timeout 120 xclip -r -i -sel c -verbose >/dev/null 2>&1 &
+case $(uname) in
+    Darwin)
+        cat <&3 | pbcopy
+        ;;
+    *)
+        cat <&3 | timeout 120 xclip -r -i -sel c -verbose >/dev/null 2>&1 &
+        ;;
+esac

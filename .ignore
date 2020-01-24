@@ -4,3 +4,4 @@ ctags
 cscope.out
 tags
 .git/
+.pytest_cache/
