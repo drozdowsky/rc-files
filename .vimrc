@@ -32,6 +32,9 @@ Plug 'tpope/vim-fugitive'
 " airline in vim
 Plug 'vim-airline/vim-airline'
 
+" Indent for python - my fork
+Plug 'drozdowsky/indentpython.vim'
+
 " vyper language syntax highlight
 Plug 'jacqueswww/vim-vyper' 
 
@@ -102,10 +105,6 @@ augroup mygroup
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
-
-" Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
