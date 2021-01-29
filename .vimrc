@@ -367,7 +367,15 @@ function! GoToNextBuffer()
   endif
 endfunction
 
+function! ExecuteTest()
+  execute "normal! ?def test_\<CR>w"
+  let l:Command = expand("<cword>")
+  execute "!pytest -n0 % -s --vcr-record=once -k " . l:Command
+endfu
+
+
 " to switch tabs use gt and gT (vim built-in shortcuts)
 nnoremap <Leader>\ :call GoToNextBuffer()<CR>
 nnoremap <leader>' :call GoToPreviousBuffer()<CR>
 nnoremap <leader>] :call GoToPreviousBuffer()<CR>
+nnoremap <leader>t :call ExecuteTest()<CR>

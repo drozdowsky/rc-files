@@ -5,3 +5,4 @@ cscope.out
 tags
 .git/
 .pytest_cache/
+node_modules/

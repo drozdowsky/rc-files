@@ -3,5 +3,5 @@
     "python.setLinter": "pylint",
     "python.formatting.provider": "black",
     "coc.preferences.formatOnSaveFiletypes": ["python", "py", "css", "Markdown"],
-    "tslint.autoFixOnSave": true
+    "tslint.autoFixOnSave": true,
 }
