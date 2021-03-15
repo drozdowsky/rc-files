@@ -370,7 +370,7 @@ endfunction
 function! ExecuteTest()
   execute "normal! ?def test_\<CR>w"
   let l:Command = expand("<cword>")
-  execute "!pytest -n0 % -s --vcr-record=once -k " . l:Command
+  execute "!pytest -n0 % -v -s --vcr-record=once -k " . l:Command
 endfu
 
 
@@ -378,4 +378,7 @@ endfu
 nnoremap <Leader>\ :call GoToNextBuffer()<CR>
 nnoremap <leader>' :call GoToPreviousBuffer()<CR>
 nnoremap <leader>] :call GoToPreviousBuffer()<CR>
-nnoremap <leader>t :call ExecuteTest()<CR>
+nnoremap <leader>1 :call ExecuteTest()<CR>
+
+" enable spell check
+set spell
