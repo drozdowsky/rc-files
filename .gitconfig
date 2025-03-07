@@ -11,7 +11,11 @@
     c = commit
     cm = commit -m
     ps = !git push origin "$(git symbolic-ref --short -q HEAD)"
+    psf = !git push origin "$(git symbolic-ref --short -q HEAD) --force"
     fixup = !git add . -u && git commit --amend --no-verify && git push origin "$(git symbolic-ref --short -q HEAD)" --force-with-lease
 [include]
 	path = ~/.gitproxy
 	path = ~/.gitname
+[user]
+	name = drozdowsky
+	email = hdrozdow@pm.me

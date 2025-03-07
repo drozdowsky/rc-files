@@ -15,6 +15,10 @@ alias v='vim'
 alias t='tmux'
 alias p='python'
 
+if which nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
+
 # googledrive
 alias mgd='google-drive-ocamlfuse ~/google/drive'
 alias umgd='fusermount -u ~/google/drive'
@@ -91,6 +95,8 @@ workon(){
     VIRTUALENVS_PATH=${WORKON_HOME:-~/.virtualenvs}
     if [ $# -eq 0 ]; then
         ls "$VIRTUALENVS_PATH"
+    elif [ "$1" = "_" ]; then
+        source .venv/bin/activate
     else
         . "$VIRTUALENVS_PATH/$1/bin/activate"
         if [ -f "$VIRTUALENVS_PATH/$1/bin/post_activate" ]; then

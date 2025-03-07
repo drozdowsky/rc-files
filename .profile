@@ -24,6 +24,11 @@ fi
 if [ -d "$HOME/.local/cargo/bin" ]; then
     PATH="$HOME/.local/cargo/bin:$PATH"
 fi
+
+if [ -d "/opt/homebrew/bin" ]; then
+    PATH="/opt/homebrew/bin:$PATH"
+fi
+
 export PATH
 export CARGO_HOME="$HOME/.local/cargo"
 export RUSTUP_HOME="$HOME/.local/rustup"
