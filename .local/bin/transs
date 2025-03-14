@@ -1,0 +1,41 @@
+#!/bin/sh
+# Translate word into a few languages at the same time.
+# Uses google translate (translate-shell package).
+
+if [ "$#" -lt 2 ]; then
+    echo "Usage: transs <from_language_code[:to_language_codes]> <word/phrase> [flags]"
+    echo "Examples:"
+    echo "             transs pl \"pies\""
+    echo "             transs pl:en+it \"pies\" -p      # few langs + TTS"
+
+    exit 1
+fi
+
+LANG_CODE="$1"
+WORD="$2"
+FLAG="$3"
+
+if echo "$LANG_CODE" | grep -q ":"; then
+    LANGS=$(echo "$LANG_CODE" | cut -d ':' -f 2)
+    LANGS=$(echo "$LANGS" | tr '+' ' ')
+    LANG_CODE=$(echo "$LANG_CODE" | cut -d ':' -f 1)
+else
+    # default languages...
+    LANGS="en pl it es fr scn"
+    LANGS=$(echo "$LANGS" | sed "s/\b$LANG_CODE \b//g")
+fi
+
+TRANS_LANGS=$(echo "$LANGS" | tr ' ' '+')
+
+set -- $LANGS
+
+echo '-------------------------------'
+echo ' Lang   | Translation'
+echo '-------------------------------'
+# `trans` command from translate-shell package
+trans "$LANG_CODE":"$TRANS_LANGS" -b $FLAG "$WORD" 2>/dev/null | while read -r line 
+do
+    printf ' %-6s | %s\n' "$1" "$line"
+    shift
+done
+echo '-------------------------------'

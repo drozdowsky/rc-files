@@ -1,0 +1,4 @@
+#!/bin/sh
+# sets random wallpaper
+
+feh --bg-fill --no-fehbg --randomize ~/Pictures/.allwallpapers/*

@@ -6,7 +6,10 @@
 #
 
 case $(uname) in
-    Linux|FreeBSD)
+    Linux)
+        ip link show | grep -i wl | awk -F: '{print $2}' | awk '{print $1}'
+        ;;
+    FreeBSD)
         ifconfig -a | grep 'wl' | sed 's/Link//' | awk '{print $1}' | head -n 1 | sed 's/://'
         ;;
     OpenBSD)

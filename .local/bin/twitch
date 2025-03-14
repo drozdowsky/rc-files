@@ -2,20 +2,14 @@
 #
 # http://github.com/mitchweaver/bin
 #
-# dmenu interface for twitch through mpv/youtube-dl
+# dmenu interface for twitch through mpv/yt-dlp
 #
 
 # ------- put your streams here -------- #
 streams=\
 "
-wonziu
-gorgc
-burhac
-chaospringle
-GTAMarathon
-cheese
-DarkViperAU
 Joshimuz
+GTAMarathon
 GamesDoneQuick
 RTAinJapan
 ESAMarathon
@@ -27,7 +21,7 @@ mkdir /tmp/twitch
 for i in $streams ; do
     {
         # test if stream is up
-        youtube-dl -s http://twitch.tv/$i > /dev/null
+        yt-dlp -s http://twitch.tv/$i > /dev/null
         
         # if so, add to our list
         [ $? -eq 0 ] && touch /tmp/twitch/$i

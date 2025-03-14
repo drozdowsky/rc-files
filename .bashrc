@@ -91,8 +91,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# VI mode as default for bash
-set -o vi
+# emacs mode as default for bash
+set -o emacs
+# exit shell after 10th consecutive ctrl-d
+set -o ignoreeof
 
 # Marcus Aurelius quote
-marcus
+# marcus

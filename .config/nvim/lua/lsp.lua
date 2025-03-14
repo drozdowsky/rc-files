@@ -67,12 +67,12 @@ cmp.setup({
     -- Key mappings for autocompletion
     mapping = {
         ['<C-Space>'] = cmp.mapping.complete(),  -- Trigger autocompletion
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),  -- Confirm completion
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),  -- Confirm completion
         --
         ["<C-p>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 if cmp.get_selected_entry() == nil then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
                 else
                     cmp.select_next_item()
                 end
@@ -84,7 +84,7 @@ cmp.setup({
         ["<C-n>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 if cmp.get_selected_entry() == nil then
-                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
                 else
                     cmp.select_prev_item()
                 end

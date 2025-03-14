@@ -1,0 +1,5 @@
+#!/bin/sh
+# Mount google drive using rclone in ~/gdrive
+
+nohup rclone mount gdrive:/ ~/gdrive/ &>/tmp/gdrive.out &
+exit

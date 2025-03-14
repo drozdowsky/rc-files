@@ -8,22 +8,22 @@ if [ -x "$(command -v xset)" ]; then
 fi
 
 # set display brightness
-if [ -x "$(command -v xbacklight)" ]; then
-    # bright should be in sudoers file
-    # also it should be owned by root
-    sudo bright 100
-    sudo bright -50
-fi
+#if [ -x "$(command -v xbacklight)" ]; then
+#    # bright should be in sudoers file
+#    # also it should be owned by root
+#    sudo bright 100
+#    sudo bright -50
+#fi
 
-# # auto linux theme and wallpaper
-# if [ -x "$(command -v wal)" ]; then
-#     wal -nR
-# else
-#     # wallpaper
-#     if [ -x "$(command -v feh)" ]; then
-#         feh --bg-fill --no-fehbg --randomize ~/Pictures/wallpaper/*
-#     fi
-# fi
+# auto linux theme and wallpaper
+if [ -x "$(command -v wal)" ]; then
+    wal -nR
+else
+    # wallpaper
+    if [ -x "$(command -v feh)" ]; then
+        randbg
+    fi
+fi
 
 # run custom script, run xrandr etc. there 
 if [ -f ~/.config/display.sh ]; then

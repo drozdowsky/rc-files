@@ -75,7 +75,7 @@ connect() {
         Linux)
             WPA_FILE="/etc/wpa_supplicant/wpa_supplicant.conf"
             sudo pkill wpa_supplicant
-            sudo ifconfig `interface` up
+            sudo ip link set `interface` up
             sudo wpa_supplicant -d -B -i `interface` -f /var/log/wpa.log -c "$WPA_FILE"
             ;;
         FreeBSD)

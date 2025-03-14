@@ -13,7 +13,7 @@
 "\e[F": end-of-line
 
 # vi mode
-set editing-mode vi
-set show-mode-in-prompt on
+set editing-mode emacs
+set show-mode-in-prompt off
 set vi-ins-mode-string "++ "
 set vi-cmd-mode-string ": "
