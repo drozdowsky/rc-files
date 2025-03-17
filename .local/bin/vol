@@ -37,7 +37,7 @@ setv() {
     case $(uname) in
         Linux)
             if [ -x "$(command -v pulseaudio)" ]; then
-                pactl set-sink-volume 0 "$1"%
+                pactl set-sink-volume @DEFAULT_SINK@ "$1"%
             else
                 amixer sset Master "$1"
             fi
@@ -53,7 +53,7 @@ incv() {
     case $(uname) in
         Linux)
             if [ -x "$(command -v pulseaudio)" ]; then
-                pactl set-sink-volume 0 +"$1"%
+                pactl set-sink-volume @DEFAULT_SINK@ +"$1"%
             else
                 amixer sset Master "$1"+
             fi
@@ -69,7 +69,7 @@ decv() {
     case $(uname) in
         Linux)
             if type pulseaudio > /dev/null 2>&1 ; then
-                pactl set-sink-volume 0 -"$1"%
+                pactl set-sink-volume @DEFAULT_SINK@ -"$1"%
             else
                 amixer sset Master "$1"-
             fi
@@ -115,8 +115,7 @@ get_vol() {
     case $(uname) in
         Linux) 
             if [ -x "$(command -v pulseaudio)" ]; then
-				vol=`pactl list sinks | grep '^[[:space:]]Volume:' | \
-					head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'`
+				vol=`pactl get-sink-volume @DEFAULT_SINK@ | head -n1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'`
 			else
 				vol="$(amixer sget Master | \
 					grep -oE '\[*..?.?%\]' | \
