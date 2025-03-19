@@ -33,9 +33,6 @@ export PATH
 export CARGO_HOME="$HOME/.local/cargo"
 export RUSTUP_HOME="$HOME/.local/rustup"
 
-export WORKON_HOME="$HOME/.virtualenvs"
-export VIRTUALENVWRAPPER_PYTHON=$(which python3)
-
 export BROWSER="firefox"
 export EDITOR="vim"
 export READER="zathura"
