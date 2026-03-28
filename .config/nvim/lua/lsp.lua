@@ -1,7 +1,5 @@
-local lspconfig = require("lspconfig")
-
 -- Config Ruff as Formatter
-lspconfig.ruff.setup({
+vim.lsp.config("ruff", {
     on_attach = function(client, bufnr)
         -- Disable formatter
         -- client.server_capabilities.documentFormattingProvider = false
@@ -24,6 +22,7 @@ lspconfig.ruff.setup({
         }
     }
 })
+vim.lsp.enable({"ruff"})
 
 -- LSP
 vim.diagnostic.config({
@@ -120,9 +119,10 @@ cmp.setup({
 
 -- Enable LSP for Jedi
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-lspconfig.jedi_language_server.setup({
+vim.lsp.config("jedi_language_server", {
     capabilities = capabilities
 })
+vim.lsp.enable({"jedi_language_server"})
 
 -- Local highlight
 require('local-highlight').setup({
@@ -139,3 +139,36 @@ require('local-highlight').setup({
     },
     debounce_timeout = 200,
 })
+
+
+local dap = require("dap")
+local dap_python = require("dap-python")
+dap_python.setup("python")
+
+dap.configurations.python = {
+  {
+    type = "python",
+    request = "attach",
+    name = "Attach to Remote",
+    justMyCode = false,
+    connect = {
+      host = "127.0.0.1",
+      port = 5678,
+    },
+  },
+}
+
+require("dapui").setup()
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.before.attach.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+  dapui.close()
+end

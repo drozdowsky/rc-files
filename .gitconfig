@@ -2,6 +2,7 @@
 	helper = store
 [core]
 	excludesfile = ~/.gitignore
+	editor = nvim
 [alias]
     st = status
 	s = status --untracked-files=no
@@ -18,4 +19,11 @@
 	path = ~/.gitname
 [user]
 	name = drozdowsky
-	email = hdrozdow+github@pm.me
+	email = hdrozdowski@lulu.com
+[color]
+	ui = auto
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

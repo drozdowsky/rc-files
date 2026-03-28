@@ -13,10 +13,6 @@ case $(uname) in
         ;;
 esac
 
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
 if [ -d "$HOME/work/bin" ] ; then
     PATH="$HOME/work/bin:$PATH"
 fi
@@ -29,7 +25,12 @@ if [ -d "/opt/homebrew/bin" ]; then
     PATH="/opt/homebrew/bin:$PATH"
 fi
 
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 export PATH
+
 export CARGO_HOME="$HOME/.local/cargo"
 export RUSTUP_HOME="$HOME/.local/rustup"
 

@@ -19,10 +19,6 @@ if which nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
 
-# googledrive
-alias mgd='google-drive-ocamlfuse ~/google/drive'
-alias umgd='fusermount -u ~/google/drive'
-
 # 3rd
 alias feh='feh -X -s -Z --scale-down --title "%n [%wx%h][%u/%l]"'
 alias ..='cd ..'
@@ -53,6 +49,9 @@ case $(uname) in
         alias ls='ls -AFG'
         ;;
 esac
+
+
+[ -f ~/.localaliases ] && . ~/.localaliases
 
 swallow() {
     # run cmd in bg & close term
@@ -108,3 +107,4 @@ workon(){
 branch() {
     git branch --all | fzf | grep -Eo "[^ *]+"
 }
+

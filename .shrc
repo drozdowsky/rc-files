@@ -20,10 +20,26 @@
 [ -f ~/.aliases ] && . ~/.aliases
 
 # set prompt: ``username@hostname$ '' 
-PS1="`whoami``hostname | sed 's/\..*//'`"
+WHOAMI="luv"
+case "$0$SHELL" in
+    *zsh*)
+        # zsh does not use $ENV, workaround with ln -s
+        autoload -Uz colors && colors
+        RED='%F{red}'
+        RESET='%f'
+        CATALOG='%~'
+        ;;
+    *)
+        RED='\[\e[31m\]'
+        RESET='\[\e[0m\]'
+        CATALOG='\w'
+        ;;
+esac
+
+PS1="${RED}${WHOAMI}${RESET}"
 case `id -u` in
-	0) PS1="${PS1}:\w # ";;
-	*) PS1="${PS1}:\w $ ";;
+	0) PS1="${PS1}:${CATALOG} # ";;
+	*) PS1="${PS1}:${CATALOG} $ ";;
 esac
 
 # search path for cd(1)
@@ -48,3 +64,5 @@ case "$0$SHELL" in
         . ~/.bashrc
         ;;
 esac
+
+
