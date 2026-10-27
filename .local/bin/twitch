@@ -43,7 +43,7 @@ for i in $streams ; do
     [ -f /tmp/twitch/$i ] || continue
     echo $i
     rm /tmp/twitch/$i
-done | dmenu -p 'Stream:')
+done | { command -v dmenu &>/dev/null && dmenu -p 'Stream:' || fzf --prompt 'Stream: '; })
 
 if [ -n "$name" ] ; then
     mpv "$@" https://twitch.tv/$name &

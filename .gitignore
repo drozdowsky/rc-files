@@ -10,3 +10,5 @@ django_models.txt
 django_models.py
 .vim/tmp
 .localaliases
+
+**/.claude/settings.local.json

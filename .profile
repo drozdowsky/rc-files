@@ -25,6 +25,10 @@ if [ -d "/opt/homebrew/bin" ]; then
     PATH="/opt/homebrew/bin:$PATH"
 fi
 
+if [ -d "/opt/homebrew/share/google-cloud-sdk/bin" ]; then
+    PATH="/opt/homebrew/share/google-cloud-sdk/bin:$PATH"
+fi
+
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi

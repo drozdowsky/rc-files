@@ -124,7 +124,7 @@ vim.lsp.config("jedi_language_server", {
 })
 vim.lsp.enable({"jedi_language_server"})
 
--- Local highlight
+-- Highlight words under cursor
 require('local-highlight').setup({
     file_types = nil,
     disable_file_types = nil,
@@ -141,6 +141,7 @@ require('local-highlight').setup({
 })
 
 
+-- DAP - Remote Python Debugger
 local dap = require("dap")
 local dap_python = require("dap-python")
 dap_python.setup("python")

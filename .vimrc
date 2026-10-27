@@ -36,7 +36,6 @@ Plug 'rcarriga/nvim-dap-ui'
 
 " colorschemes
 Plug 'tomasr/molokai'
-" Plug 'dylanaraps/wal.vim'
 
 " Git in vim
 Plug 'tpope/vim-fugitive'
@@ -46,12 +45,6 @@ Plug 'vim-airline/vim-airline'
 
 " Indent for python - my fork
 Plug 'drozdowsky/indentpython.vim'
-
-" color highlight :ColorHighlight/Clear/Toggle
-Plug 'lilydjwg/colorizer'
-let g:colorizer_startup = 0
-let g:colorizer_nomap = 1
-let g:colorizer_fgcontrast = 0
 
 " syntax highlighting
 syntax on
@@ -241,7 +234,7 @@ endtry
 
 " Allow saving of files as sudo when I forgot to start vim using sudo. Usage :W
 cmap $w w !sudo tee > /dev/null %
-" Bash like keys for the command line
+" Emacs/Bash like keys for the command line
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 
@@ -317,8 +310,9 @@ endfunction
 
 function! ExecuteTest()
   execute "normal! ?def test_\<CR>w"
-  let l:Command = expand("<cword>")
-  execute "!pytest -n0 % -v -s --vcr-record=once -k " . l:Command
+  let l:TestName = expand("<cword>")
+  let l:FilePath = expand("%:.")
+  execute "T DEBUG=true GLASSTREE_DEBUG=true GLASSTREE_DJANGO_DEBUG=true RUN_LOCAL_MOUNT=true DOCKER_RUN_ARGS='-p 5678:5678' PYTEST_ARGS='-vs " . l:FilePath . " -k " . l:TestName . "' just docker-test"
 endfu
 
 

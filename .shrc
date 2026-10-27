@@ -28,18 +28,34 @@ case "$0$SHELL" in
         RED='%F{red}'
         RESET='%f'
         CATALOG='%~'
+        CLOCK='%D{%H:%M:%S} '
+        DURATION='${_cmd_time}s '
+        setopt PROMPT_SUBST
+        _cmd_time=0
+        _cmd_preexec() { _cmd_start=$SECONDS }
+        _cmd_precmd() {
+            if [ -n "$_cmd_start" ]; then
+                _cmd_time=$((SECONDS - _cmd_start))
+                unset _cmd_start
+            fi
+        }
+        autoload -Uz add-zsh-hook
+        add-zsh-hook preexec _cmd_preexec
+        add-zsh-hook precmd _cmd_precmd
         ;;
     *)
         RED='\[\e[31m\]'
         RESET='\[\e[0m\]'
         CATALOG='\w'
+        CLOCK=''
+        DURATION=''
         ;;
 esac
 
-PS1="${RED}${WHOAMI}${RESET}"
+PS1="${CLOCK}${RED}${WHOAMI}${RESET}"
 case `id -u` in
-	0) PS1="${PS1}:${CATALOG} # ";;
-	*) PS1="${PS1}:${CATALOG} $ ";;
+	0) PS1="${PS1}:${CATALOG} ${DURATION}# ";;
+	*) PS1="${PS1}:${CATALOG} ${DURATION}$ ";;
 esac
 
 # search path for cd(1)
